@@ -586,6 +586,19 @@
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#查询缓存"><span class="toc-number">1.</span> <span class="toc-text">查询缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#13-1一级缓存：同一个SqlSession对象"><span class="toc-number">1.1.</span> <span class="toc-text">13.1一级缓存：同一个SqlSession对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-2二级缓存"><span class="toc-number">1.2.</span> <span class="toc-text">13.2二级缓存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-逆向工程"><span class="toc-number">2.</span> <span class="toc-text">14.逆向工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mybatis学习进阶"><span class="toc-number">3.</span> <span class="toc-text">mybatis学习进阶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-数据库的环境切换"><span class="toc-number">4.</span> <span class="toc-text">1.数据库的环境切换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-注解方式"><span class="toc-number">5.</span> <span class="toc-text">2.注解方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-事务提交方式"><span class="toc-number">6.</span> <span class="toc-text">4.事务提交方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-参数问题"><span class="toc-number">7.</span> <span class="toc-text">5.参数问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-增加null"><span class="toc-number">8.</span> <span class="toc-text">6.增加null</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-返回值为HashMap的情况"><span class="toc-number">9.</span> <span class="toc-text">7.返回值为HashMap的情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-ResultMap：字段和属性名的相应"><span class="toc-number">10.</span> <span class="toc-text">8.ResultMap：字段和属性名的相应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-别名问题"><span class="toc-number">11.</span> <span class="toc-text">9.别名问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-处理where子句后面的and的三种方式"><span class="toc-number">12.</span> <span class="toc-text">10.处理where子句后面的and的三种方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-内置参数"><span class="toc-number">13.</span> <span class="toc-text">11.内置参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-模糊查询三种方式"><span class="toc-number">14.</span> <span class="toc-text">12.模糊查询三种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#12-1"><span class="toc-number">14.1.</span> <span class="toc-text">12.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-2-传值时，直接-传-x"><span class="toc-number">14.2.</span> <span class="toc-text">12.2   传值时，直接 传 %x%</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-3-bind参数"><span class="toc-number">14.3.</span> <span class="toc-text">12.3    bind参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-逆向工程"><span class="toc-number">15.</span> <span class="toc-text">13.逆向工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-MyBatis架构和源码解析"><span class="toc-number">16.</span> <span class="toc-text">14.ＭyBatis架构和源码解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-获取SqlSessionFactory对象"><span class="toc-number">16.1.</span> <span class="toc-text">1.获取SqlSessionFactory对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-获取SqlSession对象"><span class="toc-number">16.2.</span> <span class="toc-text">2.获取SqlSession对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-获取xxxMapper对象-代理接口-中的方法、mapper-xml中的标签"><span class="toc-number">16.3.</span> <span class="toc-text">3.获取xxxMapper对象(代理接口 中的方法、mapper.xml中的标签)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-执行标签中定义的SQL语句"><span class="toc-number">16.4.</span> <span class="toc-text">4.执行标签中定义的SQL语句</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
@@ -825,7 +838,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">我坚信&lt;br&gt;&lt;br&gt;一次次苦与泪的打磨&lt;br&gt;我会变的更强！</div>
   	  	
     	</section>
     
