@@ -162,6 +162,348 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-mybatis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/17/mybatis/">mybatis</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/17/mybatis/" class="archive-article-date">
+  	<time datetime="2020-04-17T02:16:47.180Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-17</time>
+</a>
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2.9k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">13分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="13-查询缓存"><a href="#13-查询缓存" class="headerlink" title="13.查询缓存"></a>13.查询缓存</h2><h3 id="13-1一级缓存：同一个SqlSession对象"><a href="#13-1一级缓存：同一个SqlSession对象" class="headerlink" title="13.1一级缓存：同一个SqlSession对象"></a>13.1一级缓存：同一个SqlSession对象</h3><ul>
+<li>MyBatis默认开启一级缓存，如果用同样的SqlSession查询相同的数据，则只会在第一次查询时向数据库发送sql语句，并将查询的结果放入到SqlSession（作为缓存存在）；后续再次查询该同样的对象时，则直接从缓存中查询该对象即可（即省略了数据库的访问）。</li>
+</ul>
+<h3 id="13-2二级缓存"><a href="#13-2二级缓存" class="headerlink" title="13.2二级缓存"></a>13.2二级缓存</h3><ul>
+<li><p>MyBatis默认情况下没有开启二级缓存，需要手工打开。</p>
+<ol>
+<li><p>config.xml</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;setting name=<span class="string">"cacheEnabled"</span> value=<span class="string">"true"</span>/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在具体的mapper.xml中声明开启（studentMappper.xml）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;mapper namespace=<span class="string">"com.itt.mapper.StudentMapper"</span>&gt;</span><br><span class="line">    &lt;!--声明此namespace开启二级缓存--&gt;</span><br><span class="line">    &lt;cache/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>根据 异常提示：NotSerializableException可知，MyBatis是将对象放入到硬盘文件中</p>
+<p>——-&gt;序列化：内存—–&gt;硬盘 </p>
+<p>——-&gt;反序列化：硬盘 —–&gt;内存</p>
+<p>准备缓存的对象，必须实现了序列化接口(如果开启了缓存 namespace=”com.itt.mapper.StudentMapper”)，可知序列化对象为Student，因此要将Student对象序列化（序列化Stuent类，以及Student的级联属性和父类）</p>
+</li>
+</ol>
+<p>触发将对象写入二级缓存的时机：SqlSession对象的close（）方法。</p>
+</li>
+</ul>
+<ul>
+<li><p>Mybatis自带二级缓存：【同一个namespace】生成的mapper对象</p>
+<ul>
+<li><p>回顾：namespace的值，就是接口的全类名(包名.类名)，通过接口可以生成动态代理对象(studentMapper对象)</p>
+<ul>
+<li>———-&gt;namespace决定了studentMapper对象的产生</li>
+</ul>
+<p>结论：只要产生的xxxMapper对象来自于同一个namespace，则这些对象共享二级缓存 </p>
+</li>
+<li><p>注意：二级缓存的范围是同一个namespace，如果有多个xxxMapper.xml的namespace值相同，则通过这些xxxMapper.xml产生的xxxMapper对象，仍然共享二级缓存。</p>
+</li>
+<li><p>禁用：select标签中userCache=”false”</p>
+</li>
+<li><p>清理：</p>
+<ol>
+<li><p>执行commit();一级二级一样都使用这个（执行增删改时，会清理缓存；设计的原因是为了防止脏数据的产生）</p>
+<p>在二级缓存 中，commit（）不能是查询自身的commit。</p>
+<p>commit会清理一级和二级缓存：但是清理二级缓存时，不能是查询自身的commit；</p>
+</li>
+<li><p>在select标签中增加属性：flushCache=”true”</p>
+</li>
+</ol>
+<p>​</p>
+</li>
+</ul>
+</li>
+<li><p>三方提供的二级缓存：</p>
+<ul>
+<li><p>echcache、memcache</p>
+</li>
+<li><p>要想整合三方提供的二级缓存（或者自定义缓存），必须实现Cache接口，该接口的默认实现类为PerpetualCache</p>
+</li>
+<li><p>整合echcache二级缓存：</p>
+<ol>
+<li>导入Maven依赖：</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--mybatis使用ehacche--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.mybatis.caches&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;mybatis-ehcache&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.0.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;net.sf.ehcache&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;ehcache-core&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;2.6.10&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- https:<span class="comment">//mvnrepository.com/artifact/org.slf4j/slf4j-api --&gt;</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.7.25&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>编写ehcache配置文件Ehcache.xml</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;ehcache xmlns:xsi=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> xsi:noNamespaceSchemaLocation=<span class="string">"../config/ehcache.xsd"</span>&gt;</span><br><span class="line"> &lt;diskStore path=<span class="string">"F:\Ehcache"</span>/&gt;</span><br><span class="line"> &lt;defaultCache</span><br><span class="line">  maxElementsInMemory=<span class="string">"1000"</span></span><br><span class="line">  maxElementsOnDisk=<span class="string">"1000000"</span></span><br><span class="line">  eternal=<span class="string">"false"</span></span><br><span class="line">  overflowToDisk=<span class="string">"false"</span></span><br><span class="line">  timeToIdleSeconds=<span class="string">"100"</span></span><br><span class="line">  timeToLiveSeconds=<span class="string">"100"</span></span><br><span class="line">  diskExpiryThreadIntervalSeconds=<span class="string">"120"</span></span><br><span class="line">  memoryStoreEvictionPolicy=<span class="string">"LRU"</span>&gt;</span><br><span class="line"> &lt;/defaultCache&gt;</span><br><span class="line">&lt;/ehcache&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开启EhCache二级缓存</p>
+<p>在xxxMapper.xml中开启</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;cache type=<span class="string">"org.mybatis.caches.ehcache.EhcacheCache"</span>&gt;</span><br><span class="line">        &lt;!--自定义Ehcache中的全局参数--&gt;</span><br><span class="line">        &lt;property name=<span class="string">""</span> value=<span class="string">""</span>/&gt;</span><br><span class="line">    &lt;/cache&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="14-逆向工程"><a href="#14-逆向工程" class="headerlink" title="14.逆向工程"></a>14.逆向工程</h2><ul>
+<li><p>表、类、接口、mapper.xml四者密切相关，因此，当知道一个的时候，其他三个应该可以自动生成。</p>
+<p>表——–&gt;其他三个</p>
+</li>
+<li><p>实现步骤：</p>
+<ol>
+<li><p>添加Mave n依赖</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.3.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>逆向工程的配置文件generator.xml</p>
+</li>
+<li><p>执行</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="mybatis学习进阶"><a href="#mybatis学习进阶" class="headerlink" title="mybatis学习进阶"></a>mybatis学习进阶</h2><h2 id="1-数据库的环境切换"><a href="#1-数据库的环境切换" class="headerlink" title="1.数据库的环境切换"></a>1.数据库的环境切换</h2><h2 id="2-注解方式"><a href="#2-注解方式" class="headerlink" title="2.注解方式"></a>2.注解方式</h2><p>​    推荐使用xml</p>
+<p>​    a.将sql语句写在接口的方法前面</p>
+<p>​    b.将接口的全类名写入到<mapper>，让mybatis知道sql语句此时是存储在接口中的。</p>
+<p>注解和XML都支持批量引入 </p>
+<h2 id="4-事务提交方式"><a href="#4-事务提交方式" class="headerlink" title="4.事务提交方式"></a>4.事务提交方式</h2><ul>
+<li>手动提交：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SqlSession session = sessionFactory.openSession();</span><br><span class="line">session.commit();<span class="comment">//执行完commit时，手动提交 事务</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>自动提交 ：每一个dml语句自动提交 </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SqlSession session = sessionFactory.openSession(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-参数问题"><a href="#5-参数问题" class="headerlink" title="5.参数问题"></a>5.参数问题</h2><ul>
+<li><p>目前将多个参数封装到一个javabean对象(pojo),然后使用该对象传递</p>
+</li>
+<li><p>a.传入多个参数时，不用在mapper.xml中编写parameterType</p>
+<p>异常提示：</p>
+</li>
+<li><p>stuNo不能使用，使用的是：【arg3,arg2,arg1,arg0,param3,param2,param1】</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;insert id=<span class="string">"insertEmpInfo"</span>&gt;</span><br><span class="line">        <span class="function">insert into <span class="title">empinfo</span><span class="params">(id,name,age,job,phone)</span></span></span><br><span class="line"><span class="function">        <span class="title">values</span> <span class="params">(#&#123;arg0&#125;,#&#123;arg1&#125;,#&#123;arg2&#125;,#&#123;arg3&#125;,#&#123;arg4&#125;)</span></span></span><br><span class="line"><span class="function">    &lt;/insert&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>b. 命名参数的方式</p>
+<p>可以在接口中通过@Param(“”)来指定sql中参数的名字</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertEmpInfo</span><span class="params">(@Param(<span class="string">"sId"</span>)</span> String id,</span></span><br><span class="line"><span class="function">                       @<span class="title">Param</span><span class="params">(<span class="string">"sName"</span>)</span>  String name,</span></span><br><span class="line"><span class="function">                       @<span class="title">Param</span><span class="params">(<span class="string">"sAge"</span>)</span> String age,</span></span><br><span class="line"><span class="function">                       @<span class="title">Param</span><span class="params">(<span class="string">"sJob"</span>)</span> String job,</span></span><br><span class="line"><span class="function">                       @<span class="title">Param</span><span class="params">(<span class="string">"sPhone"</span>)</span> String phone)</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;insert id=<span class="string">"insertEmpInfo"</span>&gt;</span><br><span class="line">        <span class="function">insert into <span class="title">empinfo</span><span class="params">(id,name,age,job,phone)</span></span></span><br><span class="line"><span class="function">        <span class="title">values</span> <span class="params">(#&#123;sId&#125;,#&#123;sName&#125;,#&#123;sAge&#125;,#&#123;sJob&#125;,#&#123;sPhone&#125;)</span></span></span><br><span class="line"><span class="function">    &lt;/insert&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>c. 综合使用的情况</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一个是简单类型 ，一个是对象类型</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertEmpInfo</span><span class="params">(@Param(<span class="string">"sId"</span>)</span> String id,@<span class="title">Param</span><span class="params">(<span class="string">"empInfo"</span>)</span>  EmpInfo empInfo)</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;insert id=<span class="string">"insertEmpInfo"</span>&gt;</span><br><span class="line">    <span class="function">insert into <span class="title">empinfo</span><span class="params">(id,name,age,job,phone)</span></span></span><br><span class="line"><span class="function">    <span class="title">values</span> <span class="params">(#&#123;sId&#125;,#&#123;empInfo.name&#125;,#&#123;empInfo.age&#125;,#&#123;empInfo.job&#125;,#&#123;empInfo.phone&#125;)</span></span></span><br><span class="line"><span class="function">&lt;/insert&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="6-增加null"><a href="#6-增加null" class="headerlink" title="6.增加null"></a>6.增加null</h2><p>oracle：如果插入的 字段是null，提示错误：Other 而不是gnull</p>
+<p>mysql：如果插入的字段是null，可以正常执行（没有约束）</p>
+<p>原因：</p>
+<p>​    各个数据库在Mybatis中对各种数据类型的默认值不一致。</p>
+<p>​    mybatis中，jdbcTypeForNull（如果是null），则默认值OTHER。</p>
+<p>在mysql中，mybatis将Other当做NULL来处理了，但是oracle不行。</p>
+<p>解决：</p>
+<p>​    oracle：null -&gt; OTHER  手工告诉oracle：other  -&gt; null</p>
+<p>a.当某个数据类型oracle无法处理进，告诉它用默认值null 来处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用#&#123;empInfo.name,jdbcType=null&#125;这个就可以了</span></span><br><span class="line">&lt;insert id=<span class="string">"insertEmpInfo"</span>&gt;</span><br><span class="line">    <span class="function">insert into <span class="title">empinfo</span><span class="params">(id,name,age,job,phone)</span></span></span><br><span class="line"><span class="function">    <span class="title">values</span> <span class="params">(#&#123;sId&#125;,#&#123;empInfo.name,jdbcType=<span class="keyword">null</span>&#125;,#&#123;empInfo.age&#125;,#&#123;empInfo.job&#125;,#&#123;empInfo.phone&#125;)</span></span></span><br><span class="line"><span class="function">&lt;/insert&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>b.配置mybatis全局配置文件conf.xml</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> &lt;settings&gt;</span><br><span class="line">	&lt;setting name=<span class="string">"jdbcTypeForNull"</span> value=<span class="string">"NUll"</span>/&gt;</span><br><span class="line">&lt;/settings&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-返回值为HashMap的情况"><a href="#7-返回值为HashMap的情况" class="headerlink" title="7.返回值为HashMap的情况"></a>7.返回值为HashMap的情况</h2><ul>
+<li>注意：在mysql中@MapKey(“id”)字段为小写</li>
+<li>在oracle中为全大写</li>
+<li>map：<ul>
+<li>key：id        value：Student</li>
+</ul>
+</li>
+<li>程序根据select的返回值，知道map的value就是EmpInfo，根据@MapKey(“id”)知道Map的key是id</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MapKey</span>(<span class="string">"id"</span>)</span><br><span class="line"><span class="function">HashMap&lt;String,EmpInfo&gt; <span class="title">queryAllEmp</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=<span class="string">"queryAllEmp"</span> resultType=<span class="string">"HashMap"</span>&gt;</span><br><span class="line">    select * from empinfo</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-ResultMap：字段和属性名的相应"><a href="#8-ResultMap：字段和属性名的相应" class="headerlink" title="8.ResultMap：字段和属性名的相应"></a>8.ResultMap：字段和属性名的相应</h2><h2 id="9-别名问题"><a href="#9-别名问题" class="headerlink" title="9.别名问题"></a>9.别名问题</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--设置单个/多个别名--&gt;</span><br><span class="line">    &lt;typeAliases&gt;</span><br><span class="line">        &lt;!--单个别名(别名 忽略大小写)--&gt;</span><br><span class="line">        &lt;!--&lt;typeAlias type=<span class="string">"com.itt.entity.Student"</span> alias=<span class="string">"student"</span>/&gt;--&gt;</span><br><span class="line">        &lt;!--批量定义别名,以下会自动将该包中的所有类 批量定义别名：别名就是类名(不带包名的类名)--&gt;</span><br><span class="line">        &lt;<span class="keyword">package</span> name=<span class="string">"com.itt.entity"</span>/&gt;</span><br><span class="line">    &lt;/typeAliases&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当这个包下的子包 与Student重名时，必须使用注解的方式重新命名</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Alias</span>(<span class="string">"myempinfo"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EmpInfo</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-处理where子句后面的and的三种方式"><a href="#10-处理where子句后面的and的三种方式" class="headerlink" title="10.处理where子句后面的and的三种方式"></a>10.处理where子句后面的and的三种方式</h2><ul>
+<li>trim标签可以去掉后面的 and</li>
+<li><trim>可以处理拼接sql中【开头或结尾】第一个and</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=<span class="string">"queryByINP"</span> parameterType=<span class="string">"EmpInfo"</span> resultType=<span class="string">"EmpInfo"</span>&gt;</span><br><span class="line">  select * from empinfo where</span><br><span class="line">  	&lt;trim&gt;</span><br><span class="line">      &lt;<span class="keyword">if</span> test=<span class="string">"id != null and id != 0"</span>&gt;</span><br><span class="line">          id = #&#123;id&#125; and </span><br><span class="line">      &lt;/if&gt;</span><br><span class="line">      &lt;<span class="keyword">if</span> test=<span class="string">"name != null and name != ''"</span>&gt;</span><br><span class="line">          name like <span class="string">'%$&#123;name&#125;%'</span> and</span><br><span class="line">      &lt;/if&gt;</span><br><span class="line">      &lt;<span class="keyword">if</span> test=<span class="string">"phone != null and phone != ''"</span>&gt;</span><br><span class="line">          phone = #&#123;phone&#125; and </span><br><span class="line">      &lt;/if&gt;</span><br><span class="line">    &lt;/trim&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>prefix=”where”：在整个语句中加where</li>
+<li>prefix=”set”：在整个语句中加set，可用于更新</li>
+<li>prefixOverrides=”and”：智能处理前面的and</li>
+<li>suffixOverrides=”and”：智能处理后面的and</li>
+<li>suffixOverrides=”,”：智能处理后面的，常用于更新</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;trim prefix=<span class="string">"where"</span> prefixOverrides=<span class="string">"and"</span>&gt;</span><br><span class="line">          &lt;<span class="keyword">if</span> test=<span class="string">"id != null and id != 0"</span>&gt;</span><br><span class="line">              and id = #&#123;id&#125;</span><br><span class="line">          &lt;/if&gt;</span><br><span class="line">          &lt;<span class="keyword">if</span> test=<span class="string">"name != null and name != ''"</span>&gt;</span><br><span class="line">              and name like <span class="string">'%$&#123;name&#125;%'</span></span><br><span class="line">          &lt;/if&gt;</span><br><span class="line">          &lt;<span class="keyword">if</span> test=<span class="string">"phone != null and phone != ''"</span>&gt;</span><br><span class="line">              and phone = #&#123;phone&#125;</span><br><span class="line">          &lt;/if&gt;</span><br><span class="line"> &lt;/trim&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><where>标签可以去掉前面的and</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id&#x3D;&quot;queryByINP&quot; parameterType&#x3D;&quot;EmpInfo&quot; resultType&#x3D;&quot;EmpInfo&quot;&gt;</span><br><span class="line">  select * from empinfo</span><br><span class="line">  &lt;where&gt;</span><br><span class="line">      &lt;if test&#x3D;&quot;id !&#x3D; null and id !&#x3D; 0&quot;&gt;</span><br><span class="line">          and id &#x3D; #&#123;id&#125;</span><br><span class="line">      &lt;&#x2F;if&gt;</span><br><span class="line">      &lt;if test&#x3D;&quot;name !&#x3D; null and name !&#x3D; &#39;&#39;&quot;&gt;</span><br><span class="line">          and name like &#39;%$&#123;name&#125;%&#39;</span><br><span class="line">      &lt;&#x2F;if&gt;</span><br><span class="line">      &lt;if test&#x3D;&quot;phone !&#x3D; null and phone !&#x3D; &#39;&#39;&quot;&gt;</span><br><span class="line">          and phone &#x3D; #&#123;phone&#125;</span><br><span class="line">      &lt;&#x2F;if&gt;</span><br><span class="line">  &lt;&#x2F;where&gt;</span><br><span class="line">&lt;&#x2F;select&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>直接 在where后面加：1 = 1</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=<span class="string">"queryByINP"</span> parameterType=<span class="string">"EmpInfo"</span> resultType=<span class="string">"EmpInfo"</span>&gt;</span><br><span class="line">  select * from empinfo where <span class="number">1</span> = <span class="number">1</span></span><br><span class="line">      &lt;<span class="keyword">if</span> test=<span class="string">"id != null and id != 0"</span>&gt;</span><br><span class="line">          and id = #&#123;id&#125;</span><br><span class="line">      &lt;/if&gt;</span><br><span class="line">      &lt;<span class="keyword">if</span> test=<span class="string">"name != null and name != ''"</span>&gt;</span><br><span class="line">          and name like <span class="string">'%$&#123;name&#125;%'</span></span><br><span class="line">      &lt;/if&gt;</span><br><span class="line">      &lt;<span class="keyword">if</span> test=<span class="string">"phone != null and phone != ''"</span>&gt;</span><br><span class="line">          and phone = #&#123;phone&#125;</span><br><span class="line">      &lt;/if&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="11-内置参数"><a href="#11-内置参数" class="headerlink" title="11.内置参数"></a>11.内置参数</h2><ul>
+<li>_paramter：代表Mybatis的输入参数</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=<span class="string">"queryByINP"</span> parameterType=<span class="string">"EmpInfo"</span> resultType=<span class="string">"EmpInfo"</span>&gt;</span><br><span class="line">  select * from empinfo</span><br><span class="line">    &lt;trim prefix=<span class="string">"where"</span> prefixOverrides=<span class="string">"and"</span>&gt;</span><br><span class="line">      &lt;<span class="keyword">if</span> test=<span class="string">"id != null and id != 0"</span>&gt;</span><br><span class="line">          and id = #&#123;id&#125;</span><br><span class="line">      &lt;/if&gt;</span><br><span class="line">      &lt;<span class="keyword">if</span> test=<span class="string">"name != null and name != ''"</span>&gt;</span><br><span class="line">          and ename like <span class="string">'%$&#123;name&#125;%'</span></span><br><span class="line">      &lt;/if&gt;</span><br><span class="line">      <span class="comment">//_parameter替代parameterType这个输入的对象</span></span><br><span class="line">      &lt;<span class="keyword">if</span> test=<span class="string">"_parameter.phone != null and _parameter.phone != ''"</span>&gt;</span><br><span class="line">          and phone = #&#123;_parameter.phone&#125;</span><br><span class="line">      &lt;/if&gt;</span><br><span class="line">    &lt;/trim&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>_databaseId：代表当前数据库的名字</li>
+</ul>
+<h2 id="12-模糊查询三种方式"><a href="#12-模糊查询三种方式" class="headerlink" title="12.模糊查询三种方式"></a>12.模糊查询三种方式</h2><h3 id="12-1"><a href="#12-1" class="headerlink" title="12.1"></a>12.1</h3><ul>
+<li>${}原样输出<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stuName like <span class="string">'%$&#123;stuName&#125;%'</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ul>
+<li>#{}自动拼接’ ‘：可以防止SQL注入</li>
+</ul>
+<h3 id="12-2-传值时，直接-传-x"><a href="#12-2-传值时，直接-传-x" class="headerlink" title="12.2   传值时，直接 传 %x%"></a>12.2   传值时，直接 传 %x%</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">student.setStuName(<span class="string">"%s%"</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stuName like #&#123;stuName&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="12-3-bind参数"><a href="#12-3-bind参数" class="headerlink" title="12.3    bind参数"></a>12.3    bind参数</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;bind name=<span class="string">"_queryName"</span> value=<span class="string">"'%'+name+'%'"</span>/&gt;</span><br><span class="line">    &lt;<span class="keyword">if</span> test=<span class="string">"name != null and name != ''"</span>&gt;</span><br><span class="line">         and name like #&#123;_queryName&#125;</span><br><span class="line">    &lt;/if&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">I:\MyBatisIdea\MyBatisGenerator\src\main\java</span><br></pre></td></tr></table></figure>
+
+<h2 id="13-逆向工程"><a href="#13-逆向工程" class="headerlink" title="13.逆向工程"></a>13.逆向工程</h2><p>1.导入依赖</p>
+<p>2.xml模板文件（修改生成路径、表名）</p>
+<p>3.根据java模板类一键生成</p>
+<p>根据学生表-&gt;学生类、学生Mapper接口、studentMapper.xml</p>
+<p>4.如何使用</p>
+<p>​    增加Mybatis配置文件 conf.xml</p>
+<p>对于like模糊查询，逆向工程需要在传值时 写入%x%</p>
+<p>逆向工程的实例：</p>
+<p>使用的是StudentExample</p>
+<ul>
+<li>测试类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">queryAllEmpById</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="comment">//Connection - SqlSession操作myBatis</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//config.xml  -&gt; reader</span></span><br><span class="line">        Reader reader = Resources.getResourceAsReader(<span class="string">"conf.xml"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//reader  -&gt;SqlSession</span></span><br><span class="line">        SqlSessionFactory sessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">        SqlSession session = sessionFactory.openSession();</span><br><span class="line"></span><br><span class="line">        StudentMapper mapper = session.getMapper(StudentMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">        StudentExample example = <span class="keyword">new</span> StudentExample();</span><br><span class="line">        StudentExample.Criteria criteria = example.createCriteria();</span><br><span class="line">        criteria.andStunameLike(<span class="string">"%d%"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        StudentExample example1 = <span class="keyword">new</span> StudentExample();</span><br><span class="line">        StudentExample.Criteria criteria1 = example1.createCriteria();</span><br><span class="line">        <span class="comment">//模糊查询</span></span><br><span class="line">        criteria1.andStunoEqualTo(<span class="number">10</span>);</span><br><span class="line">        criteria1.andStunameLike(<span class="string">"%k%"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用exampl整合的方式实现or操作</span></span><br><span class="line">        example.or(criteria1);</span><br><span class="line">        <span class="comment">//Example中的Criteria：为查询的条件</span></span><br><span class="line">        List&lt;Student&gt; students = mapper.selectByExample(example);</span><br><span class="line"></span><br><span class="line">        System.out.println(students);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        session.close();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="14-MyBatis架构和源码解析"><a href="#14-MyBatis架构和源码解析" class="headerlink" title="14.ＭyBatis架构和源码解析"></a>14.ＭyBatis架构和源码解析</h2><p>MyBatis中步骤：</p>
+<ul>
+<li>1.获取SqlSessionFactory对象</li>
+<li>2.获取SqlSession对象</li>
+<li>3.获取xxxMapper对象(代理接口 中的方法、mapper.xml中的<select>标签)</li>
+<li>4.执行标签中定义的SQL语句</li>
+</ul>
+<h3 id="1-获取SqlSessionFactory对象"><a href="#1-获取SqlSessionFactory对象" class="headerlink" title="1.获取SqlSessionFactory对象"></a>1.获取SqlSessionFactory对象</h3><p>parse解析器</p>
+<p>Mybatis将所有的配置信息存放到了Configuration configuration对象中</p>
+<p>MapperStatement  -》存在于Configuration中</p>
+<p>environment -》存在于Configuration中</p>
+<p>所有的配置信息、增删改标签全部存在于Configuration中</p>
+<p>Configuration又存在于DefaultSqlSessionFactory对象中(SqlSessionFactory)</p>
+<p>SqlSessionFactory对象—》DefaultSqlSessionFactory—》Configuration—》所有的配置信息</p>
+<h3 id="2-获取SqlSession对象"><a href="#2-获取SqlSession对象" class="headerlink" title="2.获取SqlSession对象"></a>2.获取SqlSession对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">executor &#x3D; (Executor) interceptorChain.pluginAll(executor);</span><br></pre></td></tr></table></figure>
+
+<p>通过装饰模式，将刚才产生的SimpleExecutor包装成一个更加强大 的executor</p>
+<p>作用：以后如果我们要给MyBatis写自己的插件，就可以通过拦截器实现</p>
+<p>SqlSession -&gt;openSession()—&gt;openSessionFromDataSource() –&gt;DefaultSqlSession对象</p>
+<p>SqlSession -&gt; DefaultSqlSession对象 -&gt; 执行SQL</p>
+<h3 id="3-获取xxxMapper对象-代理接口-中的方法、mapper-xml中的标签"><a href="#3-获取xxxMapper对象-代理接口-中的方法、mapper-xml中的标签" class="headerlink" title="3.获取xxxMapper对象(代理接口 中的方法、mapper.xml中的标签)"></a>3.获取xxxMapper对象(代理接口 中的方法、mapper.xml中的<select>标签)</h3><h3 id="4-执行标签中定义的SQL语句"><a href="#4-执行标签中定义的SQL语句" class="headerlink" title="4.执行标签中定义的SQL语句"></a>4.执行标签中定义的SQL语句</h3><p><img src="https://img-blog.csdnimg.cn/20200327123522881.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>插件</li>
+</ul>
+<p>select * from student   –》拦截器</p>
+<p>目标对象target的包装后的产物  —&gt;metaObject.getValue(“可以从target中获取”)</p>
+<p>通过打印语句，可知，target就是 RoutingStatementHandler</p>
+<p>———-》</p>
+<p>metaObject.getValue(“可以从RoutingStatementHandler中获取”)</p>
+<p>可以从RoutingStatementHandler获得：getBoundSql，getParameterHandler</p>
+<p>——-&gt;—&gt;metaObject.getValue(“parameterHandler”)</p>
+<ul>
+<li>metaObject.getValue(“parameterHandler.parameterObject”)//xxxMapper.xml中的语句中的参数值</li>
+<li>metaObject.getValue(“parameterHandler.boundSql”)//xxxMapper.xml中sql的语句</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/17/mybatis/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-我的文章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
      
