@@ -6,15 +6,33 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/4 | clover</title>
+  <title>spring事务管理02 | clover</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="clover">
-<meta property="og:url" content="http://yoursite.com/archives/2020/04/index.html">
+  <meta name="description" content="1 事务管理1.1 回顾事务 事务：一组业务操作ABCD，要么全部成功，要么全部不成功。  特性：ACID">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring事务管理02">
+<meta property="og:url" content="http://yoursite.com/2020/04/17/spring%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%8602/index.html">
 <meta property="og:site_name" content="clover">
+<meta property="og:description" content="1 事务管理1.1 回顾事务 事务：一组业务操作ABCD，要么全部成功，要么全部不成功。  特性：ACID">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps1.jpg">
+<meta property="og:image" content="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps2.jpg">
+<meta property="og:image" content="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps3.jpg">
+<meta property="og:image" content="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps4.jpg">
+<meta property="og:image" content="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps5.jpg">
+<meta property="og:image" content="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps6.jpg">
+<meta property="og:image" content="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps7.jpg">
+<meta property="og:image" content="c:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1581940307718.png">
+<meta property="og:image" content="c:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1581940534820.png">
+<meta property="og:image" content="c:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1582036232664.png">
+<meta property="og:image" content="c:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1582069981604.png">
+<meta property="og:image" content="c:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1582070424618.png">
+<meta property="og:image" content="c:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CDesktop%5C%E5%9B%BE%E7%89%87%5CSnipaste_2020-04-15_10-37-57.png">
+<meta property="article:published_time" content="2020-04-17T02:19:04.217Z">
+<meta property="article:modified_time" content="2020-04-17T02:20:38.670Z">
 <meta property="article:author" content="clover">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="clover" type="application/atom+xml">
   
@@ -160,157 +178,434 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-spring事务管理02" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+     
+      <header class="article-header">
+        
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/17/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/" class="archive-article-date">
-  	<time datetime="2020-04-17T02:20:07.020Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/17/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/">java中的反射机制</a>
+    <h1 class="article-title" itemprop="name">
+      spring事务管理02
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/17/spring%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%8602/" class="archive-article-date">
+        
+        <a href="/2020/04/17/spring%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%8602/" class="archive-article-date">
   	<time datetime="2020-04-17T02:19:04.217Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-17</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/17/spring%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%8602/">spring事务管理02</a>
-    </h1>
-  
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">3.1k字</span>
+      </span>
+    </span>
 
-        <div class="article-info info-on-right">
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">15分</span>
+      </span>
+    </span>
+</div>
           
-          
+        <!-- 添加完成 -->
 
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-事务管理"><a href="#1-事务管理" class="headerlink" title="1 事务管理"></a>1 事务管理</h1><h2 id="1-1-回顾事务"><a href="#1-1-回顾事务" class="headerlink" title="1.1 回顾事务"></a>1.1 回顾事务</h2><ul>
+<li><p>事务：一组业务操作ABCD，要么全部成功，要么全部不成功。</p>
+</li>
+<li><p>特性：ACID</p>
+<a id="more"></a>
+
+<ul>
+<li>原子性：整体</li>
+<li>一致性：完成 </li>
+<li>隔离性：并发</li>
+<li>持久性：结果</li>
+</ul>
+</li>
+<li><p>隔离问题：</p>
+<ul>
+<li>脏读：一个事务读到另一个事务没有提交的数据</li>
+<li>不可重复读：一个事务读到另一个事务已提交的数据(update)</li>
+<li>虚读(幻读)：一个事务读到另一个事务已提交的数据(insert)</li>
+</ul>
+</li>
+<li><p>隔离级别：</p>
+<ul>
+<li>read uncommitted：读未提交。存在3个问题</li>
+<li>read committed：读已提交。解决脏读，存在2个问题</li>
+<li>repeatable read：可重复读。解决：脏读、不可重复读，存在1个问题。</li>
+<li>serializable：串行化。都解决，单事务。</li>
+</ul>
+<p><img src="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps1.jpg" alt="img"></p>
+</li>
+</ul>
+<h2 id="1-2-事务管理介绍"><a href="#1-2-事务管理介绍" class="headerlink" title="1.2 事务管理介绍"></a>1.2 事务管理介绍</h2><h3 id="1-2-1-导入jar包"><a href="#1-2-1-导入jar包" class="headerlink" title="1.2.1 导入jar包"></a>1.2.1 导入jar包</h3><p>transaction           —&gt;         tx</p>
+<p><img src="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps2.jpg" alt="img"></p>
+<h3 id="1-2-2-三个顶级接口"><a href="#1-2-2-三个顶级接口" class="headerlink" title="1.2.2 三个顶级接口"></a>1.2.2 三个顶级接口</h3><p><img src="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps3.jpg" alt="img"></p>
+<ul>
+<li><p>PlatformTransactionManager：平台事务管理器，spring要管理事务，<strong>必须使用事务管理器</strong>进行事务配置时，必须<strong>配置事务管理器</strong>。</p>
+</li>
+<li><p>TransactonDefinition：事务详情（事务定义、事务属性），spring用于确定事务具体详情，例如：隔离级别、是否只读、超时时间等。</p>
+<p>进行事务配置时，<strong>必须配置详情</strong>。spring将配置项封装到该对象实例。</p>
+</li>
+<li><p>TransactionStatus：事务状态，spring用于记录当前事务运行状态。例如：是否有保存点，事务是否完成。spring 底层根据状态进行相应操作。</p>
+</li>
+</ul>
+<h3 id="1-2-3-PlatformTransactionManager-事务管理器"><a href="#1-2-3-PlatformTransactionManager-事务管理器" class="headerlink" title="1.2.3 PlatformTransactionManager 事务管理器"></a>1.2.3 PlatformTransactionManager 事务管理器</h3><ul>
+<li>导入jar包：需要时平台事务管理器的实现类</li>
+</ul>
+<p><img src="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps4.jpg" alt="img"></p>
+<ul>
+<li><p>常见的事务管理器</p>
+<p>DataSourceTransactionManager：jdbc开发时事务管理，采用JdbcTemplate</p>
+<p>HibernateTransactionManager：hibernate 开发时事务管理器，整合hibernate</p>
+<p><img src="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps5.jpg" alt="img"></p>
+</li>
+<li><p>api 详解</p>
+<p>TransactionStatus getTransaction(TransactionDefinition definition),事务管理器，通过”事务详情“，获得”事务状态”，从而管理事务。</p>
+<p>void commit(TransactionStatus status)  根据状态提交</p>
+<p>void rollback(TransactionStatus status) 根据状态回滚</p>
+</li>
+</ul>
+<h3 id="1-2-4-TransactionStatus"><a href="#1-2-4-TransactionStatus" class="headerlink" title="1.2.4 TransactionStatus"></a>1.2.4 TransactionStatus</h3><p><img src="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps6.jpg" alt="img"></p>
+<h3 id="1-2-5-TransactionDefinition"><a href="#1-2-5-TransactionDefinition" class="headerlink" title="1.2.5 TransactionDefinition"></a>1.2.5 TransactionDefinition</h3><p><img src="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps7.jpg" alt="img"></p>
+<ul>
+<li><p>传播行为：在两个业务之间如何共享事务。</p>
+<p>PROPAGATION_REQUIRED , required , 必须  【默认值】</p>
+<p>​    支持当前事务，A如果有事务，B将使用该事务。</p>
+<p>​    如果A没有事务，B将创建一个新的事务。</p>
+<p>PROPAGATION_SUPPORTS ，supports ，支持</p>
+<p>​    支持当前事务，A如果有事务，B将使用该事务。</p>
+<p>​    如果A没有事务，B将以非事务执行。</p>
+<p>PROPAGATION_MANDATORY，mandatory ，强制</p>
+<p>​    支持当前事务，A如果有事务，B将使用该事务。</p>
+<p>​    如果A没有事务，B将抛异常。</p>
+<p>PROPAGATION_REQUIRES_NEW ， requires_new ，必须新的</p>
+<p>​    如果A有事务，将A的事务挂起，B创建一个新的事务</p>
+<p>​    如果A没有事务，B创建一个新的事务</p>
+<p>PROPAGATION_NOT_SUPPORTED ，not_supported ,不支持</p>
+<p>​    如果A有事务，将A的事务挂起，B将以非事务执行</p>
+<p>​    如果A没有事务，B将以非事务执行</p>
+<p>PROPAGATION_NEVER ，never，从不</p>
+<p>​    如果A有事务，B将抛异常</p>
+<p>​    如果A没有事务，B将以非事务执行</p>
+<p>PROPAGATION_NESTED ，nested ，嵌套</p>
+<p>​    A和B底层采用保存点机制，形成嵌套事务。</p>
+<p>*<em>掌握：PROPAGATION_REQUIRED、PROPAGATION_REQUIRES_NEW、PROPAGATION_NESTED *</em></p>
+</li>
+</ul>
+<h2 id="1-3-案例：转账"><a href="#1-3-案例：转账" class="headerlink" title="1.3 案例：转账"></a>1.3 案例：转账</h2><h3 id="1-3-1-搭建环境"><a href="#1-3-1-搭建环境" class="headerlink" title="1.3.1 搭建环境"></a>1.3.1 搭建环境</h3><h4 id="1-3-1-1创建表"><a href="#1-3-1-1创建表" class="headerlink" title="1.3.1.1创建表"></a>1.3.1.1创建表</h4><h4 id="1-3-1-2导入jar包"><a href="#1-3-1-2导入jar包" class="headerlink" title="1.3.1.2导入jar包"></a>1.3.1.2导入jar包</h4><ul>
+<li>核心 4+1</li>
+<li>aop：4（aop联盟、spring aop、aspectj规范、spring aspect）</li>
+<li>数据库：2(jdbc/tx)</li>
+<li>驱动：mysql </li>
+<li>连接池：c3p0</li>
+</ul>
+<p><img src="C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1581940307718.png" alt="1581940307718"></p>
+<p><img src="C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1581940534820.png" alt="1581940534820"></p>
+<ul>
+<li>dao层</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountDaoImpl</span> <span class="keyword">extends</span> <span class="title">JdbcDaoSupport</span> <span class="keyword">implements</span> <span class="title">AccountDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">out</span><span class="params">(String outer, Integer money)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">this</span>.getJdbcTemplate().update(<span class="string">"update account set money = money - ? where username = ?"</span>,money,outer);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">(String inner, Integer money)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">this</span>.getJdbcTemplate().update(<span class="string">"update account set money = money + ? where username = ?"</span>,money,inner);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>service层</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceImpl</span> <span class="keyword">implements</span> <span class="title">AccountService</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//注入</span></span><br><span class="line">	<span class="keyword">private</span> AccountDao accountDao;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAccountDao</span><span class="params">(AccountDao accountDao)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.accountDao = accountDao;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transfer</span><span class="params">(String outer, String inner, Integer money)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		accountDao.out(outer, money);</span><br><span class="line">		<span class="comment">//断电</span></span><br><span class="line">		<span class="keyword">int</span> i = <span class="number">1</span> / <span class="number">0</span>;</span><br><span class="line">		accountDao.in(inner, money);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>spring的xml配置文件</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- <span class="number">1</span>.datasource数据源--&gt;</span><br><span class="line">&lt;bean id=<span class="string">"dataSource"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.mchange.v2.c3p0.ComboPooledDataSource"</span>&gt;</span><br><span class="line">	&lt;property name="driverClass" value="com.mysql.jdbc.Driver"&gt;&lt;/property&gt;</span><br><span class="line">	&lt;property name="jdbcUrl" value="jdbc:mysql://localhost:3306/ee19_spring_day03"&gt;&lt;/property&gt;</span><br><span class="line">	&lt;property name="user" value="root"&gt;&lt;/property&gt;</span><br><span class="line">	&lt;property name="password" value=""&gt;&lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line">&lt;!-- <span class="number">2</span>.dao --&gt;</span><br><span class="line">&lt;bean id=<span class="string">"accountDao"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.itt.dao.impl.AccountDaoImpl"</span>&gt;</span><br><span class="line">	&lt;property name="dataSource" ref="dataSource"&gt;&lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line">&lt;!-- <span class="number">3</span>.service --&gt;</span><br><span class="line">&lt;bean id=<span class="string">"accountService"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.itt.service.impl.AccountServiceImpl"</span>&gt;</span><br><span class="line">	&lt;property name="accountDao" ref="accountDao"&gt;&lt;/property&gt;	</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>测试</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ApplicationContext applicationContext = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</span><br><span class="line">	 AccountService accountService = (AccountService) applicationContext.getBean(<span class="string">"accountService"</span>);</span><br><span class="line">	 accountService.transfer(<span class="string">"jack"</span>, <span class="string">"rose"</span>, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-2-手动管理事务"><a href="#1-3-2-手动管理事务" class="headerlink" title="1.3.2 手动管理事务"></a>1.3.2 手动管理事务</h3><ul>
+<li>dao</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountDaoImpl</span> <span class="keyword">extends</span> <span class="title">JdbcDaoSupport</span> <span class="keyword">implements</span> <span class="title">AccountDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">out</span><span class="params">(String outer, Integer money)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">this</span>.getJdbcTemplate().update(<span class="string">"update account set money = money - ? where username = ?"</span>,money,outer);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">(String inner, Integer money)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">this</span>.getJdbcTemplate().update(<span class="string">"update account set money = money + ? where username = ?"</span>,money,inner);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>service</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceImpl</span> <span class="keyword">implements</span> <span class="title">AccountService</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//注入</span></span><br><span class="line">	<span class="keyword">private</span> AccountDao accountDao;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAccountDao</span><span class="params">(AccountDao accountDao)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.accountDao = accountDao;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> TransactionTemplate transactionTemplate;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTransactionTemplate</span><span class="params">(TransactionTemplate transactionTemplate)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.transactionTemplate = transactionTemplate;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transfer</span><span class="params">(<span class="keyword">final</span> String outer, <span class="keyword">final</span> String inner, <span class="keyword">final</span> Integer money)</span> </span>&#123;</span><br><span class="line">		transactionTemplate.execute(<span class="keyword">new</span> TransactionCallbackWithoutResult() &#123;</span><br><span class="line">			</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doInTransactionWithoutResult</span><span class="params">(TransactionStatus arg0)</span> </span>&#123;</span><br><span class="line">				<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">				accountDao.out(outer, money);</span><br><span class="line">				<span class="comment">//断电</span></span><br><span class="line">				<span class="keyword">int</span> i = <span class="number">1</span> / <span class="number">0</span>;</span><br><span class="line">				accountDao.in(inner, money);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>applicationContext.xml</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- <span class="number">1</span>.datasource数据源--&gt;</span><br><span class="line">	&lt;bean id=<span class="string">"dataSource"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.mchange.v2.c3p0.ComboPooledDataSource"</span>&gt;</span><br><span class="line">		&lt;property name="driverClass" value="com.mysql.jdbc.Driver"&gt;&lt;/property&gt;</span><br><span class="line">		&lt;property name="jdbcUrl" value="jdbc:mysql://localhost:3306/ee19_spring_day03"&gt;&lt;/property&gt;</span><br><span class="line">		&lt;property name="user" value="root"&gt;&lt;/property&gt;</span><br><span class="line">		&lt;property name="password" value=""&gt;&lt;/property&gt;</span><br><span class="line">	&lt;/bean&gt;</span><br><span class="line">	&lt;!-- <span class="number">2</span>.dao --&gt;</span><br><span class="line">	&lt;bean id=<span class="string">"accountDaoImpl"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.itt.dao.impl.AccountDaoImpl"</span>&gt;</span><br><span class="line">		&lt;property name="dataSource" ref="dataSource"&gt;&lt;/property&gt;</span><br><span class="line">	&lt;/bean&gt;</span><br><span class="line">	&lt;!-- <span class="number">3</span>.service --&gt;</span><br><span class="line">	&lt;bean id=<span class="string">"accountService"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.itt.service.impl.AccountServiceImpl"</span>&gt;</span><br><span class="line">		&lt;property name="accountDao" ref="accountDaoImpl"&gt;&lt;/property&gt;	</span><br><span class="line">		&lt;property name="transactionTemplate" ref="transactionTemplate"&gt;&lt;/property&gt;	</span><br><span class="line">	&lt;/bean&gt;</span><br><span class="line">	&lt;!-- <span class="number">4</span>. 创建模板 --&gt;</span><br><span class="line">	&lt;bean id=<span class="string">"transactionTemplate"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.transaction.support.TransactionTemplate"</span>&gt;</span><br><span class="line">		&lt;property name="transactionManager" ref="txManager"&gt;&lt;/property&gt;</span><br><span class="line">	&lt;/bean&gt;</span><br><span class="line">	&lt;!-- <span class="number">5</span>.配置事务管理器  管理器需要事务，事务是从Connection获得，连接从连接池DataSource获得--&gt;</span><br><span class="line">	&lt;bean id=<span class="string">"txManager"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span><br><span class="line">		&lt;property name="dataSource" ref="dataSource"&gt;&lt;/property&gt;</span><br><span class="line">	&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>测试</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span></span>&#123;</span><br><span class="line">		ApplicationContext applicationContext = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</span><br><span class="line">		 AccountService accountService = (AccountService) applicationContext.getBean(<span class="string">"accountService"</span>);</span><br><span class="line">		 accountService.transfer(<span class="string">"jack"</span>, <span class="string">"rose"</span>, <span class="number">1000</span>);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-3-工厂bean生成代理：半自动"><a href="#1-3-3-工厂bean生成代理：半自动" class="headerlink" title="1.3.3 工厂bean生成代理：半自动"></a>1.3.3 工厂bean生成代理：半自动</h3><ul>
+<li><p>spring提供管理事务的代理工厂bean，TransactionProxyFactoryBean</p>
+<p>1.geteBean（）获得代理对象</p>
+<p>2.spring配置一个代理</p>
+</li>
+<li><p>spring的配置：</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- <span class="number">4</span> service代理对象 </span><br><span class="line">		<span class="number">4.1</span>接口  proxyInterfaces </span><br><span class="line">		<span class="number">4.2</span>目标类 target</span><br><span class="line">		<span class="number">4.3</span> TransactionManager 事务管理器</span><br><span class="line">		<span class="number">4.4</span> transactionAttributes 事务属性（事务详情，事务定义）</span><br><span class="line">			prop.key ：确定哪些方法使用当前事务配置</span><br><span class="line">			prop.text：用于配置事务的详情</span><br><span class="line">				格式：PROPAGATION,ISOLATION,readOnly,-Exception,+Exception</span><br><span class="line">					传播行为                    隔离级别          是否只读         异常回滚                异常提交 </span><br><span class="line">				例如：</span><br><span class="line">				&lt;prop key="transfer"&gt;PROPAGATION_REQUIRED,ISOLATION_DEFAULT&lt;/prop&gt; 默认的传播行为和隔离级别</span><br><span class="line">				&lt;prop key="transfer"&gt;PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly&lt;/prop&gt;   只读的事务</span><br><span class="line">				&lt;prop key="transfer"&gt;PROPAGATION_REQUIRED,ISOLATION_DEFAULT,+java.lang.ArithmeticException&lt;/prop&gt;有异常，仍提交 </span><br><span class="line">				</span><br><span class="line">	--&gt;</span><br><span class="line">	&lt;bean id=<span class="string">"ProxyAccountService"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.transaction.interceptor.TransactionProxyFactoryBean"</span>&gt;</span><br><span class="line">		&lt;property name="proxyInterfaces" value="com.itt.service.AccountService"&gt;&lt;/property&gt;</span><br><span class="line">		&lt;property name="target" ref="accountService"&gt;&lt;/property&gt;</span><br><span class="line">		&lt;property name="transactionManager" ref="txManager"&gt;&lt;/property&gt;</span><br><span class="line">		&lt;property name=<span class="string">"transactionAttributes"</span>&gt;</span><br><span class="line">			&lt;props&gt;</span><br><span class="line">				&lt;prop key="transfer"&gt;PROPAGATION_REQUIRED,ISOLATION_DEFAULT&lt;/prop&gt;</span><br><span class="line">			&lt;/props&gt;</span><br><span class="line">		&lt;/property&gt;</span><br><span class="line">	&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">	&lt;!-- <span class="number">5</span>事务管理器 --&gt;</span><br><span class="line">	&lt;bean id=<span class="string">"txManager"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span><br><span class="line">		&lt;property name="dataSource" ref="dataSource"&gt;&lt;/property&gt;</span><br><span class="line">	&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>测试</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span></span>&#123;</span><br><span class="line">		ApplicationContext applicationContext = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</span><br><span class="line">		 AccountService accountService = (AccountService) applicationContext.getBean(<span class="string">"ProxyAccountService"</span>);<span class="comment">//ProxyAccountService为代理对象</span></span><br><span class="line">		 accountService.transfer(<span class="string">"jack"</span>, <span class="string">"rose"</span>, <span class="number">1000</span>);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-4-AOP配置基于xml【掌握】"><a href="#1-3-4-AOP配置基于xml【掌握】" class="headerlink" title="1.3.4 AOP配置基于xml【掌握】"></a>1.3.4 AOP配置基于xml【掌握】</h3><ul>
+<li><strong>在spring xml配置 aop 自动生成代理，进行事务管理</strong></li>
+</ul>
+<p>1.配置管理器</p>
+<p>2.配置事务的详情</p>
+<p>3.配置 aop</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- <span class="number">4</span>.事务管理 --&gt;</span><br><span class="line">&lt;!-- <span class="number">4.1</span> 事务管理器--&gt;</span><br><span class="line">&lt;bean id=<span class="string">"txManager"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span><br><span class="line">	&lt;property name="dataSource" ref="dataSource"&gt;&lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line">&lt;!-- <span class="number">4.2</span> 事务的详情（事务通知），在aop筛选基础上，对ABC三个确定使用什么样的事务 。例如：AC读写，B只读等</span><br><span class="line">	&lt;tx:attributes&gt;   用于配置事务详情（属性）</span><br><span class="line">	&lt;tx:method name=<span class="string">""</span>/ 详情的具体内容</span><br><span class="line">		propagation  传播行为      REQUIRED：必须 ;REQUIRES_NEW:必须是新的</span><br><span class="line">		isolation    隔离级别</span><br><span class="line">--&gt;</span><br><span class="line">&lt;tx:advice id=<span class="string">"txAdvice"</span> transaction-manager=<span class="string">"txManager"</span>&gt;</span><br><span class="line">	&lt;tx:attributes&gt;</span><br><span class="line">		&lt;tx:method name=<span class="string">"transfer"</span> propagation=<span class="string">"REQUIRED"</span> isolation=<span class="string">"DEFAULT"</span>/&gt;</span><br><span class="line">	&lt;/tx:attributes&gt;</span><br><span class="line">&lt;/tx:advice&gt;</span><br><span class="line">&lt;!-- <span class="number">4.3</span> AOP 编程，目标类有ABCD四个方法(<span class="number">4</span>个连接点)，切入点表达式确定需要增强的连接点，从而获得切入点：ABC--&gt;</span><br><span class="line">&lt;aop:config&gt;</span><br><span class="line">	&lt;aop:advisor advice-ref=<span class="string">"txAdvice"</span> pointcut=<span class="string">"execution(* com.itt.service..*.*(..))"</span>/&gt;</span><br><span class="line">&lt;/aop:config&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-5-AOP配置基于注解-【掌握】"><a href="#1-3-5-AOP配置基于注解-【掌握】" class="headerlink" title="1.3.5 AOP配置基于注解 【掌握】"></a>1.3.5 AOP配置基于注解 【掌握】</h3><ul>
+<li>1 配置事务管理器，并将事务管理器交给spring</li>
+<li>2 在目标类或者目标方法添加注解即可 @Transactional</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- <span class="number">4</span>.事务管理 --&gt;</span><br><span class="line">	&lt;!-- <span class="number">4.1</span>事务管理器 --&gt;</span><br><span class="line">	&lt;bean id=<span class="string">"txManager"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span><br><span class="line">		&lt;property name="dataSource" ref="dataSource"&gt;&lt;/property&gt;</span><br><span class="line">	&lt;/bean&gt;</span><br><span class="line">	&lt;!-- <span class="number">4.2</span>将管理器将给spring</span><br><span class="line">		* transactionManager 配置事务管理器</span><br><span class="line">		* proxy-target-<span class="class"><span class="keyword">class</span></span></span><br><span class="line"><span class="class">			<span class="title">true</span>：底层强制使用<span class="title">cglib</span> 代理</span></span><br><span class="line"><span class="class">	--&gt;</span></span><br><span class="line">	&lt;tx:annotation-driven transaction-manager="txManager" proxy-target-class="false"/&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>service层</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在类中或者方法上加注解就行了</span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceImpl</span> <span class="keyword">implements</span> <span class="title">AccountService</span></span>&#123;</span><br><span class="line">.....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>事务详情的配置</li>
+</ul>
+<p><img src="C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1582036232664.png" alt="1582036232664"></p>
+<h1 id="2-整合Junit"><a href="#2-整合Junit" class="headerlink" title="2 整合Junit"></a>2 整合Junit</h1><ul>
+<li><p>导入jar包</p>
+<p>基本：4+1</p>
+<p>测试：spring-test…jar</p>
+<ol>
+<li>让Junit通知spring加载配置文件</li>
+<li>让spring容器自动进行注入</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">@<span class="title">ContextConfiguration</span>(<span class="title">locations</span></span>=<span class="string">"classpath:applicationContext.xml"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestApp</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">	<span class="meta">@Autowired</span>  <span class="comment">//与junit整合，不需要在spring xml配置扫描 </span></span><br><span class="line">	<span class="keyword">private</span> AccountService accountService;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span></span>&#123;</span><br><span class="line">		 accountService.transfer(<span class="string">"jack"</span>, <span class="string">"rose"</span>, <span class="number">1000</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-整合web"><a href="#3-整合web" class="headerlink" title="3 整合web"></a>3 整合web</h1><ul>
+<li><p>导入jar包</p>
+<ul>
+<li><p>spring-web.jar</p>
+<p><img src="C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1582069981604.png" alt="1582069981604"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-tomcat启动加载配置文件"><a href="#1-tomcat启动加载配置文件" class="headerlink" title="1. tomcat启动加载配置文件"></a>1. tomcat启动加载配置文件</h2><ul>
+<li><p>servlet                    ——-&gt;init(ServletConfig)    —–&gt;<load-on-startup>2</p>
+</li>
+<li><p>filer                         ——-&gt;init(FilterConfig)       ——&gt;web.xml注册过滤器自动调用初始化</p>
+</li>
+<li><p>listener                  ——–&gt;ServletContextListener —&gt;servletContext  对象监听【spring】</p>
+<p>spring提供监听器：<strong>ContextLoaderListener</strong>    —&gt;web.xml  <listener><listerner-class>……</p>
+<p>​    如果只配置监听器，默认加载xml位置：/WEB-INF/applicationContext.xml下</p>
+<p><img src="C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1582070424618.png" alt="1582070424618"></p>
+</li>
+</ul>
+<h2 id="2-确定我们配置文件的位置，通过系统初始化参数"><a href="#2-确定我们配置文件的位置，通过系统初始化参数" class="headerlink" title="2. 确定我们配置文件的位置，通过系统初始化参数"></a>2. 确定我们配置文件的位置，通过系统初始化参数</h2><pre><code>ServletContext 初始化参数web.xml </code></pre><p>   ​                <context-param></p>
+<p>   ​                <strong><param-name>contextConfigLocation</strong></p>
+<pre><code>**&lt;param-value&gt;classpath:applicationContext.xml**</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 确定配置文件的位置 --&gt;</span><br><span class="line"> 	&lt;context-param&gt;</span><br><span class="line"> 		&lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span><br><span class="line"> 		&lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;</span><br><span class="line"> 	&lt;/context-param&gt;</span><br><span class="line"> 	&lt;!-- 配置spring监听器，加载xml配置文件 --&gt;</span><br><span class="line"> 	&lt;listener&gt;</span><br><span class="line"> 		&lt;listener-<span class="class"><span class="keyword">class</span>&gt; <span class="title">org</span>.<span class="title">springframework</span>.<span class="title">web</span>.<span class="title">context</span>.<span class="title">ContextLoaderListener</span>&lt;/<span class="title">listener</span>-<span class="title">class</span>&gt;</span></span><br><span class="line"><span class="class"> 	&lt;/<span class="title">listener</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-从servletContext作用域-获得spring容器-了解"><a href="#3-从servletContext作用域-获得spring容器-了解" class="headerlink" title="3. 从servletContext作用域 获得spring容器(了解)"></a>3. 从servletContext作用域 获得spring容器(了解)</h2><ul>
+<li><p>web.xml</p>
+</li>
+<li><p>使用servlet实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 确定配置文件的位置 --&gt;</span><br><span class="line"> 	&lt;context-param&gt;</span><br><span class="line"> 		&lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span><br><span class="line"> 		&lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;</span><br><span class="line"> 	&lt;/context-param&gt;</span><br><span class="line"> 	&lt;!-- 配置spring监听器，加载xml配置文件 --&gt;</span><br><span class="line"> 	&lt;listener&gt;</span><br><span class="line"> 		&lt;listener-<span class="class"><span class="keyword">class</span>&gt; <span class="title">org</span>.<span class="title">springframework</span>.<span class="title">web</span>.<span class="title">context</span>.<span class="title">ContextLoaderListener</span>&lt;/<span class="title">listener</span>-<span class="title">class</span>&gt;</span></span><br><span class="line"><span class="class"> 	&lt;/<span class="title">listener</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>从servletContext作用域 获得spring容器(了解)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从application作用域(ServletContext)获得spring容器</span></span><br><span class="line">		<span class="comment">//方式1   手动从作用域获取</span></span><br><span class="line">		ApplicationContext applicationContext = </span><br><span class="line">				(ApplicationContext) <span class="keyword">this</span>.getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);</span><br><span class="line">		<span class="comment">//方式2 通过工具获取</span></span><br><span class="line">		ApplicationContext applicationContext2 = </span><br><span class="line">		WebApplicationContextUtils.getWebApplicationContext(<span class="keyword">this</span>.getServletContext());</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//操作</span></span><br><span class="line">		AccountService accountService = (AccountService) applicationContext.getBean(<span class="string">"accountService"</span>);</span><br><span class="line">		accountService.transfer(<span class="string">"jack"</span>, <span class="string">"rose"</span>, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h1 id="4-Web项目如何初始化SpringIOC容器："><a href="#4-Web项目如何初始化SpringIOC容器：" class="headerlink" title="4.Web项目如何初始化SpringIOC容器："></a>4.Web项目如何初始化SpringIOC容器：</h1><p>思路：当服务器启动时，通过监听器将SpringIOC容器初始化一次</p>
+<p><img src="C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CDesktop%5C%E5%9B%BE%E7%89%87%5CSnipaste_2020-04-15_10-37-57.png" alt="Snipaste_2020-04-15_10-37-57"></p>
+<p>maven依赖</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 面向切面模块 --&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-aop&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;4.2.6.RELEASE&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;!-- 管理Bean --&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-beans&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;4.2.6.RELEASE&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;!-- 处理上下文的 --&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-context&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;4.2.6.RELEASE&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-tx&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;4.0.3.RELEASE&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;!-- 第三方日志 --&gt;</span><br><span class="line">		&lt;!--&lt;dependency&gt;--&gt;</span><br><span class="line">		&lt;!--&lt;groupId&gt;commons-logging&lt;/groupId&gt;--&gt;</span><br><span class="line">		&lt;!--&lt;artifactId&gt;commons-logging&lt;/artifactId&gt;--&gt;</span><br><span class="line">		&lt;!--&lt;version&gt;1.1&lt;/version&gt;--&gt;</span><br><span class="line">		&lt;!--&lt;/dependency&gt;--&gt;</span><br><span class="line">		&lt;!-- SpEL表达式 --&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-expression&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;4.2.6.RELEASE&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;!--单元测试--&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;4.12&lt;/version&gt;</span><br><span class="line">			&lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;!-- https:<span class="comment">//mvnrepository.com/artifact/org.springframework/spring-web --&gt;</span></span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-web&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;4.3.9.RELEASE&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>web项目启动时，会自动加载web.xml，因此需要在web.xml中加载监听器（ioc容器初始化）</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/17/spring%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%8602/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/17/mybatis/" class="archive-article-date">
-  	<time datetime="2020-04-17T02:16:47.180Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-17</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/04/17/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          java中的反射机制
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/17/mybatis/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mybatis</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/17/mybatis/">mybatis</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/16/%E6%88%91%E7%9A%84%E6%96%87%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2020-04-16T07:41:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/16/%E6%88%91%E7%9A%84%E6%96%87%E7%AB%A0/">我的文章</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/16/hello-world/" class="archive-article-date">
-  	<time datetime="2020-04-16T07:23:11.466Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/16/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+  
+  
+      <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+<script>
+var gitalk = new Gitalk({
+  clientID: 'your clientID',
+  clientSecret: 'your clientSecret',
+  repo: 'git_comment',
+  owner: 'findtheonlyway',
+  admin: ['erbiduo'],
+  id: md5(window.location.pathname),
+  distractionFreeMode: true
+})
 
-    
+gitalk.render('gitalk-container')
+</script>
+  
 
 
           </div>
@@ -359,8 +654,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
