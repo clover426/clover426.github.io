@@ -385,9 +385,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="13-查询缓存"><a href="#13-查询缓存" class="headerlink" title="13.查询缓存"></a>13.查询缓存</h2><h3 id="13-1一级缓存：同一个SqlSession对象"><a href="#13-1一级缓存：同一个SqlSession对象" class="headerlink" title="13.1一级缓存：同一个SqlSession对象"></a>13.1一级缓存：同一个SqlSession对象</h3><ul>
-<li>MyBatis默认开启一级缓存，如果用同样的SqlSession查询相同的数据，则只会在第一次查询时向数据库发送sql语句，并将查询的结果放入到SqlSession（作为缓存存在）；后续再次查询该同样的对象时，则直接从缓存中查询该对象即可（即省略了数据库的访问）。</li>
-</ul>
-<h3 id="13-2二级缓存"><a href="#13-2二级缓存" class="headerlink" title="13.2二级缓存"></a>13.2二级缓存</h3>
+<li><p>MyBatis默认开启一级缓存，如果用同样的SqlSession查询相同的数据，则只会在第一次查询时向数据库发送sql语句，并将查询的结果放入到SqlSession（作为缓存存在）；后续再次查询该同样的对象时，则直接从缓存中查询该对象即可（即省略了数据库的访问）。</p>
         
       
 

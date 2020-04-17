@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>mybatis | clover</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="13.查询缓存13.1一级缓存：同一个SqlSession对象 MyBatis默认开启一级缓存，如果用同样的SqlSession查询相同的数据，则只会在第一次查询时向数据库发送sql语句，并将查询的结果放入到SqlSession（作为缓存存在）；后续再次查询该同样的对象时，则直接从缓存中查询该对象即可（即省略了数据库的访问）。  13.2二级缓存">
+  <meta name="description" content="13.查询缓存13.1一级缓存：同一个SqlSession对象 MyBatis默认开启一级缓存，如果用同样的SqlSession查询相同的数据，则只会在第一次查询时向数据库发送sql语句，并将查询的结果放入到SqlSession（作为缓存存在）；后续再次查询该同样的对象时，则直接从缓存中查询该对象即可（即省略了数据库的访问）。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mybatis">
 <meta property="og:url" content="http://yoursite.com/2020/04/17/mybatis/index.html">
 <meta property="og:site_name" content="clover">
-<meta property="og:description" content="13.查询缓存13.1一级缓存：同一个SqlSession对象 MyBatis默认开启一级缓存，如果用同样的SqlSession查询相同的数据，则只会在第一次查询时向数据库发送sql语句，并将查询的结果放入到SqlSession（作为缓存存在）；后续再次查询该同样的对象时，则直接从缓存中查询该对象即可（即省略了数据库的访问）。  13.2二级缓存">
+<meta property="og:description" content="13.查询缓存13.1一级缓存：同一个SqlSession对象 MyBatis默认开启一级缓存，如果用同样的SqlSession查询相同的数据，则只会在第一次查询时向数据库发送sql语句，并将查询的结果放入到SqlSession（作为缓存存在）；后续再次查询该同样的对象时，则直接从缓存中查询该对象即可（即省略了数据库的访问）。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200327123522881.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70">
 <meta property="article:published_time" content="2020-04-17T02:16:47.180Z">
-<meta property="article:modified_time" content="2020-04-17T02:20:28.101Z">
+<meta property="article:modified_time" content="2020-04-17T02:24:08.878Z">
 <meta property="article:author" content="clover">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200327123522881.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70">
@@ -211,10 +211,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="13-查询缓存"><a href="#13-查询缓存" class="headerlink" title="13.查询缓存"></a>13.查询缓存</h2><h3 id="13-1一级缓存：同一个SqlSession对象"><a href="#13-1一级缓存：同一个SqlSession对象" class="headerlink" title="13.1一级缓存：同一个SqlSession对象"></a>13.1一级缓存：同一个SqlSession对象</h3><ul>
-<li>MyBatis默认开启一级缓存，如果用同样的SqlSession查询相同的数据，则只会在第一次查询时向数据库发送sql语句，并将查询的结果放入到SqlSession（作为缓存存在）；后续再次查询该同样的对象时，则直接从缓存中查询该对象即可（即省略了数据库的访问）。</li>
-</ul>
-<h3 id="13-2二级缓存"><a href="#13-2二级缓存" class="headerlink" title="13.2二级缓存"></a>13.2二级缓存</h3><a id="more"></a>
-<ul>
+<li><p>MyBatis默认开启一级缓存，如果用同样的SqlSession查询相同的数据，则只会在第一次查询时向数据库发送sql语句，并将查询的结果放入到SqlSession（作为缓存存在）；后续再次查询该同样的对象时，则直接从缓存中查询该对象即可（即省略了数据库的访问）。</p>
+<a id="more"></a>
+<h3 id="13-2二级缓存"><a href="#13-2二级缓存" class="headerlink" title="13.2二级缓存"></a>13.2二级缓存</h3></li>
 <li><p>MyBatis默认情况下没有开启二级缓存，需要手工打开。</p>
 <ol>
 <li><p>config.xml</p>
