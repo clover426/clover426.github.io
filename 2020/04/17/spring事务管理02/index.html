@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>spring事务管理02 | clover</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1 事务管理1.1 回顾事务 事务：一组业务操作ABCD，要么全部成功，要么全部不成功。  特性：ACID">
+  <meta name="description" content="1 事务管理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spring事务管理02">
 <meta property="og:url" content="http://yoursite.com/2020/04/17/spring%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%8602/index.html">
 <meta property="og:site_name" content="clover">
-<meta property="og:description" content="1 事务管理1.1 回顾事务 事务：一组业务操作ABCD，要么全部成功，要么全部不成功。  特性：ACID">
+<meta property="og:description" content="1 事务管理">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps1.jpg">
 <meta property="og:image" content="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps2.jpg">
@@ -29,7 +29,7 @@
 <meta property="og:image" content="c:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1582070424618.png">
 <meta property="og:image" content="c:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CDesktop%5C%E5%9B%BE%E7%89%87%5CSnipaste_2020-04-15_10-37-57.png">
 <meta property="article:published_time" content="2020-04-17T02:19:04.217Z">
-<meta property="article:modified_time" content="2020-04-17T02:20:38.670Z">
+<meta property="article:modified_time" content="2020-04-17T03:02:11.692Z">
 <meta property="article:author" content="clover">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="file:///C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CLocal%5CTemp%5Cksohtml10900%5Cwps1.jpg">
@@ -222,19 +222,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-事务管理"><a href="#1-事务管理" class="headerlink" title="1 事务管理"></a>1 事务管理</h1><h2 id="1-1-回顾事务"><a href="#1-1-回顾事务" class="headerlink" title="1.1 回顾事务"></a>1.1 回顾事务</h2><ul>
+        <h1 id="1-事务管理"><a href="#1-事务管理" class="headerlink" title="1 事务管理"></a>1 事务管理</h1><a id="more"></a>
+<h2 id="1-1-回顾事务"><a href="#1-1-回顾事务" class="headerlink" title="1.1 回顾事务"></a>1.1 回顾事务</h2><ul>
 <li><p>事务：一组业务操作ABCD，要么全部成功，要么全部不成功。</p>
 </li>
 <li><p>特性：ACID</p>
-<a id="more"></a>
-
+</li>
+</ul>
 <ul>
 <li>原子性：整体</li>
 <li>一致性：完成 </li>
 <li>隔离性：并发</li>
 <li>持久性：结果</li>
 </ul>
-</li>
+<ul>
 <li><p>隔离问题：</p>
 <ul>
 <li>脏读：一个事务读到另一个事务没有提交的数据</li>
