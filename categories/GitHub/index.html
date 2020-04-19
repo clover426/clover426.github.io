@@ -6,21 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>java中的反射机制 | clover</title>
+  <title>Category: GitHub | clover</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="java中的反射机制">
-<meta property="og:type" content="article">
-<meta property="og:title" content="java中的反射机制">
-<meta property="og:url" content="http://yoursite.com/2020/04/17/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="clover">
+<meta property="og:url" content="http://yoursite.com/categories/GitHub/index.html">
 <meta property="og:site_name" content="clover">
-<meta property="og:description" content="java中的反射机制">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="c:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1580977084726.png">
-<meta property="article:published_time" content="2020-04-17T02:20:07.020Z">
-<meta property="article:modified_time" content="2020-04-17T02:57:36.750Z">
 <meta property="article:author" content="clover">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1580977084726.png">
   
     <link rel="alternative" href="/atom.xml" title="clover" type="application/atom+xml">
   
@@ -162,395 +156,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-java中的反射机制" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      java中的反射机制
-    </h1>
-  
-
-        
-        
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-
-<a href="/2020/04/17/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/" class="archive-article-date">
-  	<time datetime="2020-04-17T02:20:07.020Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-17</time>
-</a>
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">752字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
+            <article class="article article-type-post show">
+  <header class="article-header" style="border-bottom: 1px solid #ccc">
+  <h1 class="article-title" itemprop="name">
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="java中的反射机制"><a href="#java中的反射机制" class="headerlink" title="java中的反射机制"></a>java中的反射机制</h1><a id="more"></a>
-<h2 id="1-类加载器：ClassLoader"><a href="#1-类加载器：ClassLoader" class="headerlink" title="1.类加载器：ClassLoader"></a>1.类加载器：ClassLoader</h2><p><img src="C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1580977084726.png" alt="1580977084726"></p>
-<p>​           Class.forName(“全类名”)                              类名.Class                                                         对象.getClass()</p>
-<ul>
-<li><p>反射：将类的各个组成部分封装为其他对象，这就是反射机制。    </p>
-</li>
-<li><p>好处：</p>
-<ol>
-<li><p>可以在程序运行过程中，操作这些对象</p>
-</li>
-<li><p>可以解耦，提高程序的可扩展性。</p>
-</li>
-</ol>
-</li>
-<li><p>获取Class对象的方式：</p>
-<ol>
-<li>Class.forName(“全类名”)：将字节码文件加载进内存，返回内存对象</li>
-</ol>
-<ul>
-<li>多用于配置文件，将类名定义在配置文件中。读取文件，加载类</li>
-</ul>
-<ol start="2">
-<li>类名.class：通过类名的属性</li>
-</ol>
-<ul>
-<li>多用于参数的传递</li>
-</ul>
-<ol start="3">
-<li><p>对象.getClass()：getClass()方法在Object类中定义着。</p>
-<ul>
-<li>多用于对象的获取字节码的方式</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-<h2 id="2-结论："><a href="#2-结论：" class="headerlink" title="2.结论："></a>2.结论：</h2><p>同一个字节码文件(*.class)在一次程序运行过程中，只会被加载一次，不论通过哪一种方式获取的</p>
-<p>Class对象都是同一个。</p>
-<h2 id="3-Class对象的功能："><a href="#3-Class对象的功能：" class="headerlink" title="3.Class对象的功能："></a>3.Class对象的功能：</h2><ul>
-<li><p>获取功能：</p>
-<ol>
-<li><p>获取成员变量们</p>
-<ul>
-<li><p>Field[]     getFields()：获取所有 public修饰的成员变量</p>
-</li>
-<li><p>Field        getField(String name) ：获取指定public修饰的成员变量</p>
-</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-<pre><code> * Field        getDeclaredFields() ：获取所有成员变量，不考虑修饰符
+  </h1>
+  </header>
 
- * Field        getDeclaredField(String name)
-
-2. 获取构造方法们
-
- * Constructor&lt;?&gt;[]            getConstructors()   获取数组 
-
- * Constructor&lt;T&gt;             getConstructor(类&lt;?&gt;... parameterTypes)   获取单个指定的
-
-
- * Constructor&lt;T&gt;             getDeclaredConstructor(类&lt;?&gt;... parameterTypes)  
-
- * Constructor&lt;?&gt;[]            getDeclaredConstructors()  
-
-3. 获取成员方法们
-
- * Method[ ]  getMethods()
-
- * Method getMethod(String name,类&lt;?&gt; ... parameterTypes)
-
-
- * Method[ ]  getDeclaredMethods()
-
- * Method  getDeclaredMethod(String name,类&lt;?&gt; ... parameterTypes)
-
-4. 获取类名
-
- * String   getName()</code></pre><ul>
-<li><p>Field:成员变量</p>
-<ul>
-<li>操作：<ol>
-<li>设置值 <ul>
-<li>void set(Object obj,Object value)</li>
-</ul>
-</li>
-<li>获取值 <ul>
-<li>get(Object obj)</li>
-</ul>
-</li>
-<li>忽略访问权限修饰符的安全检查<ul>
-<li>setAccessible(true);//暴力反射</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>Constructor：构造方法</p>
-<ul>
-<li>创建对象：<ul>
-<li>T newInstance(Object… initargs)</li>
-<li>如何使用空参构造方法创建对象，操作可以简化 ：Class对象的newInstance方法</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Method：方法对象</p>
-<ul>
-<li>执行方法：<ul>
-<li>Object    invoke(Object   obj,object…  args)</li>
-</ul>
-</li>
-<li>获取方法名称：<ul>
-<li>String  getName   获取方法名</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="4-案例："><a href="#4-案例：" class="headerlink" title="4.案例："></a>4.案例：</h2><ul>
-<li><p>需求：写一个”框架“，不能改变该类的任何代码的前提下，可以帮助我们创建任意类的对象，并且执行其中任意方法</p>
-<ul>
-<li><p>实现：</p>
-<ol>
-<li><p>配置文件</p>
-</li>
-<li><p>反射</p>
-</li>
-</ol>
-</li>
-<li><p>步骤：</p>
-<ol>
-<li>将需要创建的对象的全类名和需要执行的方法定义在配置文件中  </li>
-<li>在程序中加载读取配置文件</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-<p>​                  3. 使用反射技术来加载类文件进内存</p>
-<ol start="4">
-<li><p>创建对象</p>
-<ol start="5">
-<li><p>执行方法</p>
-<p>实现的方法：（ReflectTest.java）</p>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.加载配置文件</span></span><br><span class="line">        <span class="comment">//1.1创建Properties对象</span></span><br><span class="line">        Properties pro = <span class="keyword">new</span> Properties();</span><br><span class="line">        <span class="comment">//1.2加载配置文件，转换为一个集合</span></span><br><span class="line">        <span class="comment">//1.2.1获取class目录下的配置文件</span></span><br><span class="line">        ClassLoader classLoader = ReflectTest<span class="class">.<span class="keyword">class</span>.<span class="title">getClassLoader</span>()</span>;</span><br><span class="line">        InputStream is = classLoader.getResourceAsStream(<span class="string">"pro.properties"</span>);</span><br><span class="line">        pro.load(is);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.获取配置文件中定义的数据</span></span><br><span class="line">        String className = pro.getProperty(<span class="string">"className"</span>);</span><br><span class="line">        String methodName = pro.getProperty(<span class="string">"methodName"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.加载该类进内存</span></span><br><span class="line">        Class cls = Class.forName(className);</span><br><span class="line">        <span class="comment">//4.创建对象</span></span><br><span class="line">        Object obj = cls.newInstance();</span><br><span class="line">        <span class="comment">//5.获取方法的对象</span></span><br><span class="line">        Method method = cls.getMethod(methodName);</span><br><span class="line">        <span class="comment">//6.执行方法</span></span><br><span class="line">        method.invoke(obj);</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li>配置文件：（pro.properties）</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">className=tree.Student</span><br><span class="line">methodName=sleep</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
+  
+  <div class="category-all-page">
+    <h2>共计&nbsp;2&nbsp;个分类</h2>
+    <ul class="category-list-item-list"><li class="category-list-item-list-item"><a class="category-list-item-list-link" href="/categories/GitHub/">GitHub</a><span class="category-list-item-list-count">1</span></li><li class="category-list-item-list-item"><a class="category-list-item-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="category-list-item-list-count">3</span></li></ul>
   </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/17/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
+  
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/04/17/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%EF%BC%9A/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          代理模式：
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/04/17/mybatis/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">mybatis</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#java中的反射机制"><span class="toc-number">1.</span> <span class="toc-text">java中的反射机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-类加载器：ClassLoader"><span class="toc-number">1.1.</span> <span class="toc-text">1.类加载器：ClassLoader</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-结论："><span class="toc-number">1.2.</span> <span class="toc-text">2.结论：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Class对象的功能："><span class="toc-number">1.3.</span> <span class="toc-text">3.Class对象的功能：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-案例："><span class="toc-number">1.4.</span> <span class="toc-text">4.案例：</span></a></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
-  
-
-  
-
-  
-
-  
-  
-      <div id="gitalk-container"></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
-
-<script>
-var gitalk = new Gitalk({
-  clientID: 'your clientID',
-  clientSecret: 'your clientSecret',
-  repo: 'git_comment',
-  owner: 'findtheonlyway',
-  admin: ['erbiduo'],
-  id: md5(window.location.pathname),
-  distractionFreeMode: true
-})
-
-gitalk.render('gitalk-container')
-</script>
-  
-
-
           </div>
         </div>
       </div>
@@ -597,10 +216,10 @@ gitalk.render('gitalk-container')
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
-		isCategory: false,
+		isCategory: true,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
