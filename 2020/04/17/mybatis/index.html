@@ -127,17 +127,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">0</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -387,7 +387,7 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;trim prefix=<span class="string">"where"</span> prefixOverrides=<span class="string">"and"</span>&gt;</span><br><span class="line">          &lt;<span class="keyword">if</span> test=<span class="string">"id != null and id != 0"</span>&gt;</span><br><span class="line">              and id = #&#123;id&#125;</span><br><span class="line">          &lt;/if&gt;</span><br><span class="line">          &lt;<span class="keyword">if</span> test=<span class="string">"name != null and name != ''"</span>&gt;</span><br><span class="line">              and name like <span class="string">'%$&#123;name&#125;%'</span></span><br><span class="line">          &lt;/if&gt;</span><br><span class="line">          &lt;<span class="keyword">if</span> test=<span class="string">"phone != null and phone != ''"</span>&gt;</span><br><span class="line">              and phone = #&#123;phone&#125;</span><br><span class="line">          &lt;/if&gt;</span><br><span class="line"> &lt;/trim&gt;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p><where>标签可以去掉前面的and</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id&#x3D;&quot;queryByINP&quot; parameterType&#x3D;&quot;EmpInfo&quot; resultType&#x3D;&quot;EmpInfo&quot;&gt;</span><br><span class="line">  select * from empinfo</span><br><span class="line">  &lt;where&gt;</span><br><span class="line">      &lt;if test&#x3D;&quot;id !&#x3D; null and id !&#x3D; 0&quot;&gt;</span><br><span class="line">          and id &#x3D; #&#123;id&#125;</span><br><span class="line">      &lt;&#x2F;if&gt;</span><br><span class="line">      &lt;if test&#x3D;&quot;name !&#x3D; null and name !&#x3D; &#39;&#39;&quot;&gt;</span><br><span class="line">          and name like &#39;%$&#123;name&#125;%&#39;</span><br><span class="line">      &lt;&#x2F;if&gt;</span><br><span class="line">      &lt;if test&#x3D;&quot;phone !&#x3D; null and phone !&#x3D; &#39;&#39;&quot;&gt;</span><br><span class="line">          and phone &#x3D; #&#123;phone&#125;</span><br><span class="line">      &lt;&#x2F;if&gt;</span><br><span class="line">  &lt;&#x2F;where&gt;</span><br><span class="line">&lt;&#x2F;select&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryByINP"</span> <span class="attr">parameterType</span>=<span class="string">"EmpInfo"</span> <span class="attr">resultType</span>=<span class="string">"EmpInfo"</span>&gt;</span></span></span><br><span class="line"><span class="xml">  select * from empinfo</span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">where</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"id != null and id != 0"</span>&gt;</span></span></span><br><span class="line"><span class="xml">          and id = #</span><span class="template-variable">&#123;id&#125;</span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"name != null and name != ''"</span>&gt;</span></span></span><br><span class="line"><span class="xml">          and name like '%$</span><span class="template-variable">&#123;name&#125;</span><span class="xml">%'</span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"phone != null and phone != ''"</span>&gt;</span></span></span><br><span class="line"><span class="xml">          and phone = #</span><span class="template-variable">&#123;phone&#125;</span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>直接 在where后面加：1 = 1</p>
 </li>
@@ -417,7 +417,7 @@
 
 <h3 id="12-3-bind参数"><a href="#12-3-bind参数" class="headerlink" title="12.3    bind参数"></a>12.3    bind参数</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;bind name=<span class="string">"_queryName"</span> value=<span class="string">"'%'+name+'%'"</span>/&gt;</span><br><span class="line">    &lt;<span class="keyword">if</span> test=<span class="string">"name != null and name != ''"</span>&gt;</span><br><span class="line">         and name like #&#123;_queryName&#125;</span><br><span class="line">    &lt;/if&gt;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">I:\MyBatisIdea\MyBatisGenerator\src\main\java</span><br></pre></td></tr></table></figure>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">I:<span class="symbol">\M</span>yBatisIdea<span class="symbol">\M</span>yBatisGenerator<span class="symbol">\s</span>rc<span class="symbol">\m</span>ain<span class="symbol">\j</span>ava</span><br></pre></td></tr></table></figure>
 
 <h2 id="13-逆向工程"><a href="#13-逆向工程" class="headerlink" title="13.逆向工程"></a>13.逆向工程</h2><p>1.导入依赖</p>
 <p>2.xml模板文件（修改生成路径、表名）</p>
@@ -447,7 +447,7 @@
 <p>所有的配置信息、增删改标签全部存在于Configuration中</p>
 <p>Configuration又存在于DefaultSqlSessionFactory对象中(SqlSessionFactory)</p>
 <p>SqlSessionFactory对象—》DefaultSqlSessionFactory—》Configuration—》所有的配置信息</p>
-<h3 id="2-获取SqlSession对象"><a href="#2-获取SqlSession对象" class="headerlink" title="2.获取SqlSession对象"></a>2.获取SqlSession对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">executor &#x3D; (Executor) interceptorChain.pluginAll(executor);</span><br></pre></td></tr></table></figure>
+<h3 id="2-获取SqlSession对象"><a href="#2-获取SqlSession对象" class="headerlink" title="2.获取SqlSession对象"></a>2.获取SqlSession对象</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">executor</span> = (Executor) interceptorChain.pluginAll(executor)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 
 <p>通过装饰模式，将刚才产生的SimpleExecutor包装成一个更加强大 的executor</p>
 <p>作用：以后如果我们要给MyBatis写自己的插件，就可以通过拦截器实现</p>
@@ -561,21 +561,9 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">6</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
