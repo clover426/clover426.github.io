@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.cloverhk.top","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="java中的反射机制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java中的反射机制">
+<meta property="og:url" content="http://www.cloverhk.top/2020/04/17/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:site_name" content="clover">
+<meta property="og:description" content="java中的反射机制">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1580977084726.png">
+<meta property="article:published_time" content="2020-04-17T02:20:07.020Z">
+<meta property="article:modified_time" content="2020-04-17T02:57:36.750Z">
+<meta property="article:author" content="clover">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1580977084726.png">
+
+<link rel="canonical" href="http://www.cloverhk.top/2020/04/17/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>java中的反射机制 | clover</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">clover</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">生命不息，奋斗不止！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.cloverhk.top/2020/04/17/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="clover">
+      <meta itemprop="description" content="加油，奋斗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="clover">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          java中的反射机制
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-17 10:20:07 / 修改时间：10:57:36" itemprop="dateCreated datePublished" datetime="2020-04-17T10:20:07+08:00">2020-04-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="java中的反射机制"><a href="#java中的反射机制" class="headerlink" title="java中的反射机制"></a>java中的反射机制</h1><a id="more"></a>
+<h2 id="1-类加载器：ClassLoader"><a href="#1-类加载器：ClassLoader" class="headerlink" title="1.类加载器：ClassLoader"></a>1.类加载器：ClassLoader</h2><p><img src="C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1580977084726.png" alt="1580977084726"></p>
+<p>​           Class.forName(“全类名”)                              类名.Class                                                         对象.getClass()</p>
+<ul>
+<li><p>反射：将类的各个组成部分封装为其他对象，这就是反射机制。    </p>
+</li>
+<li><p>好处：</p>
+<ol>
+<li><p>可以在程序运行过程中，操作这些对象</p>
+</li>
+<li><p>可以解耦，提高程序的可扩展性。</p>
+</li>
+</ol>
+</li>
+<li><p>获取Class对象的方式：</p>
+<ol>
+<li>Class.forName(“全类名”)：将字节码文件加载进内存，返回内存对象</li>
+</ol>
+<ul>
+<li>多用于配置文件，将类名定义在配置文件中。读取文件，加载类</li>
+</ul>
+<ol start="2">
+<li>类名.class：通过类名的属性</li>
+</ol>
+<ul>
+<li>多用于参数的传递</li>
+</ul>
+<ol start="3">
+<li><p>对象.getClass()：getClass()方法在Object类中定义着。</p>
+<ul>
+<li>多用于对象的获取字节码的方式</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="2-结论："><a href="#2-结论：" class="headerlink" title="2.结论："></a>2.结论：</h2><p>同一个字节码文件(*.class)在一次程序运行过程中，只会被加载一次，不论通过哪一种方式获取的</p>
+<p>Class对象都是同一个。</p>
+<h2 id="3-Class对象的功能："><a href="#3-Class对象的功能：" class="headerlink" title="3.Class对象的功能："></a>3.Class对象的功能：</h2><ul>
+<li><p>获取功能：</p>
+<ol>
+<li><p>获取成员变量们</p>
+<ul>
+<li><p>Field[]     getFields()：获取所有 public修饰的成员变量</p>
+</li>
+<li><p>Field        getField(String name) ：获取指定public修饰的成员变量</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<pre><code> * Field        getDeclaredFields() ：获取所有成员变量，不考虑修饰符
+
+ * Field        getDeclaredField(String name)
+
+2. 获取构造方法们
+
+ * Constructor&lt;?&gt;[]            getConstructors()   获取数组 
+
+ * Constructor&lt;T&gt;             getConstructor(类&lt;?&gt;... parameterTypes)   获取单个指定的
+
+
+ * Constructor&lt;T&gt;             getDeclaredConstructor(类&lt;?&gt;... parameterTypes)  
+
+ * Constructor&lt;?&gt;[]            getDeclaredConstructors()  
+
+3. 获取成员方法们
+
+ * Method[ ]  getMethods()
+
+ * Method getMethod(String name,类&lt;?&gt; ... parameterTypes)
+
+
+ * Method[ ]  getDeclaredMethods()
+
+ * Method  getDeclaredMethod(String name,类&lt;?&gt; ... parameterTypes)
+
+4. 获取类名
+
+ * String   getName()</code></pre><ul>
+<li><p>Field:成员变量</p>
+<ul>
+<li>操作：<ol>
+<li>设置值 <ul>
+<li>void set(Object obj,Object value)</li>
+</ul>
+</li>
+<li>获取值 <ul>
+<li>get(Object obj)</li>
+</ul>
+</li>
+<li>忽略访问权限修饰符的安全检查<ul>
+<li>setAccessible(true);//暴力反射</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>Constructor：构造方法</p>
+<ul>
+<li>创建对象：<ul>
+<li>T newInstance(Object… initargs)</li>
+<li>如何使用空参构造方法创建对象，操作可以简化 ：Class对象的newInstance方法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Method：方法对象</p>
+<ul>
+<li>执行方法：<ul>
+<li>Object    invoke(Object   obj,object…  args)</li>
+</ul>
+</li>
+<li>获取方法名称：<ul>
+<li>String  getName   获取方法名</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-案例："><a href="#4-案例：" class="headerlink" title="4.案例："></a>4.案例：</h2><ul>
+<li><p>需求：写一个”框架“，不能改变该类的任何代码的前提下，可以帮助我们创建任意类的对象，并且执行其中任意方法</p>
+<ul>
+<li><p>实现：</p>
+<ol>
+<li><p>配置文件</p>
+</li>
+<li><p>反射</p>
+</li>
+</ol>
+</li>
+<li><p>步骤：</p>
+<ol>
+<li>将需要创建的对象的全类名和需要执行的方法定义在配置文件中  </li>
+<li>在程序中加载读取配置文件</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p>​                  3. 使用反射技术来加载类文件进内存</p>
+<ol start="4">
+<li><p>创建对象</p>
+<ol start="5">
+<li><p>执行方法</p>
+<p>实现的方法：（ReflectTest.java）</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.加载配置文件</span></span><br><span class="line">        <span class="comment">//1.1创建Properties对象</span></span><br><span class="line">        Properties pro = <span class="keyword">new</span> Properties();</span><br><span class="line">        <span class="comment">//1.2加载配置文件，转换为一个集合</span></span><br><span class="line">        <span class="comment">//1.2.1获取class目录下的配置文件</span></span><br><span class="line">        ClassLoader classLoader = ReflectTest<span class="class">.<span class="keyword">class</span>.<span class="title">getClassLoader</span>()</span>;</span><br><span class="line">        InputStream is = classLoader.getResourceAsStream(<span class="string">"pro.properties"</span>);</span><br><span class="line">        pro.load(is);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.获取配置文件中定义的数据</span></span><br><span class="line">        String className = pro.getProperty(<span class="string">"className"</span>);</span><br><span class="line">        String methodName = pro.getProperty(<span class="string">"methodName"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.加载该类进内存</span></span><br><span class="line">        Class cls = Class.forName(className);</span><br><span class="line">        <span class="comment">//4.创建对象</span></span><br><span class="line">        Object obj = cls.newInstance();</span><br><span class="line">        <span class="comment">//5.获取方法的对象</span></span><br><span class="line">        Method method = cls.getMethod(methodName);</span><br><span class="line">        <span class="comment">//6.执行方法</span></span><br><span class="line">        method.invoke(obj);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>配置文件：（pro.properties）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">className=tree.Student</span><br><span class="line">methodName=sleep</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/17/mybatis/" rel="prev" title="mybatis">
+      <i class="fa fa-chevron-left"></i> mybatis
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/17/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%EF%BC%9A/" rel="next" title="代理模式：">
+      代理模式： <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#java中的反射机制"><span class="nav-number">1.</span> <span class="nav-text">java中的反射机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-类加载器：ClassLoader"><span class="nav-number">1.1.</span> <span class="nav-text">1.类加载器：ClassLoader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-结论："><span class="nav-number">1.2.</span> <span class="nav-text">2.结论：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Class对象的功能："><span class="nav-number">1.3.</span> <span class="nav-text">3.Class对象的功能：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-案例："><span class="nav-number">1.4.</span> <span class="nav-text">4.案例：</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">clover</p>
+  <div class="site-description" itemprop="description">加油，奋斗</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">clover</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
