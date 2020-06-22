@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>代理模式</title>
+    <url>/2020/04/17/Head%20First%20Design%20Patterns%E2%80%94%E2%80%94%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<blockquote>
+<p>代理模式指的就是使用现一个代理类来代理另一个目标类的行为，比如说我们一般在租房子的时候，不直接和房东进行交涉，而通过房屋中介来进行操作，因为他们手里可能有很多的房源，对于房东来说，就可以直接与房屋中介进行交流。类似的例子数不胜数，又比如好莱坞的明星，都有他们自己的经济人，当然这里指的可不是宝强的经济人，开个玩笑，他们的经济人负责明星的经济活动，这里指的就是代理模式！</p>
+<a id="more"></a>
+<p>代理模式分为：<strong>静态代理模式，动态代模式（jdk动态代理），cglib动态代理模式</strong>三种！</p>
+</blockquote>
+<h1 id="一、-静态代理模式："><a href="#一、-静态代理模式：" class="headerlink" title="一、 静态代理模式："></a>一、 静态代理模式：</h1><p> 我们这里就用租房子的例子来说明原理，</p>
+<ul>
+<li>类图如下 ：</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20200408113559570.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><strong>大概的说明一下：</strong><br>有一个接口Host，里面有Rent租房的方法，然后让HostImpl房东来实现Host方法，这个就是目标类，真正要出租房子的房东，proxy为中介对象，它也实现Host方法，然后在类内部聚合了HostImpl对象，调用HostImpl，从而可以帮房东来出租房子，下面来看具体的代码实现：</p>
+<ul>
+<li>代码<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Host</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Rent</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HostImpl</span> <span class="keyword">implements</span> <span class="title">Host</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Rent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"房东要租房子"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">proxy</span> <span class="keyword">implements</span> <span class="title">Host</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//聚合HostImpl</span></span><br><span class="line">    HostImpl host;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">proxy</span><span class="params">(HostImpl host)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.host = host;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Rent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"代理开始工作"</span>);</span><br><span class="line">        <span class="comment">//调用HostImpl中的Rent方法</span></span><br><span class="line">        host.Rent();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        proxy proxy = <span class="keyword">new</span> proxy(<span class="keyword">new</span> HostImpl());</span><br><span class="line">        proxy.Rent();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>运行结果<br><img src="https://img-blog.csdnimg.cn/20200408114157664.png" alt="在这里插入图片描述"><br>静态代理：<br>优点：在不修改目标对象的功能前提下，能通过代理对象目标功能扩展<br>缺点：<br>（1）因为代理对象需要 与目标对象实现一样的接口，所有会有很多代理类<br>（2）一旦接口增加方法，目标对象与代理对象都要维护<h1 id="二、-动态代模式（jdk动态代理）："><a href="#二、-动态代模式（jdk动态代理）：" class="headerlink" title="二、 动态代模式（jdk动态代理）："></a>二、 动态代模式（jdk动态代理）：</h1></li>
+<li><em>基本介绍：*</em><br>1）代理对象不需要实现接口，但是目标对象要实现接口，否则不能用动态代理<br>2）代理对象的生成是利用JDK的API，动态的在内存中构建代理对象<br>3）动态代理也叫：JDK代理、接口代理</li>
+<li>类图如下：<br><img src="https://img-blog.csdnimg.cn/20200408161327757.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>getProxyInstacne():</strong><br>1.根据传入的对象（HostImpl）,目标对象<br>2.利用反射机制，返回一个代理对象<br>3.然后通过代理对象，调用目标对象方法</li>
+<li>代码实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Host</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Rent</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HostImpl</span> <span class="keyword">implements</span> <span class="title">Host</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Rent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"房东要租房子"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyInvocationHadler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyInvocationHadler</span><span class="params">(Object target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//执行目标方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"JDK代理"</span>);</span><br><span class="line">        <span class="comment">//利用反射机制调用目标对象的方法</span></span><br><span class="line">        Object returnVal = method.invoke(target, args);</span><br><span class="line">        System.out.println(<span class="string">"JDK代理提交"</span>);</span><br><span class="line">        <span class="keyword">return</span> returnVal;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ProxyFactory</span><span class="params">(Object target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//给目标对象，生成一个代理对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getProxyInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * public static Object newProxyInstance(ClassLoader loader,</span></span><br><span class="line"><span class="comment">         *                                 Class&lt;?&gt;[] interfaces,</span></span><br><span class="line"><span class="comment">         *                                 InvocationHandler h)</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="comment">//1.ClassLoader loader：指定当前目标对象使用的类加载器</span></span><br><span class="line">        <span class="comment">//2.Class&lt;?&gt;[] interfaces:目标对象实现的接口类型，使用泛型确认类型</span></span><br><span class="line">        <span class="comment">//3.InvocationHandler h)：事件处理，执行目标对象的方法，会触发事件处理器方法</span></span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(target.getClass().getClassLoader(),</span><br><span class="line">                target.getClass().getInterfaces(),</span><br><span class="line">                <span class="keyword">new</span> MyInvocationHadler(target));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>测试结果<br><img src="https://img-blog.csdnimg.cn/20200408161639895.png" alt="在这里插入图片描述"></li>
+<li>通过Debug可以观察到<br><img src="https://img-blog.csdnimg.cn/20200408175345938.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>类图所示<br><img src="https://img-blog.csdnimg.cn/20200408161943446.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><h1 id="三、-Cglib动态代理模式："><a href="#三、-Cglib动态代理模式：" class="headerlink" title="三、 Cglib动态代理模式："></a>三、 Cglib动态代理模式：</h1><blockquote>
+<p>基本介绍：</p>
+<p>1）静态代理和JDK动态代理都要求目标对象是实现一个接口，但有时候目标对象只是一个单独的对象，并没有实现任何的接口，这个时候可以使目标对象子类来实现代理，这就是Cglib代理。<br>2）Cglib代理也叫子类代理，它是在内存中构建一个子类对象从而实现目标对象功能扩展，有时候也把Cglib代理归属到动态代理中。<br>3）Cglib代理是一个强大的高性能的代码生成包，这可以在运行期间扩展java类与实现java接口，它广泛的被许多AOP的框架使用，例如：Spring AOP中实现方法拦截<br>4）在AOP编程中如何选择代理模式：<br>4.1）<strong>目标对象需要实现接口</strong>，就用<strong>JDK代理</strong><br>4.2）<strong>目标对象不需要实现接口</strong>，就用<strong>Cglib代理</strong><br>5）Cglib包的底层是通过使用字节码处理框架ASM来转换字节码并生成新的类</p>
+</blockquote>
+<ul>
+<li>Cglib使用的jar包：<blockquote>
+<p>cglib-2.2.jar<br> asm.jar<br> commons.jar<br> asm-tree.jar</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p>没有jar包的小伙伴可以下载食用：<br>链接：<a href="https://pan.baidu.com/s/16XEWkAGapxnmT4Li4ocKDA" target="_blank" rel="noopener">https://pan.baidu.com/s/16XEWkAGapxnmT4Li4ocKDA</a><br>提取码：sa4k</p>
+<ul>
+<li>类图如下<br><img src="https://img-blog.csdnimg.cn/20200408172519153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>代码实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HostImpl</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Rent</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"房东要租房子,cglib方式"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyFactory</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="comment">//给一个目标对象</span></span><br><span class="line">    <span class="keyword">private</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//构造器，用于初始化被代理的对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ProxyFactory</span><span class="params">(Object target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回一个代理对象，是target对象的代理对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getProxyInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//1.创建一个工具类</span></span><br><span class="line">        Enhancer enhancer = <span class="keyword">new</span> Enhancer();</span><br><span class="line">        <span class="comment">//2.设置父类</span></span><br><span class="line">        enhancer.setSuperclass(target.getClass());</span><br><span class="line">        <span class="comment">//3.设置回调函数</span></span><br><span class="line">        enhancer.setCallback(<span class="keyword">this</span>);</span><br><span class="line">        <span class="comment">//4.创建子类对象，即代理对象</span></span><br><span class="line">        <span class="keyword">return</span> enhancer.create();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//重写intercept方法，会调用目标对象的方法</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object o, Method method, Object[] args, MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"cglib代理模式*******开始"</span>);</span><br><span class="line">        Object returnVale = method.invoke(target, args);</span><br><span class="line">        System.out.println(<span class="string">"cglib代理模式*******提交"</span>);</span><br><span class="line">        <span class="keyword">return</span> returnVale;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//目标对象</span></span><br><span class="line">        HostImpl target = <span class="keyword">new</span> HostImpl();</span><br><span class="line">        <span class="comment">//获得到代理对象，并且将目标对象传递给代理对象</span></span><br><span class="line">        HostImpl proxyFactory = (HostImpl)<span class="keyword">new</span> ProxyFactory(target).getProxyInstance();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//执行代理对象的方法，触发intercept方法，从而实现对目标对象调用</span></span><br><span class="line">        proxyFactory.Rent();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>运行结果<br><img src="https://img-blog.csdnimg.cn/20200408174116812.png" alt="在这里插入图片描述"></li>
+<li>通过Debug可以观察到<br><img src="https://img-blog.csdnimg.cn/20200408175057283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>类图形式<br><img src="https://img-blog.csdnimg.cn/20200408174214555.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>总结：</strong><br>cglib生成动态代理时，目标对象target和ProxyFactory 都不需要实现接口！</li>
+</ul>
+]]></content>
+      <categories>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>-java -设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>单例模式</title>
     <url>/2020/06/21/Head%20First%20Design%20Patterns%E2%80%94%E2%80%94%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<p>基本介绍：<br>单例模式：也叫单件模式，可以用来创建独一无二的，只能有一个实例的对象，并且该类只提供一个取得其对象实例的方法(static)！它是所有设计模式中最简单的，它的类图只有一个类：</p>
@@ -131,55 +180,6 @@
       </tags>
   </entry>
   <entry>
-    <title>代理模式</title>
-    <url>/2020/04/17/Head%20First%20Design%20Patterns%E2%80%94%E2%80%94%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<blockquote>
-<p>代理模式指的就是使用现一个代理类来代理另一个目标类的行为，比如说我们一般在租房子的时候，不直接和房东进行交涉，而通过房屋中介来进行操作，因为他们手里可能有很多的房源，对于房东来说，就可以直接与房屋中介进行交流。类似的例子数不胜数，又比如好莱坞的明星，都有他们自己的经济人，当然这里指的可不是宝强的经济人，开个玩笑，他们的经济人负责明星的经济活动，这里指的就是代理模式！</p>
-<a id="more"></a>
-<p>代理模式分为：<strong>静态代理模式，动态代模式（jdk动态代理），cglib动态代理模式</strong>三种！</p>
-</blockquote>
-<h1 id="一、-静态代理模式："><a href="#一、-静态代理模式：" class="headerlink" title="一、 静态代理模式："></a>一、 静态代理模式：</h1><p> 我们这里就用租房子的例子来说明原理，</p>
-<ul>
-<li>类图如下 ：</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/20200408113559570.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><strong>大概的说明一下：</strong><br>有一个接口Host，里面有Rent租房的方法，然后让HostImpl房东来实现Host方法，这个就是目标类，真正要出租房子的房东，proxy为中介对象，它也实现Host方法，然后在类内部聚合了HostImpl对象，调用HostImpl，从而可以帮房东来出租房子，下面来看具体的代码实现：</p>
-<ul>
-<li>代码<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Host</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Rent</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HostImpl</span> <span class="keyword">implements</span> <span class="title">Host</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Rent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"房东要租房子"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">proxy</span> <span class="keyword">implements</span> <span class="title">Host</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//聚合HostImpl</span></span><br><span class="line">    HostImpl host;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">proxy</span><span class="params">(HostImpl host)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.host = host;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Rent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"代理开始工作"</span>);</span><br><span class="line">        <span class="comment">//调用HostImpl中的Rent方法</span></span><br><span class="line">        host.Rent();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        proxy proxy = <span class="keyword">new</span> proxy(<span class="keyword">new</span> HostImpl());</span><br><span class="line">        proxy.Rent();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>运行结果<br><img src="https://img-blog.csdnimg.cn/20200408114157664.png" alt="在这里插入图片描述"><br>静态代理：<br>优点：在不修改目标对象的功能前提下，能通过代理对象目标功能扩展<br>缺点：<br>（1）因为代理对象需要 与目标对象实现一样的接口，所有会有很多代理类<br>（2）一旦接口增加方法，目标对象与代理对象都要维护<h1 id="二、-动态代模式（jdk动态代理）："><a href="#二、-动态代模式（jdk动态代理）：" class="headerlink" title="二、 动态代模式（jdk动态代理）："></a>二、 动态代模式（jdk动态代理）：</h1></li>
-<li><em>基本介绍：*</em><br>1）代理对象不需要实现接口，但是目标对象要实现接口，否则不能用动态代理<br>2）代理对象的生成是利用JDK的API，动态的在内存中构建代理对象<br>3）动态代理也叫：JDK代理、接口代理</li>
-<li>类图如下：<br><img src="https://img-blog.csdnimg.cn/20200408161327757.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>getProxyInstacne():</strong><br>1.根据传入的对象（HostImpl）,目标对象<br>2.利用反射机制，返回一个代理对象<br>3.然后通过代理对象，调用目标对象方法</li>
-<li>代码实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Host</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Rent</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HostImpl</span> <span class="keyword">implements</span> <span class="title">Host</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Rent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"房东要租房子"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyInvocationHadler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyInvocationHadler</span><span class="params">(Object target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//执行目标方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"JDK代理"</span>);</span><br><span class="line">        <span class="comment">//利用反射机制调用目标对象的方法</span></span><br><span class="line">        Object returnVal = method.invoke(target, args);</span><br><span class="line">        System.out.println(<span class="string">"JDK代理提交"</span>);</span><br><span class="line">        <span class="keyword">return</span> returnVal;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ProxyFactory</span><span class="params">(Object target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//给目标对象，生成一个代理对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getProxyInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * public static Object newProxyInstance(ClassLoader loader,</span></span><br><span class="line"><span class="comment">         *                                 Class&lt;?&gt;[] interfaces,</span></span><br><span class="line"><span class="comment">         *                                 InvocationHandler h)</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="comment">//1.ClassLoader loader：指定当前目标对象使用的类加载器</span></span><br><span class="line">        <span class="comment">//2.Class&lt;?&gt;[] interfaces:目标对象实现的接口类型，使用泛型确认类型</span></span><br><span class="line">        <span class="comment">//3.InvocationHandler h)：事件处理，执行目标对象的方法，会触发事件处理器方法</span></span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(target.getClass().getClassLoader(),</span><br><span class="line">                target.getClass().getInterfaces(),</span><br><span class="line">                <span class="keyword">new</span> MyInvocationHadler(target));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>测试结果<br><img src="https://img-blog.csdnimg.cn/20200408161639895.png" alt="在这里插入图片描述"></li>
-<li>通过Debug可以观察到<br><img src="https://img-blog.csdnimg.cn/20200408175345938.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-<li>类图所示<br><img src="https://img-blog.csdnimg.cn/20200408161943446.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><h1 id="三、-Cglib动态代理模式："><a href="#三、-Cglib动态代理模式：" class="headerlink" title="三、 Cglib动态代理模式："></a>三、 Cglib动态代理模式：</h1><blockquote>
-<p>基本介绍：</p>
-<p>1）静态代理和JDK动态代理都要求目标对象是实现一个接口，但有时候目标对象只是一个单独的对象，并没有实现任何的接口，这个时候可以使目标对象子类来实现代理，这就是Cglib代理。<br>2）Cglib代理也叫子类代理，它是在内存中构建一个子类对象从而实现目标对象功能扩展，有时候也把Cglib代理归属到动态代理中。<br>3）Cglib代理是一个强大的高性能的代码生成包，这可以在运行期间扩展java类与实现java接口，它广泛的被许多AOP的框架使用，例如：Spring AOP中实现方法拦截<br>4）在AOP编程中如何选择代理模式：<br>4.1）<strong>目标对象需要实现接口</strong>，就用<strong>JDK代理</strong><br>4.2）<strong>目标对象不需要实现接口</strong>，就用<strong>Cglib代理</strong><br>5）Cglib包的底层是通过使用字节码处理框架ASM来转换字节码并生成新的类</p>
-</blockquote>
-<ul>
-<li>Cglib使用的jar包：<blockquote>
-<p>cglib-2.2.jar<br> asm.jar<br> commons.jar<br> asm-tree.jar</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<p>没有jar包的小伙伴可以下载食用：<br>链接：<a href="https://pan.baidu.com/s/16XEWkAGapxnmT4Li4ocKDA" target="_blank" rel="noopener">https://pan.baidu.com/s/16XEWkAGapxnmT4Li4ocKDA</a><br>提取码：sa4k</p>
-<ul>
-<li>类图如下<br><img src="https://img-blog.csdnimg.cn/20200408172519153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-<li>代码实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HostImpl</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Rent</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"房东要租房子,cglib方式"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyFactory</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="comment">//给一个目标对象</span></span><br><span class="line">    <span class="keyword">private</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//构造器，用于初始化被代理的对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ProxyFactory</span><span class="params">(Object target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回一个代理对象，是target对象的代理对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getProxyInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//1.创建一个工具类</span></span><br><span class="line">        Enhancer enhancer = <span class="keyword">new</span> Enhancer();</span><br><span class="line">        <span class="comment">//2.设置父类</span></span><br><span class="line">        enhancer.setSuperclass(target.getClass());</span><br><span class="line">        <span class="comment">//3.设置回调函数</span></span><br><span class="line">        enhancer.setCallback(<span class="keyword">this</span>);</span><br><span class="line">        <span class="comment">//4.创建子类对象，即代理对象</span></span><br><span class="line">        <span class="keyword">return</span> enhancer.create();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//重写intercept方法，会调用目标对象的方法</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object o, Method method, Object[] args, MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"cglib代理模式*******开始"</span>);</span><br><span class="line">        Object returnVale = method.invoke(target, args);</span><br><span class="line">        System.out.println(<span class="string">"cglib代理模式*******提交"</span>);</span><br><span class="line">        <span class="keyword">return</span> returnVale;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//目标对象</span></span><br><span class="line">        HostImpl target = <span class="keyword">new</span> HostImpl();</span><br><span class="line">        <span class="comment">//获得到代理对象，并且将目标对象传递给代理对象</span></span><br><span class="line">        HostImpl proxyFactory = (HostImpl)<span class="keyword">new</span> ProxyFactory(target).getProxyInstance();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//执行代理对象的方法，触发intercept方法，从而实现对目标对象调用</span></span><br><span class="line">        proxyFactory.Rent();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>运行结果<br><img src="https://img-blog.csdnimg.cn/20200408174116812.png" alt="在这里插入图片描述"></li>
-<li>通过Debug可以观察到<br><img src="https://img-blog.csdnimg.cn/20200408175057283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-<li>类图形式<br><img src="https://img-blog.csdnimg.cn/20200408174214555.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>总结：</strong><br>cglib生成动态代理时，目标对象target和ProxyFactory 都不需要实现接口！</li>
-</ul>
-]]></content>
-      <categories>
-        <category>设计模式</category>
-      </categories>
-      <tags>
-        <tag>-java -设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>装饰者模式</title>
     <url>/2020/04/17/Head%20First%20Design%20Patterns%E2%80%94%E2%80%94%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<p>基本介绍：<br>装饰者模式：动态的将新功能附加到对象上，在对象功能扩展方面，它比继承更具有弹性，装饰者模式也体现了开闭原则(ocp)，装饰者模式也可以理解为包装模式。</p>
@@ -222,31 +222,6 @@
       </categories>
       <tags>
         <tag>-java -设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SpringMVC@RequestBody获取发送的ajax请求数据</title>
-    <url>/2020/04/24/SpringMVC@RequestBody%E8%8E%B7%E5%8F%96%E5%8F%91%E9%80%81%E7%9A%84ajax%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE/</url>
-    <content><![CDATA[<blockquote>
-<p>在获取前端发送的ajax请求时，如果不使用@RequestBody则拿不到请求体中的数据，那么我们来使用@RequestBody获取ajax请求发送的数据</p>
-</blockquote>
-<a id="more"></a>
-
-<ul>
-<li>response.jsp</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%--引入资源--%</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/jquery-1.11.1.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//页面加载，绑定单击事件</span></span></span><br><span class="line"><span class="javascript">        $(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            $(<span class="string">"#btn"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="comment">//alert("hello btn");</span></span></span><br><span class="line"><span class="actionscript">                <span class="comment">//发送ajax请求</span></span></span><br><span class="line"><span class="javascript">                $.ajax(&#123;</span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//编写json格式，设置属性和值</span></span></span><br><span class="line"><span class="actionscript">                    url:<span class="string">"user/testAjax"</span>,</span></span><br><span class="line"><span class="actionscript">                    contentType:<span class="string">"application/json;charset=UTF-8"</span>,</span></span><br><span class="line"><span class="actionscript">                    data:<span class="string">'&#123;"username":"hk","password","5201314","age","20"&#125;'</span>,</span></span><br><span class="line"><span class="actionscript">                    dataType:<span class="string">"json"</span>,</span></span><br><span class="line"><span class="actionscript">                    type:<span class="string">"post"</span>,</span></span><br><span class="line"><span class="actionscript">                    success:<span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">                        <span class="comment">//data服务器端响应的json的数据，进行解析</span></span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">%--</span> 模拟异步请求<span class="attr">ajax--</span>%&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span>&gt;</span>发送ajax的请求<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>UserController.class(控制器)<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/user"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 模拟异步请求响应</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/testAjax"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAjax</span><span class="params">(@RequestBody String body)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"testAjax执行了..."</span>);</span><br><span class="line">        System.out.println(body);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="注意：使用-RequestBody是为了获得请求体中的所有内容"><a href="#注意：使用-RequestBody是为了获得请求体中的所有内容" class="headerlink" title="注意：使用@RequestBody是为了获得请求体中的所有内容"></a>注意：使用@RequestBody是为了获得请求体中的所有内容</h2></li>
-<li>运行<br><img src="https://img-blog.csdnimg.cn/20200424010432401.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><h2 id="点击发送ajax请求，然后我们查看控制台"><a href="#点击发送ajax请求，然后我们查看控制台" class="headerlink" title="点击发送ajax请求，然后我们查看控制台"></a>点击发送ajax请求，然后我们查看控制台</h2><img src="https://img-blog.csdnimg.cn/20200424010518947.png" alt="在这里插入图片描述"><h2 id="这样我们就可以拿到了ajax请求中的所有的数据了！"><a href="#这样我们就可以拿到了ajax请求中的所有的数据了！" class="headerlink" title="这样我们就可以拿到了ajax请求中的所有的数据了！"></a>这样我们就可以拿到了ajax请求中的所有的数据了！</h2></li>
-</ul>
-]]></content>
-      <categories>
-        <category>SpringMVC</category>
-      </categories>
-      <tags>
-        <tag>-json -ajax</tag>
       </tags>
   </entry>
   <entry>
@@ -316,6 +291,85 @@ at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)</code
       </categories>
       <tags>
         <tag>SSM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JSP如何获取数据库的图片</title>
+    <url>/2020/01/02/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/</url>
+    <content><![CDATA[<blockquote>
+<p>在我们学习jsp的过程中，有时候有的业务处理会使用到数据库中的图片，我当时也遇到了这种情况，当时也是想走捷径就在csdn上百，发现并没有任何卵用，大家写的都千篇一律，于是就想自己搞懂这个问题。</p>
+</blockquote>
+<a id="more"></a>
+
+<ul>
+<li>数据库中存放的无非就：图片的相对路径和图片的名称，当然这两种意思本质上也是相同的。下面的就是一般数据库表的格式就是这样的。我用的数据库客户端是<strong>SQLyog</strong>。<br>  <img src="https://img-blog.csdnimg.cn/20200109204344536.png" alt="nbateam"><pre><code>项目的结构图如下：
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200109205450268.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70)
+NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到里面就OK了。
+通过路径的方式，取出你要查询的队名，初始化要查询的字段。搞到集合里占位输出就好了，下面上代码：</code></pre></li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"lishi"</span>&gt;</span><br><span class="line">          	    	&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"tab"</span>&gt; </span><br><span class="line">          	    	&lt;table  width=<span class="string">"600"</span> align=<span class="string">"center"</span> height=<span class="string">"150"</span> &gt;</span><br><span class="line">          	    	&lt;%</span><br><span class="line">          	    	ArrayList&lt;NTm&gt; list = (ArrayList&lt;NTm&gt;)session.getAttribute(<span class="string">"ssss"</span>);</span><br><span class="line">          	    	<span class="keyword">if</span>(list!=<span class="keyword">null</span>&amp;&amp;list.size() != <span class="number">0</span>)&#123; %&gt;</span><br><span class="line">          	    	&lt;tr align=<span class="string">"center"</span> height=<span class="string">"5"</span>&gt;</span><br><span class="line">          	    			&lt;td class="z1"&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;tr height=<span class="string">"6"</span>&gt; </span><br><span class="line">          	    			&lt;td  align="left"&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    	&lt;% 	</span><br><span class="line">          	    	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; list.size();j++)&#123; %&gt;</span><br><span class="line">          	    		&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"img1"</span> width=<span class="string">"200"</span> height=<span class="string">"200"</span>&gt;</span><br><span class="line">          	    			&lt;img src=<span class="string">"img/NBA/&lt;%=list.get(j).getImgsd()%&gt;"</span> height=<span class="string">"200"</span> width=<span class="string">"200"</span>&gt;</span><br><span class="line">          	    		&lt;/div&gt;</span><br><span class="line">          	    		&lt;tr align=<span class="string">"center"</span> height=<span class="string">"60"</span>&gt;</span><br><span class="line">          	    			&lt;td class="z1"&gt;&lt;%=list.get(j).getNtem() %&gt;&lt;/td&gt;</span><br><span class="line">          	    			</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;tr height=<span class="string">"200"</span>&gt; </span><br><span class="line">          	    			&lt;td  align="left"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;%=list.get(j).getNhostr() %&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;%&#125; </span><br><span class="line">          	    	&#125;</span><br><span class="line">          	    	</span><br><span class="line">          	    	%&gt;</span><br><span class="line">          	    	&lt;/table&gt;</span><br><span class="line">          	    	&lt;/div&gt;</span><br><span class="line">          	    &lt;/div&gt;</span><br><span class="line">          &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>上面的代码是前端显示的界面，使用的是表单提交的方式，将业务需求交给对应的Servlet层进行处理。<br><strong>Servlet层：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;NTm&gt; <span class="title">selectByTeam</span><span class="params">(String Ntem)</span></span>&#123;</span><br><span class="line">		ArrayList&lt;NTm&gt; slist = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			slist = nd.selectByTeam(Ntem);</span><br><span class="line">		&#125; <span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> (ArrayList&lt;NTm&gt;)slist;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Dao层：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;NTm&gt; <span class="title">selectByTeam</span><span class="params">(String Ntem)</span></span>&#123;</span><br><span class="line">		ArrayList&lt;NTm&gt; list = <span class="keyword">new</span> ArrayList&lt;NTm&gt;();</span><br><span class="line">		String sql = <span class="string">"select * from nbateam where Ntem like '%"</span>+Ntem+<span class="string">"%'"</span>;</span><br><span class="line">		NTm ntm = <span class="keyword">new</span> NTm();</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			DBUtil.getConnection();</span><br><span class="line">			rs = DBUtil.executeQuery(sql);</span><br><span class="line">			<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">				ntm.setNno(rs.getInt(<span class="string">"Nno"</span>));</span><br><span class="line">				ntm.setNtem(rs.getString(<span class="string">"Ntem"</span>));</span><br><span class="line">				ntm.setNhostr(rs.getString(<span class="string">"Nhostr"</span>));</span><br><span class="line">				ntm.setImgsd(rs.getString(<span class="string">"Imgsd"</span>));</span><br><span class="line">				list.add(ntm);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">finally</span>&#123;</span><br><span class="line">			DBUtil.close();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Bean层：</strong><br>Bean层大家自己封装就OK了，这个不再进行说明。</p>
+<p>这个问题的实质就是使用：<strong>img 标签将查找的队名与数据库中的一致时，就输入相对路径的图片。</strong></p>
+<p>如有问题，还望各位大佬多多指教！</p>
+]]></content>
+      <categories>
+        <category>Javaweb</category>
+      </categories>
+      <tags>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mybatis开启Log4J日志</title>
+    <url>/2020/06/22/Mybatis%E5%BC%80%E5%90%AFLog4j%E6%97%A5%E5%BF%97/</url>
+    <content><![CDATA[<blockquote>
+<p>在日常的开发中，日志有着非常重要的作用，通过日志可以排查错误！只要开启Log4J日志，并在配置文件中配置，就可以在程序运行中定位错误，再也不用system.out.println(…..)之类的打桩测试了！</p>
+</blockquote>
+<a id="more"></a>
+
+<ul>
+<li><h2 id="1-引入maven坐标"><a href="#1-引入maven坐标" class="headerlink" title="1.引入maven坐标"></a>1.引入maven坐标</h2>   <figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;!-- https:<span class="comment">//mvnrepository.com/artifact/log4j/log4j --&gt;</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;log4j&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;log4j&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.17&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2-在主配置文件中开启日志"><a href="#2-在主配置文件中开启日志" class="headerlink" title="2.在主配置文件中开启日志"></a>2.在主配置文件中开启日志</h2>   <figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;settings&gt;</span><br><span class="line">    &lt;!--开启日志，并指定使用的具体日志--&gt;</span><br><span class="line">    &lt;setting name=<span class="string">"LogImpl"</span> value=<span class="string">"LOG4J"</span>/&gt;</span><br><span class="line"> &lt;/settings&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="3-编写日志文件（log4j-properties）"><a href="#3-编写日志文件（log4j-properties）" class="headerlink" title="3.编写日志文件（log4j.properties）"></a>3.编写日志文件（log4j.properties）</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">log4j.rootLogger=DEBUG,Console</span><br><span class="line">log4j.appender.Console=org.apache.log4j.ConsoleAppender </span><br><span class="line">log4j.appender.Console.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.Console.layout.ConversionPattern= [%t] %-<span class="number">5</span>p [%c] - %m%n</span><br></pre></td></tr></table></figure>
+<h2 id="4-测试"><a href="#4-测试" class="headerlink" title="4.测试"></a>4.测试</h2><p>   <img src="https://img-blog.csdnimg.cn/20200325091334608.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="这样就成功了！"><a href="#这样就成功了！" class="headerlink" title="这样就成功了！"></a>这样就成功了！</h2><p>   ​</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>mybatis</category>
+      </categories>
+      <tags>
+        <tag>mybatis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringMVC@RequestBody获取发送的ajax请求数据</title>
+    <url>/2020/04/24/SpringMVC@RequestBody%E8%8E%B7%E5%8F%96%E5%8F%91%E9%80%81%E7%9A%84ajax%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE/</url>
+    <content><![CDATA[<blockquote>
+<p>在获取前端发送的ajax请求时，如果不使用@RequestBody则拿不到请求体中的数据，那么我们来使用@RequestBody获取ajax请求发送的数据</p>
+</blockquote>
+<a id="more"></a>
+
+<ul>
+<li>response.jsp</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%--引入资源--%</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/jquery-1.11.1.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//页面加载，绑定单击事件</span></span></span><br><span class="line"><span class="javascript">        $(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            $(<span class="string">"#btn"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="comment">//alert("hello btn");</span></span></span><br><span class="line"><span class="actionscript">                <span class="comment">//发送ajax请求</span></span></span><br><span class="line"><span class="javascript">                $.ajax(&#123;</span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//编写json格式，设置属性和值</span></span></span><br><span class="line"><span class="actionscript">                    url:<span class="string">"user/testAjax"</span>,</span></span><br><span class="line"><span class="actionscript">                    contentType:<span class="string">"application/json;charset=UTF-8"</span>,</span></span><br><span class="line"><span class="actionscript">                    data:<span class="string">'&#123;"username":"hk","password","5201314","age","20"&#125;'</span>,</span></span><br><span class="line"><span class="actionscript">                    dataType:<span class="string">"json"</span>,</span></span><br><span class="line"><span class="actionscript">                    type:<span class="string">"post"</span>,</span></span><br><span class="line"><span class="actionscript">                    success:<span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">                        <span class="comment">//data服务器端响应的json的数据，进行解析</span></span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">%--</span> 模拟异步请求<span class="attr">ajax--</span>%&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span>&gt;</span>发送ajax的请求<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>UserController.class(控制器)<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/user"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 模拟异步请求响应</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/testAjax"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAjax</span><span class="params">(@RequestBody String body)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"testAjax执行了..."</span>);</span><br><span class="line">        System.out.println(body);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="注意：使用-RequestBody是为了获得请求体中的所有内容"><a href="#注意：使用-RequestBody是为了获得请求体中的所有内容" class="headerlink" title="注意：使用@RequestBody是为了获得请求体中的所有内容"></a>注意：使用@RequestBody是为了获得请求体中的所有内容</h2></li>
+<li>运行<br><img src="https://img-blog.csdnimg.cn/20200424010432401.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><h2 id="点击发送ajax请求，然后我们查看控制台"><a href="#点击发送ajax请求，然后我们查看控制台" class="headerlink" title="点击发送ajax请求，然后我们查看控制台"></a>点击发送ajax请求，然后我们查看控制台</h2><img src="https://img-blog.csdnimg.cn/20200424010518947.png" alt="在这里插入图片描述"><h2 id="这样我们就可以拿到了ajax请求中的所有的数据了！"><a href="#这样我们就可以拿到了ajax请求中的所有的数据了！" class="headerlink" title="这样我们就可以拿到了ajax请求中的所有的数据了！"></a>这样我们就可以拿到了ajax请求中的所有的数据了！</h2></li>
+</ul>
+]]></content>
+      <categories>
+        <category>SpringMVC</category>
+      </categories>
+      <tags>
+        <tag>-json -ajax</tag>
       </tags>
   </entry>
   <entry>
@@ -533,60 +587,6 @@ at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)</code
 
 
 ]]></content>
-  </entry>
-  <entry>
-    <title>Mybatis开启Log4J日志</title>
-    <url>/2020/06/22/Mybatis%E5%BC%80%E5%90%AFLog4j%E6%97%A5%E5%BF%97/</url>
-    <content><![CDATA[<blockquote>
-<p>在日常的开发中，日志有着非常重要的作用，通过日志可以排查错误！只要开启Log4J日志，并在配置文件中配置，就可以在程序运行中定位错误，再也不用system.out.println(…..)之类的打桩测试了！</p>
-</blockquote>
-<a id="more"></a>
-
-<ul>
-<li><h2 id="1-引入maven坐标"><a href="#1-引入maven坐标" class="headerlink" title="1.引入maven坐标"></a>1.引入maven坐标</h2>   <figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;!-- https:<span class="comment">//mvnrepository.com/artifact/log4j/log4j --&gt;</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;log4j&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;log4j&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.17&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="2-在主配置文件中开启日志"><a href="#2-在主配置文件中开启日志" class="headerlink" title="2.在主配置文件中开启日志"></a>2.在主配置文件中开启日志</h2>   <figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;settings&gt;</span><br><span class="line">    &lt;!--开启日志，并指定使用的具体日志--&gt;</span><br><span class="line">    &lt;setting name=<span class="string">"LogImpl"</span> value=<span class="string">"LOG4J"</span>/&gt;</span><br><span class="line"> &lt;/settings&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="3-编写日志文件（log4j-properties）"><a href="#3-编写日志文件（log4j-properties）" class="headerlink" title="3.编写日志文件（log4j.properties）"></a>3.编写日志文件（log4j.properties）</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">log4j.rootLogger=DEBUG,Console</span><br><span class="line">log4j.appender.Console=org.apache.log4j.ConsoleAppender </span><br><span class="line">log4j.appender.Console.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.Console.layout.ConversionPattern= [%t] %-<span class="number">5</span>p [%c] - %m%n</span><br></pre></td></tr></table></figure>
-<h2 id="4-测试"><a href="#4-测试" class="headerlink" title="4.测试"></a>4.测试</h2><p>   <img src="https://img-blog.csdnimg.cn/20200325091334608.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="这样就成功了！"><a href="#这样就成功了！" class="headerlink" title="这样就成功了！"></a>这样就成功了！</h2><p>   ​</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>mybatis</category>
-      </categories>
-      <tags>
-        <tag>mybatis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JSP如何获取数据库的图片</title>
-    <url>/2020/01/02/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/</url>
-    <content><![CDATA[<blockquote>
-<p>在我们学习jsp的过程中，有时候有的业务处理会使用到数据库中的图片，我当时也遇到了这种情况，当时也是想走捷径就在csdn上百，发现并没有任何卵用，大家写的都千篇一律，于是就想自己搞懂这个问题。</p>
-</blockquote>
-<a id="more"></a>
-
-<ul>
-<li>数据库中存放的无非就：图片的相对路径和图片的名称，当然这两种意思本质上也是相同的。下面的就是一般数据库表的格式就是这样的。我用的数据库客户端是<strong>SQLyog</strong>。<br>  <img src="https://img-blog.csdnimg.cn/20200109204344536.png" alt="nbateam"><pre><code>项目的结构图如下：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200109205450268.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70)
-NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到里面就OK了。
-通过路径的方式，取出你要查询的队名，初始化要查询的字段。搞到集合里占位输出就好了，下面上代码：</code></pre></li>
-</ul>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"lishi"</span>&gt;</span><br><span class="line">          	    	&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"tab"</span>&gt; </span><br><span class="line">          	    	&lt;table  width=<span class="string">"600"</span> align=<span class="string">"center"</span> height=<span class="string">"150"</span> &gt;</span><br><span class="line">          	    	&lt;%</span><br><span class="line">          	    	ArrayList&lt;NTm&gt; list = (ArrayList&lt;NTm&gt;)session.getAttribute(<span class="string">"ssss"</span>);</span><br><span class="line">          	    	<span class="keyword">if</span>(list!=<span class="keyword">null</span>&amp;&amp;list.size() != <span class="number">0</span>)&#123; %&gt;</span><br><span class="line">          	    	&lt;tr align=<span class="string">"center"</span> height=<span class="string">"5"</span>&gt;</span><br><span class="line">          	    			&lt;td class="z1"&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;tr height=<span class="string">"6"</span>&gt; </span><br><span class="line">          	    			&lt;td  align="left"&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    	&lt;% 	</span><br><span class="line">          	    	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; list.size();j++)&#123; %&gt;</span><br><span class="line">          	    		&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"img1"</span> width=<span class="string">"200"</span> height=<span class="string">"200"</span>&gt;</span><br><span class="line">          	    			&lt;img src=<span class="string">"img/NBA/&lt;%=list.get(j).getImgsd()%&gt;"</span> height=<span class="string">"200"</span> width=<span class="string">"200"</span>&gt;</span><br><span class="line">          	    		&lt;/div&gt;</span><br><span class="line">          	    		&lt;tr align=<span class="string">"center"</span> height=<span class="string">"60"</span>&gt;</span><br><span class="line">          	    			&lt;td class="z1"&gt;&lt;%=list.get(j).getNtem() %&gt;&lt;/td&gt;</span><br><span class="line">          	    			</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;tr height=<span class="string">"200"</span>&gt; </span><br><span class="line">          	    			&lt;td  align="left"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;%=list.get(j).getNhostr() %&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;%&#125; </span><br><span class="line">          	    	&#125;</span><br><span class="line">          	    	</span><br><span class="line">          	    	%&gt;</span><br><span class="line">          	    	&lt;/table&gt;</span><br><span class="line">          	    	&lt;/div&gt;</span><br><span class="line">          	    &lt;/div&gt;</span><br><span class="line">          &lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<p>上面的代码是前端显示的界面，使用的是表单提交的方式，将业务需求交给对应的Servlet层进行处理。<br><strong>Servlet层：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;NTm&gt; <span class="title">selectByTeam</span><span class="params">(String Ntem)</span></span>&#123;</span><br><span class="line">		ArrayList&lt;NTm&gt; slist = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			slist = nd.selectByTeam(Ntem);</span><br><span class="line">		&#125; <span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> (ArrayList&lt;NTm&gt;)slist;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>Dao层：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;NTm&gt; <span class="title">selectByTeam</span><span class="params">(String Ntem)</span></span>&#123;</span><br><span class="line">		ArrayList&lt;NTm&gt; list = <span class="keyword">new</span> ArrayList&lt;NTm&gt;();</span><br><span class="line">		String sql = <span class="string">"select * from nbateam where Ntem like '%"</span>+Ntem+<span class="string">"%'"</span>;</span><br><span class="line">		NTm ntm = <span class="keyword">new</span> NTm();</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			DBUtil.getConnection();</span><br><span class="line">			rs = DBUtil.executeQuery(sql);</span><br><span class="line">			<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">				ntm.setNno(rs.getInt(<span class="string">"Nno"</span>));</span><br><span class="line">				ntm.setNtem(rs.getString(<span class="string">"Ntem"</span>));</span><br><span class="line">				ntm.setNhostr(rs.getString(<span class="string">"Nhostr"</span>));</span><br><span class="line">				ntm.setImgsd(rs.getString(<span class="string">"Imgsd"</span>));</span><br><span class="line">				list.add(ntm);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">finally</span>&#123;</span><br><span class="line">			DBUtil.close();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>Bean层：</strong><br>Bean层大家自己封装就OK了，这个不再进行说明。</p>
-<p>这个问题的实质就是使用：<strong>img 标签将查找的队名与数据库中的一致时，就输入相对路径的图片。</strong></p>
-<p>如有问题，还望各位大佬多多指教！</p>
-]]></content>
-      <categories>
-        <category>Javaweb</category>
-      </categories>
-      <tags>
-        <tag>javaweb</tag>
-      </tags>
   </entry>
   <entry>
     <title>mybatis</title>
@@ -851,6 +851,37 @@ NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到
 ]]></content>
   </entry>
   <entry>
+    <title>npm工具的使用（适合新手）</title>
+    <url>/2020/05/22/npm%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E9%80%82%E5%90%88%E6%96%B0%E6%89%8B%EF%BC%89/</url>
+    <content><![CDATA[<blockquote>
+<h2 id="npm是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种："><a href="#npm是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：" class="headerlink" title="npm是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种："></a>npm是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：</h2><ul>
+<li>允许用户从NPM服务器下载别人编写的第三方包到本地使用。</li>
+<li>允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。</li>
+<li>允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。</li>
+<li>由于新版的nodejs已经集成了npm，所以之前npm也一并安装好了。</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<p>​        以上来自菜鸟教程中的解释</p>
+<h2 id="那么在git中如何安装npm呢-别着急，接下来就讲"><a href="#那么在git中如何安装npm呢-别着急，接下来就讲" class="headerlink" title="那么在git中如何安装npm呢!别着急，接下来就讲"></a>那么在git中如何安装npm呢!别着急，接下来就讲</h2><h2 id="首先安装Node-js，如果没有安装-的话可以上node-js官网下载安装："><a href="#首先安装Node-js，如果没有安装-的话可以上node-js官网下载安装：" class="headerlink" title="首先安装Node.js，如果没有安装 的话可以上node.js官网下载安装："></a>首先安装Node.js，如果没有安装 的话可以上node.js官网下载安装：</h2><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a><br><img src="https://img-blog.csdnimg.cn/20200522112654968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="然后安装-就OK了！下载好node-js之后，它会自带包管理器npm"><a href="#然后安装-就OK了！下载好node-js之后，它会自带包管理器npm" class="headerlink" title="然后安装 就OK了！下载好node.js之后，它会自带包管理器npm"></a>然后安装 就OK了！下载好node.js之后，它会自带包管理器npm</h2><h2 id="接下来我们右键单击进行git命令中去"><a href="#接下来我们右键单击进行git命令中去" class="headerlink" title="接下来我们右键单击进行git命令中去"></a>接下来我们右键单击进行git命令中去</h2><p><img src="https://img-blog.csdnimg.cn/20200522113007596.png" alt=""></p>
+<h2 id="输入-npm-v：察看npm-包管理器的版本"><a href="#输入-npm-v：察看npm-包管理器的版本" class="headerlink" title="输入$npm -v：察看npm(包管理器的版本)"></a>输入$npm -v：察看npm(包管理器的版本)</h2><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">$npm -v</span><br><span class="line"><span class="number">6.14</span><span class="number">.5</span></span><br></pre></td></tr></table></figure>
+<h2 id="如果版本老了，windows用户可以用"><a href="#如果版本老了，windows用户可以用" class="headerlink" title="如果版本老了，windows用户可以用"></a>如果版本老了，windows用户可以用</h2><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">$<span class="built_in">npm</span> install <span class="built_in">npm</span> -g</span><br></pre></td></tr></table></figure>
+<h2 id="Mac命令："><a href="#Mac命令：" class="headerlink" title="Mac命令："></a>Mac命令：</h2><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">$sudo <span class="built_in">npm</span> install <span class="built_in">npm</span> -g</span><br></pre></td></tr></table></figure>
+<h2 id="切换为淘宝镜像："><a href="#切换为淘宝镜像：" class="headerlink" title="切换为淘宝镜像："></a>切换为淘宝镜像：</h2><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="variable">$npm</span> install -g cnpm <span class="attribute">--registry</span>=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<p><strong>注意打断点是ctrl+c</strong></p>
+<h2 id="我们以两个前端框架为例子，使用npm安装-一波："><a href="#我们以两个前端框架为例子，使用npm安装-一波：" class="headerlink" title="我们以两个前端框架为例子，使用npm安装 一波："></a>我们以两个前端框架为例子，使用npm安装 一波：</h2><h3 id="Bootstrap："><a href="#Bootstrap：" class="headerlink" title="Bootstrap："></a>Bootstrap：</h3><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">$ npm install <span class="symbol">bootstrap@</span><span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h3 id="Layui"><a href="#Layui" class="headerlink" title="Layui:"></a>Layui:</h3><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">npm</span> i layui-src</span><br></pre></td></tr></table></figure>
+<h2 id="这样的安装也是特别的方便，而且如果使用普通-的方式进行安装-时，由于是国外的镜像，下载速度也是相当-的感人！所以也是强烈推荐大家使用！"><a href="#这样的安装也是特别的方便，而且如果使用普通-的方式进行安装-时，由于是国外的镜像，下载速度也是相当-的感人！所以也是强烈推荐大家使用！" class="headerlink" title="这样的安装也是特别的方便，而且如果使用普通 的方式进行安装 时，由于是国外的镜像，下载速度也是相当 的感人！所以也是强烈推荐大家使用！"></a>这样的安装也是特别的方便，而且如果使用普通 的方式进行安装 时，由于是国外的镜像，下载速度也是相当 的感人！所以也是强烈推荐大家使用！</h2>]]></content>
+      <categories>
+        <category>git#分类</category>
+      </categories>
+      <tags>
+        <tag>-Git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>一文解决github下载几kb速度太慢的问题</title>
     <url>/2020/06/10/%E4%B8%80%E6%96%87%E8%A7%A3%E5%86%B3github%E4%B8%8B%E8%BD%BD%E5%87%A0kb%E9%80%9F%E5%BA%A6%E5%A4%AA%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<blockquote>
@@ -871,6 +902,62 @@ NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到
       </categories>
       <tags>
         <tag>IDEA GitHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一次性成功：将IDEA中的项目传到github上</title>
+    <url>/2020/04/19/%E4%B8%80%E6%AC%A1%E6%80%A7%E6%88%90%E5%8A%9F%EF%BC%9A%E5%B0%86IDEA%E4%B8%AD%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%BC%A0%E5%88%B0github%E4%B8%8A/</url>
+    <content><![CDATA[<blockquote>
+<p>由于idea这个软件，对于项目管理来说特别的不方便，一个项目只有一个demo，如果我想对比以前做的demo，这就有点尬了，所以想着把项目传到github中，这样可以集中管理代码，查看方便！我查看了好多的博客，下面开干，大家坐稳了！</p>
+</blockquote>
+<a id="more"></a>
+
+<p><img src="https://img-blog.csdnimg.cn/20200419220456331.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<ol>
+<li>首先各位小可爱必须得有Git工具，如果没有大家出门左转下载：</li>
+</ol>
+<blockquote>
+<p>等等门在这：<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a></p>
+<p><img src="https://img-blog.csdnimg.cn/20200419220853278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>2. 然后单击Git Bash，输入命令：</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200419221114648.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>$ git config –global user.name “Your Name”<br>$ git config –global user.email “<a href="mailto:email@example.com">email@example.com</a>“<br>用来设置用户名和邮箱</p>
+</blockquote>
+<ol start="3">
+<li>在IDEA中设置Git与github<br>  <img src="https://img-blog.csdnimg.cn/20200419221436165.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></li>
+</ol>
+<ul>
+<li>Git<br><img src="https://img-blog.csdnimg.cn/20200419221700261.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>GitHub<br><img src="https://img-blog.csdnimg.cn/20200419221854956.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<ol start="4">
+<li>创建Git仓库<br>  <img src="https://img-blog.csdnimg.cn/20200419222022542.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><pre><code>默认的就是自己的项目名
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200419222055844.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center)</code></pre></li>
+</ol>
+<pre><code>然后项目中的文件就会全部变红
+
+​
+
+  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200419222306634.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center)</code></pre><ol start="5">
+<li>VCS–》Git–》Add（注意选中项目）<br>  <img src="https://img-blog.csdnimg.cn/20200419222336456.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ol>
+<pre><code>然后就会变绿
+
+​
+
+  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200419222606687.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center)
+  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200419222713758.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70)
+  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200419222743536.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70)
+  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200419222833510.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70)
+  然后就会弹出</code></pre><p><img src="https://img-blog.csdnimg.cn/20200419222900355.png#pic_center" alt="在这里插入图片描述"><br>这样就上传成功了，下面我们进入github搂一眼：<br><img src="https://img-blog.csdnimg.cn/20200419223054465.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200419223159204.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>GitHub</category>
+      </categories>
+      <tags>
+        <tag>-IDEA -GitHub</tag>
       </tags>
   </entry>
   <entry>
@@ -1097,90 +1184,19 @@ NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到
       </tags>
   </entry>
   <entry>
-    <title>一次性成功：将IDEA中的项目传到github上</title>
-    <url>/2020/04/19/%E4%B8%80%E6%AC%A1%E6%80%A7%E6%88%90%E5%8A%9F%EF%BC%9A%E5%B0%86IDEA%E4%B8%AD%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%BC%A0%E5%88%B0github%E4%B8%8A/</url>
-    <content><![CDATA[<blockquote>
-<p>由于idea这个软件，对于项目管理来说特别的不方便，一个项目只有一个demo，如果我想对比以前做的demo，这就有点尬了，所以想着把项目传到github中，这样可以集中管理代码，查看方便！我查看了好多的博客，下面开干，大家坐稳了！</p>
-</blockquote>
+    <title>使用IDEA开发Web项目并实现热部署</title>
+    <url>/2020/06/02/%E4%BD%BF%E7%94%A8IDEA%E5%BC%80%E5%8F%91Web%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%AE%9E%E7%8E%B0%E7%83%AD%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200622095802735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <a id="more"></a>
 
-<p><img src="https://img-blog.csdnimg.cn/20200419220456331.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<ol>
-<li>首先各位小可爱必须得有Git工具，如果没有大家出门左转下载：</li>
-</ol>
-<blockquote>
-<p>等等门在这：<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a></p>
-<p><img src="https://img-blog.csdnimg.cn/20200419220853278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>2. 然后单击Git Bash，输入命令：</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20200419221114648.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<blockquote>
-<p>$ git config –global user.name “Your Name”<br>$ git config –global user.email “<a href="mailto:email@example.com">email@example.com</a>“<br>用来设置用户名和邮箱</p>
-</blockquote>
-<ol start="3">
-<li>在IDEA中设置Git与github<br>  <img src="https://img-blog.csdnimg.cn/20200419221436165.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></li>
-</ol>
-<ul>
-<li>Git<br><img src="https://img-blog.csdnimg.cn/20200419221700261.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-<li>GitHub<br><img src="https://img-blog.csdnimg.cn/20200419221854956.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-</ul>
-<ol start="4">
-<li>创建Git仓库<br>  <img src="https://img-blog.csdnimg.cn/20200419222022542.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><pre><code>默认的就是自己的项目名
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200419222055844.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center)</code></pre></li>
-</ol>
-<pre><code>然后项目中的文件就会全部变红
-
-​
-
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200419222306634.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center)</code></pre><ol start="5">
-<li>VCS–》Git–》Add（注意选中项目）<br>  <img src="https://img-blog.csdnimg.cn/20200419222336456.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-</ol>
-<pre><code>然后就会变绿
-
-​
-
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200419222606687.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center)
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200419222713758.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70)
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200419222743536.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70)
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200419222833510.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70)
-  然后就会弹出</code></pre><p><img src="https://img-blog.csdnimg.cn/20200419222900355.png#pic_center" alt="在这里插入图片描述"><br>这样就上传成功了，下面我们进入github搂一眼：<br><img src="https://img-blog.csdnimg.cn/20200419223054465.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/20200419223159204.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>1.新建一个java文件，选择Web Application<br><img src="https://img-blog.csdnimg.cn/20200415091340767.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这就是新建好的项目结构<br><img src="https://img-blog.csdnimg.cn/20200415092029307.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>2.Run—&gt;Edit Configurations<br><img src="https://img-blog.csdnimg.cn/20200415092308181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415092429774.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415092804157.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415092958336.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415093237707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415093315193.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>先测试一下：<br><img src="https://img-blog.csdnimg.cn/20200415093606983.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415093717273.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>就出来了结果！<br><img src="https://img-blog.csdnimg.cn/2020041509375420.png" alt="在这里插入图片描述"><br>然后我们设置为热部署，就是在修改jsp文件，不用重启tomcat服务器</p>
+<p><img src="https://img-blog.csdnimg.cn/20200415094237771.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415094338438.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>修改一下，再测<br><img src="https://img-blog.csdnimg.cn/20200415094401851.png" alt="在这里插入图片描述"><br>将鼠标移动到浏览器刷新<br><img src="https://img-blog.csdnimg.cn/20200415094504434.png" alt="在这里插入图片描述"><br>这样我们就实现了tomcat的热部署</p>
 ]]></content>
       <categories>
-        <category>GitHub</category>
+        <category>IDEA</category>
       </categories>
       <tags>
-        <tag>-IDEA -GitHub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>npm工具的使用（适合新手）</title>
-    <url>/2020/05/22/npm%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E9%80%82%E5%90%88%E6%96%B0%E6%89%8B%EF%BC%89/</url>
-    <content><![CDATA[<blockquote>
-<h2 id="npm是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种："><a href="#npm是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：" class="headerlink" title="npm是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种："></a>npm是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：</h2><ul>
-<li>允许用户从NPM服务器下载别人编写的第三方包到本地使用。</li>
-<li>允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。</li>
-<li>允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。</li>
-<li>由于新版的nodejs已经集成了npm，所以之前npm也一并安装好了。</li>
-</ul>
-</blockquote>
-<a id="more"></a>
-
-<p>​        以上来自菜鸟教程中的解释</p>
-<h2 id="那么在git中如何安装npm呢-别着急，接下来就讲"><a href="#那么在git中如何安装npm呢-别着急，接下来就讲" class="headerlink" title="那么在git中如何安装npm呢!别着急，接下来就讲"></a>那么在git中如何安装npm呢!别着急，接下来就讲</h2><h2 id="首先安装Node-js，如果没有安装-的话可以上node-js官网下载安装："><a href="#首先安装Node-js，如果没有安装-的话可以上node-js官网下载安装：" class="headerlink" title="首先安装Node.js，如果没有安装 的话可以上node.js官网下载安装："></a>首先安装Node.js，如果没有安装 的话可以上node.js官网下载安装：</h2><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a><br><img src="https://img-blog.csdnimg.cn/20200522112654968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="然后安装-就OK了！下载好node-js之后，它会自带包管理器npm"><a href="#然后安装-就OK了！下载好node-js之后，它会自带包管理器npm" class="headerlink" title="然后安装 就OK了！下载好node.js之后，它会自带包管理器npm"></a>然后安装 就OK了！下载好node.js之后，它会自带包管理器npm</h2><h2 id="接下来我们右键单击进行git命令中去"><a href="#接下来我们右键单击进行git命令中去" class="headerlink" title="接下来我们右键单击进行git命令中去"></a>接下来我们右键单击进行git命令中去</h2><p><img src="https://img-blog.csdnimg.cn/20200522113007596.png" alt=""></p>
-<h2 id="输入-npm-v：察看npm-包管理器的版本"><a href="#输入-npm-v：察看npm-包管理器的版本" class="headerlink" title="输入$npm -v：察看npm(包管理器的版本)"></a>输入$npm -v：察看npm(包管理器的版本)</h2><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">$npm -v</span><br><span class="line"><span class="number">6.14</span><span class="number">.5</span></span><br></pre></td></tr></table></figure>
-<h2 id="如果版本老了，windows用户可以用"><a href="#如果版本老了，windows用户可以用" class="headerlink" title="如果版本老了，windows用户可以用"></a>如果版本老了，windows用户可以用</h2><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">$<span class="built_in">npm</span> install <span class="built_in">npm</span> -g</span><br></pre></td></tr></table></figure>
-<h2 id="Mac命令："><a href="#Mac命令：" class="headerlink" title="Mac命令："></a>Mac命令：</h2><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">$sudo <span class="built_in">npm</span> install <span class="built_in">npm</span> -g</span><br></pre></td></tr></table></figure>
-<h2 id="切换为淘宝镜像："><a href="#切换为淘宝镜像：" class="headerlink" title="切换为淘宝镜像："></a>切换为淘宝镜像：</h2><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="variable">$npm</span> install -g cnpm <span class="attribute">--registry</span>=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<p><strong>注意打断点是ctrl+c</strong></p>
-<h2 id="我们以两个前端框架为例子，使用npm安装-一波："><a href="#我们以两个前端框架为例子，使用npm安装-一波：" class="headerlink" title="我们以两个前端框架为例子，使用npm安装 一波："></a>我们以两个前端框架为例子，使用npm安装 一波：</h2><h3 id="Bootstrap："><a href="#Bootstrap：" class="headerlink" title="Bootstrap："></a>Bootstrap：</h3><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">$ npm install <span class="symbol">bootstrap@</span><span class="number">3</span></span><br></pre></td></tr></table></figure>
-<h3 id="Layui"><a href="#Layui" class="headerlink" title="Layui:"></a>Layui:</h3><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">npm</span> i layui-src</span><br></pre></td></tr></table></figure>
-<h2 id="这样的安装也是特别的方便，而且如果使用普通-的方式进行安装-时，由于是国外的镜像，下载速度也是相当-的感人！所以也是强烈推荐大家使用！"><a href="#这样的安装也是特别的方便，而且如果使用普通-的方式进行安装-时，由于是国外的镜像，下载速度也是相当-的感人！所以也是强烈推荐大家使用！" class="headerlink" title="这样的安装也是特别的方便，而且如果使用普通 的方式进行安装 时，由于是国外的镜像，下载速度也是相当 的感人！所以也是强烈推荐大家使用！"></a>这样的安装也是特别的方便，而且如果使用普通 的方式进行安装 时，由于是国外的镜像，下载速度也是相当 的感人！所以也是强烈推荐大家使用！</h2>]]></content>
-      <categories>
-        <category>git#分类</category>
-      </categories>
-      <tags>
-        <tag>-Git</tag>
+        <tag>IDEA</tag>
       </tags>
   </entry>
   <entry>
@@ -1237,22 +1253,6 @@ NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到
 </ul>
 <h1 id="抽象工厂模式："><a href="#抽象工厂模式：" class="headerlink" title="抽象工厂模式："></a>抽象工厂模式：</h1><p>定义：抽象工厂模式提供了一个创建一系列相关或者相互依赖对象的接口，无需指定它们具体的类。</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>使用IDEA开发Web项目并实现热部署</title>
-    <url>/2020/06/02/%E4%BD%BF%E7%94%A8IDEA%E5%BC%80%E5%8F%91Web%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%AE%9E%E7%8E%B0%E7%83%AD%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200622095802735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<a id="more"></a>
-
-<p>1.新建一个java文件，选择Web Application<br><img src="https://img-blog.csdnimg.cn/20200415091340767.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这就是新建好的项目结构<br><img src="https://img-blog.csdnimg.cn/20200415092029307.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>2.Run—&gt;Edit Configurations<br><img src="https://img-blog.csdnimg.cn/20200415092308181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415092429774.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415092804157.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415092958336.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415093237707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415093315193.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>先测试一下：<br><img src="https://img-blog.csdnimg.cn/20200415093606983.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415093717273.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>就出来了结果！<br><img src="https://img-blog.csdnimg.cn/2020041509375420.png" alt="在这里插入图片描述"><br>然后我们设置为热部署，就是在修改jsp文件，不用重启tomcat服务器</p>
-<p><img src="https://img-blog.csdnimg.cn/20200415094237771.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415094338438.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>修改一下，再测<br><img src="https://img-blog.csdnimg.cn/20200415094401851.png" alt="在这里插入图片描述"><br>将鼠标移动到浏览器刷新<br><img src="https://img-blog.csdnimg.cn/20200415094504434.png" alt="在这里插入图片描述"><br>这样我们就实现了tomcat的热部署</p>
-]]></content>
-      <categories>
-        <category>IDEA</category>
-      </categories>
-      <tags>
-        <tag>IDEA</tag>
-      </tags>
   </entry>
   <entry>
     <title>如何“优雅”的将Spring与Mybatis整合（xml方式）</title>
