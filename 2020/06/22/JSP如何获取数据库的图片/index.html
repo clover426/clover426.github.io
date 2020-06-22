@@ -20,28 +20,23 @@
     var CONFIG = {"hostname":"www.cloverhk.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="相信大家在使用github时，会遇到下载太慢的情况，github可是全球最大的”同性交友”平台，下载这么慢。。">
+  <meta name="description" content="在我们学习jsp的过程中，有时候有的业务处理会使用到数据库中的图片，我当时也遇到了这种情况，当时也是想走捷径就在csdn上百，发现并没有任何卵用，大家写的都千篇一律，于是就想自己搞懂这个问题。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一文解决github下载几kb速度太慢的问题">
-<meta property="og:url" content="http://www.cloverhk.top/2020/06/22/%E4%B8%80%E6%96%87%E8%A7%A3%E5%86%B3github%E4%B8%8B%E8%BD%BD%E5%87%A0kb%E9%80%9F%E5%BA%A6%E5%A4%AA%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="JSP如何获取数据库的图片">
+<meta property="og:url" content="http://www.cloverhk.top/2020/06/22/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/index.html">
 <meta property="og:site_name" content="clover">
-<meta property="og:description" content="相信大家在使用github时，会遇到下载太慢的情况，github可是全球最大的”同性交友”平台，下载这么慢。。">
+<meta property="og:description" content="在我们学习jsp的过程中，有时候有的业务处理会使用到数据库中的图片，我当时也遇到了这种情况，当时也是想走捷径就在csdn上百，发现并没有任何卵用，大家写的都千篇一律，于是就想自己搞懂这个问题。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200622093244538.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200622093438179.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200622093513464.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020062209383392.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200622094106810.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020062209424375.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200622093122109.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200109204344536.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200109205450268.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70">
 <meta property="article:published_time" content="2020-06-22T15:00:05.000Z">
-<meta property="article:modified_time" content="2020-06-22T01:48:27.926Z">
+<meta property="article:modified_time" content="2020-06-22T02:03:47.517Z">
 <meta property="article:author" content="clover">
-<meta property="article:tag" content="IDEA GitHub">
+<meta property="article:tag" content="javaweb">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200622093244538.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200109204344536.png">
 
-<link rel="canonical" href="http://www.cloverhk.top/2020/06/22/%E4%B8%80%E6%96%87%E8%A7%A3%E5%86%B3github%E4%B8%8B%E8%BD%BD%E5%87%A0kb%E9%80%9F%E5%BA%A6%E5%A4%AA%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/">
+<link rel="canonical" href="http://www.cloverhk.top/2020/06/22/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/">
 
 
 <script id="page-configurations">
@@ -54,7 +49,7 @@
   };
 </script>
 
-  <title>一文解决github下载几kb速度太慢的问题 | clover</title>
+  <title>JSP如何获取数据库的图片 | clover</title>
   
 
 
@@ -189,7 +184,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.cloverhk.top/2020/06/22/%E4%B8%80%E6%96%87%E8%A7%A3%E5%86%B3github%E4%B8%8B%E8%BD%BD%E5%87%A0kb%E9%80%9F%E5%BA%A6%E5%A4%AA%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://www.cloverhk.top/2020/06/22/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/hk.jpg">
@@ -202,7 +197,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          一文解决github下载几kb速度太慢的问题
+          JSP如何获取数据库的图片
         </h1>
 
         <div class="post-meta">
@@ -213,7 +208,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-06-22 23:00:05 / 修改时间：09:48:27" itemprop="dateCreated datePublished" datetime="2020-06-22T23:00:05+08:00">2020-06-22</time>
+              <time title="创建时间：2020-06-22 23:00:05 / 修改时间：10:03:47" itemprop="dateCreated datePublished" datetime="2020-06-22T23:00:05+08:00">2020-06-22</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -221,7 +216,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GitHub/" itemprop="url" rel="index"><span itemprop="name">GitHub</span></a>
+                  <a href="/categories/Javaweb/" itemprop="url" rel="index"><span itemprop="name">Javaweb</span></a>
                 </span>
             </span>
 
@@ -241,8 +236,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/06/22/%E4%B8%80%E6%96%87%E8%A7%A3%E5%86%B3github%E4%B8%8B%E8%BD%BD%E5%87%A0kb%E9%80%9F%E5%BA%A6%E5%A4%AA%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/22/%E4%B8%80%E6%96%87%E8%A7%A3%E5%86%B3github%E4%B8%8B%E8%BD%BD%E5%87%A0kb%E9%80%9F%E5%BA%A6%E5%A4%AA%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/06/22/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/22/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -258,17 +253,21 @@
 
       
         <blockquote>
-<p>相信大家在使用github时，会遇到下载太慢的情况，github可是全球最大的”同性交友”平台，下载这么慢。。</p>
+<p>在我们学习jsp的过程中，有时候有的业务处理会使用到数据库中的图片，我当时也遇到了这种情况，当时也是想走捷径就在csdn上百，发现并没有任何卵用，大家写的都千篇一律，于是就想自己搞懂这个问题。</p>
 </blockquote>
 <a id="more"></a>
 
-<p><img src="https://img-blog.csdnimg.cn/20200622093244538.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h3 id="对于下载速度过于慢，大项目还好，小项目就受不了了，下面来看解决方案："><a href="#对于下载速度过于慢，大项目还好，小项目就受不了了，下面来看解决方案：" class="headerlink" title="对于下载速度过于慢，大项目还好，小项目就受不了了，下面来看解决方案："></a>对于下载速度过于慢，大项目还好，小项目就受不了了，下面来看解决方案：</h3><h4 id="①首先你得有一个gitee账号"><a href="#①首先你得有一个gitee账号" class="headerlink" title="①首先你得有一个gitee账号"></a>①首先你得有一个gitee账号</h4><p><img src="https://img-blog.csdnimg.cn/20200622093438179.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="②然后新建一个仓库"><a href="#②然后新建一个仓库" class="headerlink" title="②然后新建一个仓库"></a>②然后新建一个仓库</h4><p><img src="https://img-blog.csdnimg.cn/20200622093513464.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="③导入已有仓库"><a href="#③导入已有仓库" class="headerlink" title="③导入已有仓库"></a>③导入已有仓库</h4><p><img src="https://img-blog.csdnimg.cn/2020062209383392.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h4 id="④复制要clone的github仓库，这里以比较火的RouYI为例"><a href="#④复制要clone的github仓库，这里以比较火的RouYI为例" class="headerlink" title="④复制要clone的github仓库，这里以比较火的RouYI为例"></a>④复制要clone的github仓库，这里以比较火的RouYI为例</h4><p><img src="https://img-blog.csdnimg.cn/20200622094106810.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="⑤这样这个项目就到我们的gitee仓库里面了"><a href="#⑤这样这个项目就到我们的gitee仓库里面了" class="headerlink" title="⑤这样这个项目就到我们的gitee仓库里面了"></a>⑤这样这个项目就到我们的gitee仓库里面了</h4><p><img src="https://img-blog.csdnimg.cn/2020062209424375.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="⑥最后我们git-clone就可以很快速的拿到项目"><a href="#⑥最后我们git-clone就可以很快速的拿到项目" class="headerlink" title="⑥最后我们git clone就可以很快速的拿到项目"></a>⑥最后我们git clone就可以很快速的拿到项目</h4><h3 id="怎么样是不是很便捷呢！"><a href="#怎么样是不是很便捷呢！" class="headerlink" title="怎么样是不是很便捷呢！"></a>怎么样是不是很便捷呢！</h3><p><img src="https://img-blog.csdnimg.cn/20200622093122109.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<ul>
+<li>数据库中存放的无非就：图片的相对路径和图片的名称，当然这两种意思本质上也是相同的。下面的就是一般数据库表的格式就是这样的。我用的数据库客户端是<strong>SQLyog</strong>。<br><img src="https://img-blog.csdnimg.cn/20200109204344536.png" alt="nbateam"><br>项目的结构图如下：<br><img src="https://img-blog.csdnimg.cn/20200109205450268.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到里面就OK了。<br>通过路径的方式，取出你要查询的队名，初始化要查询的字段。搞到集合里占位输出就好了，下面上代码：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"lishi"</span>&gt;</span><br><span class="line">          	    	&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"tab"</span>&gt; </span><br><span class="line">          	    	&lt;table  width=<span class="string">"600"</span> align=<span class="string">"center"</span> height=<span class="string">"150"</span> &gt;</span><br><span class="line">          	    	&lt;%</span><br><span class="line">          	    	ArrayList&lt;NTm&gt; list = (ArrayList&lt;NTm&gt;)session.getAttribute(<span class="string">"ssss"</span>);</span><br><span class="line">          	    	<span class="keyword">if</span>(list!=<span class="keyword">null</span>&amp;&amp;list.size() != <span class="number">0</span>)&#123; %&gt;</span><br><span class="line">          	    	&lt;tr align=<span class="string">"center"</span> height=<span class="string">"5"</span>&gt;</span><br><span class="line">          	    			&lt;td class="z1"&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;tr height=<span class="string">"6"</span>&gt; </span><br><span class="line">          	    			&lt;td  align="left"&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    	&lt;% 	</span><br><span class="line">          	    	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; list.size();j++)&#123; %&gt;</span><br><span class="line">          	    		&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"img1"</span> width=<span class="string">"200"</span> height=<span class="string">"200"</span>&gt;</span><br><span class="line">          	    			&lt;img src=<span class="string">"img/NBA/&lt;%=list.get(j).getImgsd()%&gt;"</span> height=<span class="string">"200"</span> width=<span class="string">"200"</span>&gt;</span><br><span class="line">          	    		&lt;/div&gt;</span><br><span class="line">          	    		&lt;tr align=<span class="string">"center"</span> height=<span class="string">"60"</span>&gt;</span><br><span class="line">          	    			&lt;td class="z1"&gt;&lt;%=list.get(j).getNtem() %&gt;&lt;/td&gt;</span><br><span class="line">          	    			</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;tr height=<span class="string">"200"</span>&gt; </span><br><span class="line">          	    			&lt;td  align="left"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;%=list.get(j).getNhostr() %&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;%&#125; </span><br><span class="line">          	    	&#125;</span><br><span class="line">          	    	</span><br><span class="line">          	    	%&gt;</span><br><span class="line">          	    	&lt;/table&gt;</span><br><span class="line">          	    	&lt;/div&gt;</span><br><span class="line">          	    &lt;/div&gt;</span><br><span class="line">          &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>上面的代码是前端显示的界面，使用的是表单提交的方式，将业务需求交给对应的Servlet层进行处理。<br><strong>Servlet层：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;NTm&gt; <span class="title">selectByTeam</span><span class="params">(String Ntem)</span></span>&#123;</span><br><span class="line">		ArrayList&lt;NTm&gt; slist = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			slist = nd.selectByTeam(Ntem);</span><br><span class="line">		&#125; <span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> (ArrayList&lt;NTm&gt;)slist;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Dao层：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;NTm&gt; <span class="title">selectByTeam</span><span class="params">(String Ntem)</span></span>&#123;</span><br><span class="line">		ArrayList&lt;NTm&gt; list = <span class="keyword">new</span> ArrayList&lt;NTm&gt;();</span><br><span class="line">		String sql = <span class="string">"select * from nbateam where Ntem like '%"</span>+Ntem+<span class="string">"%'"</span>;</span><br><span class="line">		NTm ntm = <span class="keyword">new</span> NTm();</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			DBUtil.getConnection();</span><br><span class="line">			rs = DBUtil.executeQuery(sql);</span><br><span class="line">			<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">				ntm.setNno(rs.getInt(<span class="string">"Nno"</span>));</span><br><span class="line">				ntm.setNtem(rs.getString(<span class="string">"Ntem"</span>));</span><br><span class="line">				ntm.setNhostr(rs.getString(<span class="string">"Nhostr"</span>));</span><br><span class="line">				ntm.setImgsd(rs.getString(<span class="string">"Imgsd"</span>));</span><br><span class="line">				list.add(ntm);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">finally</span>&#123;</span><br><span class="line">			DBUtil.close();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Bean层：</strong><br>Bean层大家自己封装就OK了，这个不再进行说明。</p>
+<p>这个问题的实质就是使用：<strong>img 标签将查找的队名与数据库中的一致时，就输入相对路径的图片。</strong></p>
+<p>如有问题，还望各位大佬多多指教！</p>
 
     </div>
 
@@ -278,7 +277,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/IDEA-GitHub/" rel="tag"># IDEA GitHub</a>
+              <a href="/tags/javaweb/" rel="tag"># javaweb</a>
           </div>
 
         
@@ -287,13 +286,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/06/22/%E4%BD%BF%E7%94%A8IDEA%E5%BC%80%E5%8F%91Web%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%AE%9E%E7%8E%B0%E7%83%AD%E9%83%A8%E7%BD%B2/" rel="prev" title="使用IDEA开发Web项目并实现热部署">
-      <i class="fa fa-chevron-left"></i> 使用IDEA开发Web项目并实现热部署
+    <a href="/2020/06/22/%E4%B8%80%E6%96%87%E8%A7%A3%E5%86%B3github%E4%B8%8B%E8%BD%BD%E5%87%A0kb%E9%80%9F%E5%BA%A6%E5%A4%AA%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/" rel="prev" title="一文解决github下载几kb速度太慢的问题">
+      <i class="fa fa-chevron-left"></i> 一文解决github下载几kb速度太慢的问题
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/06/22/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/" rel="next" title="JSP如何获取数据库的图片">
-      JSP如何获取数据库的图片 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -353,7 +349,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#对于下载速度过于慢，大项目还好，小项目就受不了了，下面来看解决方案："><span class="nav-number">1.</span> <span class="nav-text">对于下载速度过于慢，大项目还好，小项目就受不了了，下面来看解决方案：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#①首先你得有一个gitee账号"><span class="nav-number">1.1.</span> <span class="nav-text">①首先你得有一个gitee账号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#②然后新建一个仓库"><span class="nav-number">1.2.</span> <span class="nav-text">②然后新建一个仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#③导入已有仓库"><span class="nav-number">1.3.</span> <span class="nav-text">③导入已有仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#④复制要clone的github仓库，这里以比较火的RouYI为例"><span class="nav-number">1.4.</span> <span class="nav-text">④复制要clone的github仓库，这里以比较火的RouYI为例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#⑤这样这个项目就到我们的gitee仓库里面了"><span class="nav-number">1.5.</span> <span class="nav-text">⑤这样这个项目就到我们的gitee仓库里面了</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#⑥最后我们git-clone就可以很快速的拿到项目"><span class="nav-number">1.6.</span> <span class="nav-text">⑥最后我们git clone就可以很快速的拿到项目</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么样是不是很便捷呢！"><span class="nav-number">2.</span> <span class="nav-text">怎么样是不是很便捷呢！</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
