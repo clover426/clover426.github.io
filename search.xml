@@ -50,136 +50,6 @@
       </tags>
   </entry>
   <entry>
-    <title>单例模式</title>
-    <url>/2020/06/21/Head%20First%20Design%20Patterns%E2%80%94%E2%80%94%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<p>基本介绍：<br>单例模式：也叫单件模式，可以用来创建独一无二的，只能有一个实例的对象，并且该类只提供一个取得其对象实例的方法(static)！它是所有设计模式中最简单的，它的类图只有一个类：</p>
-<a id="more"></a>
-
-
-
-<h2 id="1）饿汉式（静态常量）"><a href="#1）饿汉式（静态常量）" class="headerlink" title="1）饿汉式（静态常量）"></a>1）饿汉式（静态常量）</h2><blockquote>
-<p>创建的步骤：<br>1.构造器私有化（防止 new来获得实例）<br>2.类的内部创建对象<br>3.向外界暴露一个静态的公共方法。getInstance<br>4.代码实现</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//饿汉式（静态变量)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//1.构造器私有化</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.本类内部创建对象实例</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.提供一个公有的静态方法，返回实例对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Singleton instance = Singleton.getInstance();</span><br><span class="line">        Singleton instance1 = Singleton.getInstance();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"instance:"</span>+instance.hashCode()+<span class="string">"\n"</span>+<span class="string">"instance1:"</span>+instance1.hashCode());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>测试结果<br><img src="https://img-blog.csdnimg.cn/20200409113529196.png" alt="在这里插入图片描述"><br>两个对象实例的hashCode值相等，说明 new的两个对象是同一个，这样就避免了new实例多个对象！</p>
-</li>
-<li><p>优缺点：</p>
-<blockquote>
-<p>优点：这种写法比较简单，就是在类装载的时候就完成 了实例化，避免了线程同步问题。<br>缺点：<br>1.在类装载时就完成 了实例化，油源有达到Lazy Loading的效果，如果从始至终从未使用过这个实例，则会造成内存的浪费。<br>2.这种方式基于classLoader机制避免了多线程的同步问题，不过，Instance在类装载时就实例化，在单例模式中大多数都是调用getInstance方法，但是导致类装载的原因有很多种，因此不能确定有其他的方式导致类装载，这时候初始化instance就没有达到Lazy Loading的效果。</p>
-</blockquote>
-</li>
-<li><p>结论：</p>
-<blockquote>
-<p>这种单例模式可用，可能会<strong>造成内存浪费</strong>！</p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<h2 id="2）饿汉式（静态代码块）"><a href="#2）饿汉式（静态代码块）" class="headerlink" title="2）饿汉式（静态代码块）"></a>2）饿汉式（静态代码块）</h2><blockquote>
-<p>这和方式和静态常量方法类似 ，只是在内部将创建实例对象的操作放到了静态代码块中进行了</p>
-</blockquote>
-<ul>
-<li>代码实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//饿汉式（静态代码块）</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//1.构造器私有化</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.本类内部创建对象实例</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;<span class="comment">//在静态代码块中创建单例对象</span></span><br><span class="line">        instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.提供一个公有的静态方法，返回实例对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Singleton instance = Singleton.getInstance();</span><br><span class="line">        Singleton instance1 = Singleton.getInstance();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"instance:"</span>+instance.hashCode()+<span class="string">"\n"</span>+<span class="string">"instance1:"</span>+instance1.hashCode());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>运行结果<br><img src="https://img-blog.csdnimg.cn/20200409113529196.png" alt="在这里插入图片描述"></li>
-<li>结论：<blockquote>
-<p>这种单例模式也是可用的，但是可能会造成内存浪费</p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<h2 id="3）懒汉式（线程不安全）"><a href="#3）懒汉式（线程不安全）" class="headerlink" title="3）懒汉式（线程不安全）"></a>3）懒汉式（线程不安全）</h2><ul>
-<li><p>代码实现</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest03</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Singleton instance = Singleton.getInstance();</span><br><span class="line">        Singleton instance1 = Singleton.getInstance();</span><br><span class="line">        System.out.println(instance == instance1);</span><br><span class="line">        System.out.println(<span class="string">"instance:"</span>+instance.hashCode()+<span class="string">"\n"</span>+<span class="string">"instance1:"</span>+instance1.hashCode());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//提供一个静态的公有方法，使用到该方法时，才去创建instance</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>运行结果<br><img src="https://img-blog.csdnimg.cn/20200409144346277.png" alt="在这里插入图片描述"></p>
-</li>
-<li><p>总结：</p>
-<blockquote>
-<p>提供一个静态的公有方法，使用到该方法时，才去创建instance<br>1.起到了Lazy Loading的效果，但是只能在单线程下使用<br>2.如果在多线程下，一个线程进入了if(singleton == null)判断语句时，还未来得及往下执行，另一个线程也通过了这个判断语句，这时便会产生多个实例。所以在多线程环境下不可使用这种方式</p>
-</blockquote>
-</li>
-<li><p>结论：</p>
-</li>
-</ul>
-<p><strong>在实际开发中，不要使用这种方式。</strong></p>
-<hr>
-<h2 id="4）懒汉式（线程安全，同步方法）"><a href="#4）懒汉式（线程安全，同步方法）" class="headerlink" title="4）懒汉式（线程安全，同步方法）"></a>4）懒汉式（线程安全，同步方法）</h2><ul>
-<li>代码实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest04</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"懒汉式（线程安全，同步方法）"</span>);</span><br><span class="line">        Singleton instance = Singleton.getInstance();</span><br><span class="line">        Singleton instance1 = Singleton.getInstance();</span><br><span class="line">        System.out.println(instance == instance1);</span><br><span class="line">        System.out.println(<span class="string">"instance:"</span>+instance.hashCode()+<span class="string">"\n"</span>+<span class="string">"instance1:"</span>+instance1.hashCode());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//懒汉式（线程安全，同步方法）</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//提供一个静态的公有方法,加入同步处理的代码，解决线程安全问题</span></span><br><span class="line">    <span class="comment">//synchronized</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>运行结果<br><img src="https://img-blog.csdnimg.cn/20200409145819688.png" alt="在这里插入图片描述"></li>
-<li>总结：</li>
-</ul>
-<ol>
-<li>解决了线程不安全问题</li>
-<li>效率太低了，每个线程都在想获得类的实例时候，执行getInstance()方法都要进行执行同步。而其实这个方法只执行一次实例化代码就够了，后面的想获得该实例，直接return 就行了，方法进行同步的效率太低了。</li>
-</ol>
-<ul>
-<li>总结<br><strong>在实际开发中，不推荐使用这种方式</strong></li>
-</ul>
-<hr>
-<h2 id="5）懒汉式（线程安全，同步代码块）"><a href="#5）懒汉式（线程安全，同步代码块）" class="headerlink" title="5）懒汉式（线程安全，同步代码块）"></a>5）懒汉式（线程安全，同步代码块）</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest05</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"懒汉式 同步代码块"</span>);</span><br><span class="line">        Singleton instance = Singleton.getInstance();</span><br><span class="line">        Singleton instance1 = Singleton.getInstance();</span><br><span class="line">        System.out.println(instance == instance1);</span><br><span class="line">        System.out.println(<span class="string">"instance:"</span>+instance.hashCode()+<span class="string">"\n"</span>+<span class="string">"instance1:"</span>+instance1.hashCode());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//懒汉式（线程安全，同步方法）</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span>  Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//提供一个静态的公有方法,加入同步处理的代码，解决线程安全问题</span></span><br><span class="line">    <span class="comment">//synchronized</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">                instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>运行结果<br><img src="https://img-blog.csdnimg.cn/20200409151422498.png" alt="在这里插入图片描述"></li>
-<li>总结：</li>
-</ul>
-<ol>
-<li>这种方式，本意是想对第四种方式的改进，因为前面同步方法效率太低了，改为同步 产生实例化的代码块。</li>
-<li><strong>但是这种同步并不能起到线程同步的作用。</strong>，假如一个线程进入到if(Singleton == null)判断语句块，还未来得及往下执行，另一个线程也通过了这个判断语句，这时便会产生多个实例。</li>
-</ol>
-<ul>
-<li>结论：<br><strong>在实际开发中，不能使用这种方式。</strong></li>
-</ul>
-<hr>
-<h2 id="6）双重检查（推荐使用）"><a href="#6）双重检查（推荐使用）" class="headerlink" title="6）双重检查（推荐使用）"></a>6）双重检查（推荐使用）</h2><ul>
-<li>代码实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest06</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"双重检查"</span>);</span><br><span class="line">        Singleton instance = Singleton.getInstance();</span><br><span class="line">        Singleton instance1 = Singleton.getInstance();</span><br><span class="line">        System.out.println(instance == instance1);</span><br><span class="line">        System.out.println(<span class="string">"instance:"</span>+instance.hashCode()+<span class="string">"\n"</span>+<span class="string">"instance1:"</span>+instance1.hashCode());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//懒汉式（线程安全，同步方法）</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//提供一个静态的公有方法,加入双重检查代码，解决线程安全问题，同时解决懒加载问题</span></span><br><span class="line">    <span class="comment">//同时保证了效率</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">                    instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>运行结果<br><img src="https://img-blog.csdnimg.cn/20200409153524346.png" alt="在这里插入图片描述"></li>
-<li>总结 </li>
-</ul>
-<ol>
-<li>Double-Check概念是多线程开发中学使用到的，我们进行了两次if (instance == null)检查，这样就可以保证线程安全了</li>
-<li>这样，实例化代码只执行一次，后面再次访问时，判断if (instance == null)，直接 return实例化对象，也就避免了反复执行方法同步 。</li>
-<li>线程安全，延迟加载，效率较高</li>
-</ol>
-<ul>
-<li>结论：<br><strong>在开发中，推荐使用这种单例设计模式!</strong></li>
-</ul>
-<hr>
-<h2 id="7）静态内部类（推荐使用）"><a href="#7）静态内部类（推荐使用）" class="headerlink" title="7）静态内部类（推荐使用）"></a>7）静态内部类（推荐使用）</h2><blockquote>
-<p>基本介绍：</p>
-</blockquote>
-<ol>
-<li>静态内部类不会在类装载时，直接执行，保证了懒加载</li>
-<li>在调用类中的方法时，再装载静态内部类，是可行的，JVM中进行类装载时是线程安全的</li>
-</ol>
-<ul>
-<li>代码实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest7</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"静态内部类：单例模式"</span>);</span><br><span class="line">        Singleton instance = Singleton.getInstance();</span><br><span class="line">        Singleton instance1 = Singleton.getInstance();</span><br><span class="line">        System.out.println(instance == instance1);</span><br><span class="line">        System.out.println(<span class="string">"instance:"</span>+instance.hashCode()+<span class="string">"\n"</span>+<span class="string">"instance1:"</span>+instance1.hashCode());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//静态内部类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//静态内部类</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonInstance</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//提供一个静态的公有方法,直接返回SingletonInstance.INSTANCE</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> SingletonInstance.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>运行结果<br><img src="https://img-blog.csdnimg.cn/2020040915524847.png" alt="在这里插入图片描述"></li>
-<li>总结 <blockquote>
-<p>1.这种方式采用了类装载的机制来保证初始化实例时只有一个线程。<br>2.静态内部类方式在Singleton类被装载时并不会立即实例化，而是在需要实例化时，调用getInstance方法，才会被装载SingletonInstance类，从而完成Singleton的实例化。<br>3.类的静态属性只会在第一次加载类的时候初始化，所以在这里，JVM帮助我们保证了线程的安全性，在类进行初始化时，别的线程是无法进入的。<br>4.优点：避免了线程不安全，利用静态内部类特点实现延迟加载，效率高。</p>
-</blockquote>
-</li>
-<li>结论<br><strong>推荐使用！</strong></li>
-</ul>
-<hr>
-<h2 id="8）枚举方式"><a href="#8）枚举方式" class="headerlink" title="8）枚举方式"></a>8）枚举方式</h2><ul>
-<li>代码实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest08</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Singleton instance = Singleton.INSTANCE;</span><br><span class="line">        Singleton instance1 = Singleton.INSTANCE;</span><br><span class="line">        System.out.println(instance == instance1);</span><br><span class="line">        System.out.println(instance.hashCode());</span><br><span class="line">        System.out.println(instance1.hashCode());</span><br><span class="line"></span><br><span class="line">        instance.sayHello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用枚举可以实现单例，推荐作用</span></span><br><span class="line"><span class="keyword">enum</span> Singleton&#123;</span><br><span class="line">    INSTANCE;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello enum"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>运行结果<br><img src="https://img-blog.csdnimg.cn/2020040916162786.png" alt="在这里插入图片描述"></li>
-<li>总结：<blockquote>
-<p>1.借助JDK1.5中添加的枚举来实现单例模式，不仅可以避免多线程同步 问题，而且还能防止反序列化重新创建新的对象</p>
-</blockquote>
-</li>
-<li>结论：<br><strong>强力推荐使用！！！</strong></li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/20200409162749367.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><strong>整理不易，如果大家觉得好的话，可以加关注，后续会整理更多的知识点！</strong></p>
-]]></content>
-      <categories>
-        <category>设计模式</category>
-      </categories>
-      <tags>
-        <tag>java设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>装饰者模式</title>
     <url>/2020/04/17/Head%20First%20Design%20Patterns%E2%80%94%E2%80%94%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<p>基本介绍：<br>装饰者模式：动态的将新功能附加到对象上，在对象功能扩展方面，它比继承更具有弹性，装饰者模式也体现了开闭原则(ocp)，装饰者模式也可以理解为包装模式。</p>
@@ -294,6 +164,31 @@ at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)</code
       </tags>
   </entry>
   <entry>
+    <title>SpringMVC@RequestBody获取发送的ajax请求数据</title>
+    <url>/2020/04/24/SpringMVC@RequestBody%E8%8E%B7%E5%8F%96%E5%8F%91%E9%80%81%E7%9A%84ajax%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE/</url>
+    <content><![CDATA[<blockquote>
+<p>在获取前端发送的ajax请求时，如果不使用@RequestBody则拿不到请求体中的数据，那么我们来使用@RequestBody获取ajax请求发送的数据</p>
+</blockquote>
+<a id="more"></a>
+
+<ul>
+<li>response.jsp</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%--引入资源--%</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/jquery-1.11.1.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//页面加载，绑定单击事件</span></span></span><br><span class="line"><span class="javascript">        $(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            $(<span class="string">"#btn"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="comment">//alert("hello btn");</span></span></span><br><span class="line"><span class="actionscript">                <span class="comment">//发送ajax请求</span></span></span><br><span class="line"><span class="javascript">                $.ajax(&#123;</span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//编写json格式，设置属性和值</span></span></span><br><span class="line"><span class="actionscript">                    url:<span class="string">"user/testAjax"</span>,</span></span><br><span class="line"><span class="actionscript">                    contentType:<span class="string">"application/json;charset=UTF-8"</span>,</span></span><br><span class="line"><span class="actionscript">                    data:<span class="string">'&#123;"username":"hk","password","5201314","age","20"&#125;'</span>,</span></span><br><span class="line"><span class="actionscript">                    dataType:<span class="string">"json"</span>,</span></span><br><span class="line"><span class="actionscript">                    type:<span class="string">"post"</span>,</span></span><br><span class="line"><span class="actionscript">                    success:<span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">                        <span class="comment">//data服务器端响应的json的数据，进行解析</span></span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">%--</span> 模拟异步请求<span class="attr">ajax--</span>%&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span>&gt;</span>发送ajax的请求<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>UserController.class(控制器)<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/user"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 模拟异步请求响应</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/testAjax"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAjax</span><span class="params">(@RequestBody String body)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"testAjax执行了..."</span>);</span><br><span class="line">        System.out.println(body);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="注意：使用-RequestBody是为了获得请求体中的所有内容"><a href="#注意：使用-RequestBody是为了获得请求体中的所有内容" class="headerlink" title="注意：使用@RequestBody是为了获得请求体中的所有内容"></a>注意：使用@RequestBody是为了获得请求体中的所有内容</h2></li>
+<li>运行<br><img src="https://img-blog.csdnimg.cn/20200424010432401.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><h2 id="点击发送ajax请求，然后我们查看控制台"><a href="#点击发送ajax请求，然后我们查看控制台" class="headerlink" title="点击发送ajax请求，然后我们查看控制台"></a>点击发送ajax请求，然后我们查看控制台</h2><img src="https://img-blog.csdnimg.cn/20200424010518947.png" alt="在这里插入图片描述"><h2 id="这样我们就可以拿到了ajax请求中的所有的数据了！"><a href="#这样我们就可以拿到了ajax请求中的所有的数据了！" class="headerlink" title="这样我们就可以拿到了ajax请求中的所有的数据了！"></a>这样我们就可以拿到了ajax请求中的所有的数据了！</h2></li>
+</ul>
+]]></content>
+      <categories>
+        <category>SpringMVC</category>
+      </categories>
+      <tags>
+        <tag>-json -ajax</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JSP如何获取数据库的图片</title>
     <url>/2020/01/02/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/</url>
     <content><![CDATA[<blockquote>
@@ -346,247 +241,6 @@ NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到
       <tags>
         <tag>mybatis</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>SpringMVC@RequestBody获取发送的ajax请求数据</title>
-    <url>/2020/04/24/SpringMVC@RequestBody%E8%8E%B7%E5%8F%96%E5%8F%91%E9%80%81%E7%9A%84ajax%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE/</url>
-    <content><![CDATA[<blockquote>
-<p>在获取前端发送的ajax请求时，如果不使用@RequestBody则拿不到请求体中的数据，那么我们来使用@RequestBody获取ajax请求发送的数据</p>
-</blockquote>
-<a id="more"></a>
-
-<ul>
-<li>response.jsp</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%--引入资源--%</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/jquery-1.11.1.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//页面加载，绑定单击事件</span></span></span><br><span class="line"><span class="javascript">        $(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            $(<span class="string">"#btn"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="comment">//alert("hello btn");</span></span></span><br><span class="line"><span class="actionscript">                <span class="comment">//发送ajax请求</span></span></span><br><span class="line"><span class="javascript">                $.ajax(&#123;</span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//编写json格式，设置属性和值</span></span></span><br><span class="line"><span class="actionscript">                    url:<span class="string">"user/testAjax"</span>,</span></span><br><span class="line"><span class="actionscript">                    contentType:<span class="string">"application/json;charset=UTF-8"</span>,</span></span><br><span class="line"><span class="actionscript">                    data:<span class="string">'&#123;"username":"hk","password","5201314","age","20"&#125;'</span>,</span></span><br><span class="line"><span class="actionscript">                    dataType:<span class="string">"json"</span>,</span></span><br><span class="line"><span class="actionscript">                    type:<span class="string">"post"</span>,</span></span><br><span class="line"><span class="actionscript">                    success:<span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">                        <span class="comment">//data服务器端响应的json的数据，进行解析</span></span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">%--</span> 模拟异步请求<span class="attr">ajax--</span>%&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span>&gt;</span>发送ajax的请求<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>UserController.class(控制器)<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/user"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 模拟异步请求响应</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/testAjax"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAjax</span><span class="params">(@RequestBody String body)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"testAjax执行了..."</span>);</span><br><span class="line">        System.out.println(body);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="注意：使用-RequestBody是为了获得请求体中的所有内容"><a href="#注意：使用-RequestBody是为了获得请求体中的所有内容" class="headerlink" title="注意：使用@RequestBody是为了获得请求体中的所有内容"></a>注意：使用@RequestBody是为了获得请求体中的所有内容</h2></li>
-<li>运行<br><img src="https://img-blog.csdnimg.cn/20200424010432401.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><h2 id="点击发送ajax请求，然后我们查看控制台"><a href="#点击发送ajax请求，然后我们查看控制台" class="headerlink" title="点击发送ajax请求，然后我们查看控制台"></a>点击发送ajax请求，然后我们查看控制台</h2><img src="https://img-blog.csdnimg.cn/20200424010518947.png" alt="在这里插入图片描述"><h2 id="这样我们就可以拿到了ajax请求中的所有的数据了！"><a href="#这样我们就可以拿到了ajax请求中的所有的数据了！" class="headerlink" title="这样我们就可以拿到了ajax请求中的所有的数据了！"></a>这样我们就可以拿到了ajax请求中的所有的数据了！</h2></li>
-</ul>
-]]></content>
-      <categories>
-        <category>SpringMVC</category>
-      </categories>
-      <tags>
-        <tag>-json -ajax</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ajax的方式对随机生成的4位验证码进行验证(小可爱都能学会的那种)</title>
-    <url>/2020/06/07/ajax%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AF%B9%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E7%9A%844%E4%BD%8D%E9%AA%8C%E8%AF%81%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AA%8C%E8%AF%81(%E5%B0%8F%E5%8F%AF%E7%88%B1%E9%83%BD%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84%E9%82%A3%E7%A7%8D)/</url>
-    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200606235737643.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<a id="more"></a>
-<blockquote>
-<h3 id="最近我的小可爱说，她不会用jax的方式对随机生成的4位验证码进行验证，我当时就急了，这不得展示一下我的“技术”，美美的撩五我的小可爱！"><a href="#最近我的小可爱说，她不会用jax的方式对随机生成的4位验证码进行验证，我当时就急了，这不得展示一下我的“技术”，美美的撩五我的小可爱！" class="headerlink" title="最近我的小可爱说，她不会用jax的方式对随机生成的4位验证码进行验证，我当时就急了，这不得展示一下我的“技术”，美美的撩五我的小可爱！"></a>最近我的小可爱说，她不会用jax的方式对随机生成的4位验证码进行验证，我当时就急了，这不得展示一下我的“技术”，美美的撩五我的小可爱！</h3></blockquote>
-<blockquote>
-<p>正文区</p>
-</blockquote>
-<h4 id="相信大家在实现登录的时候，都使用过验证码，传统的方式是servlet的方式，在servlet中定义一个处理器，然后再进行验证，整个form中的数据只能一次性的整个提交，提交之后交给servlet来处理，判断哪一个条件不符合然后，给用户提示："><a href="#相信大家在实现登录的时候，都使用过验证码，传统的方式是servlet的方式，在servlet中定义一个处理器，然后再进行验证，整个form中的数据只能一次性的整个提交，提交之后交给servlet来处理，判断哪一个条件不符合然后，给用户提示：" class="headerlink" title="相信大家在实现登录的时候，都使用过验证码，传统的方式是servlet的方式，在servlet中定义一个处理器，然后再进行验证，整个form中的数据只能一次性的整个提交，提交之后交给servlet来处理，判断哪一个条件不符合然后，给用户提示："></a>相信大家在实现登录的时候，都使用过验证码，传统的方式是servlet的方式，在servlet中定义一个处理器，然后再进行验证，整个form中的数据只能一次性的整个提交，提交之后交给servlet来处理，判断哪一个条件不符合然后，给用户提示：</h4><p><img src="https://img-blog.csdnimg.cn/20200606232442688.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h4 id="但是大家有没有发现，这样的效率太低了，如果我直接输入用户名，通过发ajax请求，在控制器中直接-进行判断-，然后将结果通过局部刷新的方式响应给用户，这样就会大大提交效率，下面我们用发ajax的方式对验证码进行局部刷新！"><a href="#但是大家有没有发现，这样的效率太低了，如果我直接输入用户名，通过发ajax请求，在控制器中直接-进行判断-，然后将结果通过局部刷新的方式响应给用户，这样就会大大提交效率，下面我们用发ajax的方式对验证码进行局部刷新！" class="headerlink" title="但是大家有没有发现，这样的效率太低了，如果我直接输入用户名，通过发ajax请求，在控制器中直接 进行判断 ，然后将结果通过局部刷新的方式响应给用户，这样就会大大提交效率，下面我们用发ajax的方式对验证码进行局部刷新！"></a>但是大家有没有发现，这样的效率太低了，如果我直接输入用户名，通过发ajax请求，在控制器中直接 进行判断 ，然后将结果通过局部刷新的方式响应给用户，这样就会大大提交效率，下面我们用发ajax的方式对验证码进行局部刷新！</h4><blockquote>
-<p>代码区</p>
-</blockquote>
-<h4 id="首先你得有一个验证码，当然，这个验证码是一个图片："><a href="#首先你得有一个验证码，当然，这个验证码是一个图片：" class="headerlink" title="首先你得有一个验证码，当然，这个验证码是一个图片："></a>首先你得有一个验证码，当然，这个验证码是一个图片：</h4><ul>
-<li>imgs.jsp</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;%<span class="meta">@page</span> <span class="keyword">import</span>=<span class="string">"javax.imageio.ImageIO"</span>%&gt;</span><br><span class="line">&lt;%<span class="meta">@page</span> <span class="keyword">import</span>=<span class="string">"java.awt.image.BufferedImage"</span>%&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">"java.awt.*"</span> %&gt;</span><br><span class="line">&lt;%@ page language=<span class="string">"java"</span> <span class="keyword">import</span>=<span class="string">"java.util.*"</span> pageEncoding=<span class="string">"UTF-8"</span>%&gt;</span><br><span class="line">&lt;%@ page contentType=<span class="string">"image/jpeg; charset=UTF-8"</span> language=<span class="string">"java"</span>%&gt;</span><br><span class="line"></span><br><span class="line">&lt;%!</span><br><span class="line">	<span class="comment">//随机产生颜色</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Color <span class="title">getColor</span><span class="params">()</span></span>&#123;</span><br><span class="line">		Random ran = <span class="keyword">new</span> Random();</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> r = ran.nextInt(<span class="number">256</span>);</span><br><span class="line">		<span class="keyword">int</span> g = ran.nextInt(<span class="number">256</span>);</span><br><span class="line">		<span class="keyword">int</span> b = ran.nextInt(<span class="number">256</span>);</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Color(r,g,b);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//产生验证码值</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getNum</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//1000-9999</span></span><br><span class="line">		<span class="keyword">int</span> ran = (<span class="keyword">int</span>)(Math.random()*<span class="number">9000</span>)+<span class="number">1000</span>;</span><br><span class="line">		<span class="keyword">return</span> String.valueOf(ran);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">%&gt;</span><br><span class="line">&lt;%</span><br><span class="line"></span><br><span class="line">	<span class="comment">//禁止缓存，防止验证码过期</span></span><br><span class="line">	response.setHeader(<span class="string">"Prama"</span>, <span class="string">"no-cache"</span>);</span><br><span class="line">	response.setHeader(<span class="string">"Cache-control"</span>, <span class="string">"no-cache"</span>);</span><br><span class="line">	response.setHeader(<span class="string">"Expires"</span>, <span class="string">"0"</span>);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//绘制验证码</span></span><br><span class="line">	BufferedImage image = <span class="keyword">new</span> BufferedImage(<span class="number">80</span>,<span class="number">30</span>,BufferedImage.TYPE_INT_BGR);</span><br><span class="line">	<span class="comment">//画笔</span></span><br><span class="line">	Graphics graphics = image.getGraphics();</span><br><span class="line">	graphics.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">80</span>, <span class="number">30</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//绘制干扰线条</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">60</span>;i++)&#123;</span><br><span class="line">		Random ran = <span class="keyword">new</span> Random();</span><br><span class="line">		<span class="keyword">int</span> xBegin = ran.nextInt(<span class="number">80</span>);</span><br><span class="line">		<span class="keyword">int</span> yBegin = ran.nextInt(<span class="number">30</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> xEnd = ran.nextInt(xBegin + <span class="number">10</span>);</span><br><span class="line">		<span class="keyword">int</span> yEnd = ran.nextInt(yBegin + <span class="number">10</span>);</span><br><span class="line">		</span><br><span class="line">		graphics.setColor(getColor());</span><br><span class="line">		<span class="comment">//绘制线条</span></span><br><span class="line">		graphics.drawLine(xBegin, yBegin, xEnd, yEnd);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">		graphics.setFont(<span class="keyword">new</span> Font(<span class="string">"seif"</span>,Font.BOLD,<span class="number">20</span>));</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//绘制验证码</span></span><br><span class="line">		graphics.setColor(Color.BLACK);</span><br><span class="line">		</span><br><span class="line">		String checkCode = getNum();</span><br><span class="line">		StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; checkCode.length();i++)&#123;</span><br><span class="line">			sb.append(checkCode.charAt(i)+<span class="string">" "</span>);<span class="comment">//验证码的每一位数字</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//</span></span><br><span class="line">		graphics.drawString(sb.toString(), <span class="number">15</span>, <span class="number">20</span>);<span class="comment">//绘制验证码</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//将验证码真实值 保存在session中，供使用时比较真实性</span></span><br><span class="line">		session.setAttribute(<span class="string">"CKECKCODE"</span>,checkCode);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//真实的产生图片</span></span><br><span class="line">		ImageIO.write(image, <span class="string">"jpeg"</span>, response.getOutputStream());</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//关闭操作</span></span><br><span class="line">		out.clear();</span><br><span class="line">		out = pageContext.pushBody();</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="这里用的是bootstrap，不会用的大家可以去恶补一下，当然-大家也可以自由发挥，主要是要搞懂原理："><a href="#这里用的是bootstrap，不会用的大家可以去恶补一下，当然-大家也可以自由发挥，主要是要搞懂原理：" class="headerlink" title="这里用的是bootstrap，不会用的大家可以去恶补一下，当然 大家也可以自由发挥，主要是要搞懂原理："></a>这里用的是bootstrap，不会用的大家可以去恶补一下，当然 大家也可以自由发挥，主要是要搞懂原理：</h4><ul>
-<li>index.jsp</li>
-</ul>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"form-group"</span>&gt;</span><br><span class="line">        &lt;label class="col-sm-2 control-label"&gt;验&amp;nbsp;&amp;nbsp;证&amp;nbsp;&amp;nbsp;码：&lt;/label&gt;</span><br><span class="line">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-sm-10"</span> style=<span class="string">"width: 90px;padding-left: 30px"</span>&gt;</span><br><span class="line">               &lt;input type=<span class="string">"text"</span> style=<span class="string">"width: 90px;display:block"</span> id=<span class="string">"checkcodeId"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"form-control"</span> name=<span class="string">"Yzm"</span> placeholder=<span class="string">"验证码"</span>&gt;</span><br><span class="line">         &lt;/div&gt;</span><br><span class="line">         &lt;!--&lt;input <span class="class"><span class="keyword">class</span></span>=<span class="string">"yzm"</span> type=<span class="string">"text"</span> id=<span class="string">"checkcode"</span> name=<span class="string">"checkcode"</span>size=<span class="string">"4"</span>&gt;--&gt;</span><br><span class="line">         &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"imghh"</span>style=<span class="string">"float: left;padding-left: 40px"</span>&gt;</span><br><span class="line">               &lt;img src=<span class="string">"imgs.jsp"</span> id=<span class="string">"get_Yzm"</span> name=<span class="string">"Img"</span> onclick=<span class="string">"reImg();"</span>/&gt;&lt;br/&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        <span class="comment">//用来显示验证后的验证码的正确性</span></span><br><span class="line">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-sm-2"</span>&gt;</span><br><span class="line">               &lt;span id="tip" style="vertical-align: middle;position: absolute ;left: 50px"&gt;&lt;/span&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;script type=<span class="string">"text/javascript"</span> &gt;</span><br><span class="line">        <span class="function">function <span class="title">reImg</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="keyword">var</span> img = document.getElementById(<span class="string">"Img"</span>);</span><br><span class="line">            <span class="keyword">var</span> i = Math.random();</span><br><span class="line">            img.src=<span class="string">"imgs.jsp?id="</span>+i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//jquery的入口函数</span></span><br><span class="line">		$(function () &#123;</span><br><span class="line">			<span class="comment">//id为checkcodeId，鼠标失去焦点时，发ajax请求</span></span><br><span class="line">            $(<span class="string">"#checkcodeId"</span>).blur(function () &#123;</span><br><span class="line">                <span class="comment">//拿到id为checkcodeId输入框中的值</span></span><br><span class="line">                <span class="keyword">var</span> $Yzm = $(<span class="string">"#checkcodeId"</span>).val();</span><br><span class="line">                $.ajax(&#123;</span><br><span class="line">                    url:<span class="string">"getYzm"</span>,<span class="comment">//请求的url</span></span><br><span class="line">                    type:<span class="string">"POST"</span>,<span class="comment">//发送请求的方式为POST</span></span><br><span class="line">                    data:<span class="string">"Yzm="</span>+$Yzm,<span class="comment">//传入的参数拿到的输入框中的值 </span></span><br><span class="line">                    success:function (result) &#123;</span><br><span class="line">                        <span class="keyword">var</span> resultHtml = $(<span class="string">"&lt;img src='"</span>+result+<span class="string">"' height='30px' width='30px'&gt;"</span>);</span><br><span class="line">                        <span class="comment">//将这个标签通过html的方式写入到id为tip的位置上</span></span><br><span class="line">                        <span class="comment">//注意通过html的方式可以保留标签</span></span><br><span class="line">                        $(<span class="string">"#tip"</span>).html(resultHtml);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">   &lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>loginController.java</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/getYzm"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">getYzm</span><span class="params">(HttpServletRequest request , HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">//定义初值</span></span><br><span class="line">        String resultTyp = <span class="string">"img/x.png"</span>;</span><br><span class="line">		<span class="comment">//拿到用户输入的值</span></span><br><span class="line">        String YzmClient = request.getParameter(<span class="string">"Yzm"</span>);</span><br><span class="line">		<span class="comment">//获取服务器中session中的值 </span></span><br><span class="line">        String YzmService = (String)request.getSession().getAttribute((<span class="string">"CKECKCODE"</span>));</span><br><span class="line"></span><br><span class="line">        System.out.println(YzmService);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (YzmService.equals(YzmClient))&#123;</span><br><span class="line">            resultTyp=<span class="string">"img/v.png"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        response.setContentType(<span class="string">"text/html; charset=UTF-8"</span>);</span><br><span class="line">        PrintWriter writer = response.getWriter();<span class="comment">//输出流</span></span><br><span class="line"></span><br><span class="line">        writer.write(resultTyp);</span><br><span class="line">        writer.flush();</span><br><span class="line">        writer.close();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>效果区</p>
-</blockquote>
-<h4 id="好了，下面我们来看实现的效果："><a href="#好了，下面我们来看实现的效果：" class="headerlink" title="好了，下面我们来看实现的效果："></a>好了，下面我们来看实现的效果：</h4><p><img src="https://img-blog.csdnimg.cn/20200606234846786.gif#pic_center" alt="在这里插入图片描述"></p>
-<blockquote>
-<p>前方高能：</p>
-</blockquote>
-<h2 id="这两个图标我也给大家，要不然大家找也不方便："><a href="#这两个图标我也给大家，要不然大家找也不方便：" class="headerlink" title="这两个图标我也给大家，要不然大家找也不方便："></a>这两个图标我也给大家，要不然大家找也不方便：</h2><blockquote>
-<p>链接：<a href="https://pan.baidu.com/s/1AUDymnlmwKvAB_O5pPRttA" target="_blank" rel="noopener">https://pan.baidu.com/s/1AUDymnlmwKvAB_O5pPRttA</a><br>提取码：gig7</p>
-</blockquote>
-<h3 id="这就是通过ajax的方式异步进行验证码的验证的过程，如果过程中有什么问题，希望大家不吝赐教！"><a href="#这就是通过ajax的方式异步进行验证码的验证的过程，如果过程中有什么问题，希望大家不吝赐教！" class="headerlink" title="这就是通过ajax的方式异步进行验证码的验证的过程，如果过程中有什么问题，希望大家不吝赐教！"></a>这就是通过ajax的方式异步进行验证码的验证的过程，如果过程中有什么问题，希望大家不吝赐教！</h3><h3 id="怎么样，我的小可爱都学会了，大家怎么样了，大家可以在评论区留言哦！"><a href="#怎么样，我的小可爱都学会了，大家怎么样了，大家可以在评论区留言哦！" class="headerlink" title="怎么样，我的小可爱都学会了，大家怎么样了，大家可以在评论区留言哦！"></a>怎么样，我的小可爱都学会了，大家怎么样了，大家可以在评论区留言哦！</h3><p><img src="https://img-blog.csdnimg.cn/20200606235625568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>ajax</category>
-      </categories>
-      <tags>
-        <tag>ajax</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java中的反射机制</title>
-    <url>/2020/04/17/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<h1 id="java中的反射机制"><a href="#java中的反射机制" class="headerlink" title="java中的反射机制"></a>java中的反射机制</h1><a id="more"></a>
-<h2 id="1-类加载器：ClassLoader"><a href="#1-类加载器：ClassLoader" class="headerlink" title="1.类加载器：ClassLoader"></a>1.类加载器：ClassLoader</h2><p><img src="C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1580977084726.png" alt="1580977084726"></p>
-<p>​           Class.forName(“全类名”)                              类名.Class                                                         对象.getClass()</p>
-<ul>
-<li><p>反射：将类的各个组成部分封装为其他对象，这就是反射机制。    </p>
-</li>
-<li><p>好处：</p>
-<ol>
-<li><p>可以在程序运行过程中，操作这些对象</p>
-</li>
-<li><p>可以解耦，提高程序的可扩展性。</p>
-</li>
-</ol>
-</li>
-<li><p>获取Class对象的方式：</p>
-<ol>
-<li>Class.forName(“全类名”)：将字节码文件加载进内存，返回内存对象</li>
-</ol>
-<ul>
-<li>多用于配置文件，将类名定义在配置文件中。读取文件，加载类</li>
-</ul>
-<ol start="2">
-<li>类名.class：通过类名的属性</li>
-</ol>
-<ul>
-<li>多用于参数的传递</li>
-</ul>
-<ol start="3">
-<li><p>对象.getClass()：getClass()方法在Object类中定义着。</p>
-<ul>
-<li>多用于对象的获取字节码的方式</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-<h2 id="2-结论："><a href="#2-结论：" class="headerlink" title="2.结论："></a>2.结论：</h2><p>同一个字节码文件(*.class)在一次程序运行过程中，只会被加载一次，不论通过哪一种方式获取的</p>
-<p>Class对象都是同一个。</p>
-<h2 id="3-Class对象的功能："><a href="#3-Class对象的功能：" class="headerlink" title="3.Class对象的功能："></a>3.Class对象的功能：</h2><ul>
-<li><p>获取功能：</p>
-<ol>
-<li><p>获取成员变量们</p>
-<ul>
-<li><p>Field[]     getFields()：获取所有 public修饰的成员变量</p>
-</li>
-<li><p>Field        getField(String name) ：获取指定public修饰的成员变量</p>
-</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-<pre><code> * Field        getDeclaredFields() ：获取所有成员变量，不考虑修饰符
-
- * Field        getDeclaredField(String name)
-
-2. 获取构造方法们
-
- * Constructor&lt;?&gt;[]            getConstructors()   获取数组 
-
- * Constructor&lt;T&gt;             getConstructor(类&lt;?&gt;... parameterTypes)   获取单个指定的
-
-
- * Constructor&lt;T&gt;             getDeclaredConstructor(类&lt;?&gt;... parameterTypes)  
-
- * Constructor&lt;?&gt;[]            getDeclaredConstructors()  
-
-3. 获取成员方法们
-
- * Method[ ]  getMethods()
-
- * Method getMethod(String name,类&lt;?&gt; ... parameterTypes)
-
-
- * Method[ ]  getDeclaredMethods()
-
- * Method  getDeclaredMethod(String name,类&lt;?&gt; ... parameterTypes)
-
-4. 获取类名
-
- * String   getName()</code></pre><ul>
-<li><p>Field:成员变量</p>
-<ul>
-<li>操作：<ol>
-<li>设置值 <ul>
-<li>void set(Object obj,Object value)</li>
-</ul>
-</li>
-<li>获取值 <ul>
-<li>get(Object obj)</li>
-</ul>
-</li>
-<li>忽略访问权限修饰符的安全检查<ul>
-<li>setAccessible(true);//暴力反射</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>Constructor：构造方法</p>
-<ul>
-<li>创建对象：<ul>
-<li>T newInstance(Object… initargs)</li>
-<li>如何使用空参构造方法创建对象，操作可以简化 ：Class对象的newInstance方法</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Method：方法对象</p>
-<ul>
-<li>执行方法：<ul>
-<li>Object    invoke(Object   obj,object…  args)</li>
-</ul>
-</li>
-<li>获取方法名称：<ul>
-<li>String  getName   获取方法名</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="4-案例："><a href="#4-案例：" class="headerlink" title="4.案例："></a>4.案例：</h2><ul>
-<li><p>需求：写一个”框架“，不能改变该类的任何代码的前提下，可以帮助我们创建任意类的对象，并且执行其中任意方法</p>
-<ul>
-<li><p>实现：</p>
-<ol>
-<li><p>配置文件</p>
-</li>
-<li><p>反射</p>
-</li>
-</ol>
-</li>
-<li><p>步骤：</p>
-<ol>
-<li>将需要创建的对象的全类名和需要执行的方法定义在配置文件中  </li>
-<li>在程序中加载读取配置文件</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-<p>​                  3. 使用反射技术来加载类文件进内存</p>
-<ol start="4">
-<li><p>创建对象</p>
-<ol start="5">
-<li><p>执行方法</p>
-<p>实现的方法：（ReflectTest.java）</p>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1.加载配置文件</span></span><br><span class="line">        <span class="comment">//1.1创建Properties对象</span></span><br><span class="line">        Properties pro = <span class="keyword">new</span> Properties();</span><br><span class="line">        <span class="comment">//1.2加载配置文件，转换为一个集合</span></span><br><span class="line">        <span class="comment">//1.2.1获取class目录下的配置文件</span></span><br><span class="line">        ClassLoader classLoader = ReflectTest<span class="class">.<span class="keyword">class</span>.<span class="title">getClassLoader</span>()</span>;</span><br><span class="line">        InputStream is = classLoader.getResourceAsStream(<span class="string">"pro.properties"</span>);</span><br><span class="line">        pro.load(is);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.获取配置文件中定义的数据</span></span><br><span class="line">        String className = pro.getProperty(<span class="string">"className"</span>);</span><br><span class="line">        String methodName = pro.getProperty(<span class="string">"methodName"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.加载该类进内存</span></span><br><span class="line">        Class cls = Class.forName(className);</span><br><span class="line">        <span class="comment">//4.创建对象</span></span><br><span class="line">        Object obj = cls.newInstance();</span><br><span class="line">        <span class="comment">//5.获取方法的对象</span></span><br><span class="line">        Method method = cls.getMethod(methodName);</span><br><span class="line">        <span class="comment">//6.执行方法</span></span><br><span class="line">        method.invoke(obj);</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li>配置文件：（pro.properties）</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">className=tree.Student</span><br><span class="line">methodName=sleep</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-]]></content>
   </entry>
   <entry>
     <title>mybatis</title>
@@ -851,35 +505,305 @@ NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到
 ]]></content>
   </entry>
   <entry>
-    <title>npm工具的使用（适合新手）</title>
-    <url>/2020/05/22/npm%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E9%80%82%E5%90%88%E6%96%B0%E6%89%8B%EF%BC%89/</url>
-    <content><![CDATA[<blockquote>
-<h2 id="npm是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种："><a href="#npm是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：" class="headerlink" title="npm是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种："></a>npm是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：</h2><ul>
-<li>允许用户从NPM服务器下载别人编写的第三方包到本地使用。</li>
-<li>允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。</li>
-<li>允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。</li>
-<li>由于新版的nodejs已经集成了npm，所以之前npm也一并安装好了。</li>
-</ul>
-</blockquote>
+    <title>单例模式</title>
+    <url>/2020/06/21/Head%20First%20Design%20Patterns%E2%80%94%E2%80%94%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<p>基本介绍：<br>单例模式：也叫单件模式，可以用来创建独一无二的，只能有一个实例的对象，并且该类只提供一个取得其对象实例的方法(static)！它是所有设计模式中最简单的，它的类图只有一个类：</p>
 <a id="more"></a>
 
-<p>​        以上来自菜鸟教程中的解释</p>
-<h2 id="那么在git中如何安装npm呢-别着急，接下来就讲"><a href="#那么在git中如何安装npm呢-别着急，接下来就讲" class="headerlink" title="那么在git中如何安装npm呢!别着急，接下来就讲"></a>那么在git中如何安装npm呢!别着急，接下来就讲</h2><h2 id="首先安装Node-js，如果没有安装-的话可以上node-js官网下载安装："><a href="#首先安装Node-js，如果没有安装-的话可以上node-js官网下载安装：" class="headerlink" title="首先安装Node.js，如果没有安装 的话可以上node.js官网下载安装："></a>首先安装Node.js，如果没有安装 的话可以上node.js官网下载安装：</h2><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a><br><img src="https://img-blog.csdnimg.cn/20200522112654968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="然后安装-就OK了！下载好node-js之后，它会自带包管理器npm"><a href="#然后安装-就OK了！下载好node-js之后，它会自带包管理器npm" class="headerlink" title="然后安装 就OK了！下载好node.js之后，它会自带包管理器npm"></a>然后安装 就OK了！下载好node.js之后，它会自带包管理器npm</h2><h2 id="接下来我们右键单击进行git命令中去"><a href="#接下来我们右键单击进行git命令中去" class="headerlink" title="接下来我们右键单击进行git命令中去"></a>接下来我们右键单击进行git命令中去</h2><p><img src="https://img-blog.csdnimg.cn/20200522113007596.png" alt=""></p>
-<h2 id="输入-npm-v：察看npm-包管理器的版本"><a href="#输入-npm-v：察看npm-包管理器的版本" class="headerlink" title="输入$npm -v：察看npm(包管理器的版本)"></a>输入$npm -v：察看npm(包管理器的版本)</h2><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">$npm -v</span><br><span class="line"><span class="number">6.14</span><span class="number">.5</span></span><br></pre></td></tr></table></figure>
-<h2 id="如果版本老了，windows用户可以用"><a href="#如果版本老了，windows用户可以用" class="headerlink" title="如果版本老了，windows用户可以用"></a>如果版本老了，windows用户可以用</h2><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">$<span class="built_in">npm</span> install <span class="built_in">npm</span> -g</span><br></pre></td></tr></table></figure>
-<h2 id="Mac命令："><a href="#Mac命令：" class="headerlink" title="Mac命令："></a>Mac命令：</h2><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">$sudo <span class="built_in">npm</span> install <span class="built_in">npm</span> -g</span><br></pre></td></tr></table></figure>
-<h2 id="切换为淘宝镜像："><a href="#切换为淘宝镜像：" class="headerlink" title="切换为淘宝镜像："></a>切换为淘宝镜像：</h2><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="variable">$npm</span> install -g cnpm <span class="attribute">--registry</span>=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<p><strong>注意打断点是ctrl+c</strong></p>
-<h2 id="我们以两个前端框架为例子，使用npm安装-一波："><a href="#我们以两个前端框架为例子，使用npm安装-一波：" class="headerlink" title="我们以两个前端框架为例子，使用npm安装 一波："></a>我们以两个前端框架为例子，使用npm安装 一波：</h2><h3 id="Bootstrap："><a href="#Bootstrap：" class="headerlink" title="Bootstrap："></a>Bootstrap：</h3><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">$ npm install <span class="symbol">bootstrap@</span><span class="number">3</span></span><br></pre></td></tr></table></figure>
-<h3 id="Layui"><a href="#Layui" class="headerlink" title="Layui:"></a>Layui:</h3><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">npm</span> i layui-src</span><br></pre></td></tr></table></figure>
-<h2 id="这样的安装也是特别的方便，而且如果使用普通-的方式进行安装-时，由于是国外的镜像，下载速度也是相当-的感人！所以也是强烈推荐大家使用！"><a href="#这样的安装也是特别的方便，而且如果使用普通-的方式进行安装-时，由于是国外的镜像，下载速度也是相当-的感人！所以也是强烈推荐大家使用！" class="headerlink" title="这样的安装也是特别的方便，而且如果使用普通 的方式进行安装 时，由于是国外的镜像，下载速度也是相当 的感人！所以也是强烈推荐大家使用！"></a>这样的安装也是特别的方便，而且如果使用普通 的方式进行安装 时，由于是国外的镜像，下载速度也是相当 的感人！所以也是强烈推荐大家使用！</h2>]]></content>
+
+
+<h2 id="1）饿汉式（静态常量）"><a href="#1）饿汉式（静态常量）" class="headerlink" title="1）饿汉式（静态常量）"></a>1）饿汉式（静态常量）</h2><blockquote>
+<p>创建的步骤：<br>1.构造器私有化（防止 new来获得实例）<br>2.类的内部创建对象<br>3.向外界暴露一个静态的公共方法。getInstance<br>4.代码实现</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//饿汉式（静态变量)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//1.构造器私有化</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.本类内部创建对象实例</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.提供一个公有的静态方法，返回实例对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Singleton instance = Singleton.getInstance();</span><br><span class="line">        Singleton instance1 = Singleton.getInstance();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"instance:"</span>+instance.hashCode()+<span class="string">"\n"</span>+<span class="string">"instance1:"</span>+instance1.hashCode());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>测试结果<br><img src="https://img-blog.csdnimg.cn/20200409113529196.png" alt="在这里插入图片描述"><br>两个对象实例的hashCode值相等，说明 new的两个对象是同一个，这样就避免了new实例多个对象！</p>
+</li>
+<li><p>优缺点：</p>
+<blockquote>
+<p>优点：这种写法比较简单，就是在类装载的时候就完成 了实例化，避免了线程同步问题。<br>缺点：<br>1.在类装载时就完成 了实例化，油源有达到Lazy Loading的效果，如果从始至终从未使用过这个实例，则会造成内存的浪费。<br>2.这种方式基于classLoader机制避免了多线程的同步问题，不过，Instance在类装载时就实例化，在单例模式中大多数都是调用getInstance方法，但是导致类装载的原因有很多种，因此不能确定有其他的方式导致类装载，这时候初始化instance就没有达到Lazy Loading的效果。</p>
+</blockquote>
+</li>
+<li><p>结论：</p>
+<blockquote>
+<p>这种单例模式可用，可能会<strong>造成内存浪费</strong>！</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h2 id="2）饿汉式（静态代码块）"><a href="#2）饿汉式（静态代码块）" class="headerlink" title="2）饿汉式（静态代码块）"></a>2）饿汉式（静态代码块）</h2><blockquote>
+<p>这和方式和静态常量方法类似 ，只是在内部将创建实例对象的操作放到了静态代码块中进行了</p>
+</blockquote>
+<ul>
+<li>代码实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//饿汉式（静态代码块）</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//1.构造器私有化</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.本类内部创建对象实例</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;<span class="comment">//在静态代码块中创建单例对象</span></span><br><span class="line">        instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.提供一个公有的静态方法，返回实例对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Singleton instance = Singleton.getInstance();</span><br><span class="line">        Singleton instance1 = Singleton.getInstance();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"instance:"</span>+instance.hashCode()+<span class="string">"\n"</span>+<span class="string">"instance1:"</span>+instance1.hashCode());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>运行结果<br><img src="https://img-blog.csdnimg.cn/20200409113529196.png" alt="在这里插入图片描述"></li>
+<li>结论：<blockquote>
+<p>这种单例模式也是可用的，但是可能会造成内存浪费</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h2 id="3）懒汉式（线程不安全）"><a href="#3）懒汉式（线程不安全）" class="headerlink" title="3）懒汉式（线程不安全）"></a>3）懒汉式（线程不安全）</h2><ul>
+<li><p>代码实现</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest03</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Singleton instance = Singleton.getInstance();</span><br><span class="line">        Singleton instance1 = Singleton.getInstance();</span><br><span class="line">        System.out.println(instance == instance1);</span><br><span class="line">        System.out.println(<span class="string">"instance:"</span>+instance.hashCode()+<span class="string">"\n"</span>+<span class="string">"instance1:"</span>+instance1.hashCode());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//提供一个静态的公有方法，使用到该方法时，才去创建instance</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>运行结果<br><img src="https://img-blog.csdnimg.cn/20200409144346277.png" alt="在这里插入图片描述"></p>
+</li>
+<li><p>总结：</p>
+<blockquote>
+<p>提供一个静态的公有方法，使用到该方法时，才去创建instance<br>1.起到了Lazy Loading的效果，但是只能在单线程下使用<br>2.如果在多线程下，一个线程进入了if(singleton == null)判断语句时，还未来得及往下执行，另一个线程也通过了这个判断语句，这时便会产生多个实例。所以在多线程环境下不可使用这种方式</p>
+</blockquote>
+</li>
+<li><p>结论：</p>
+</li>
+</ul>
+<p><strong>在实际开发中，不要使用这种方式。</strong></p>
+<hr>
+<h2 id="4）懒汉式（线程安全，同步方法）"><a href="#4）懒汉式（线程安全，同步方法）" class="headerlink" title="4）懒汉式（线程安全，同步方法）"></a>4）懒汉式（线程安全，同步方法）</h2><ul>
+<li>代码实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest04</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"懒汉式（线程安全，同步方法）"</span>);</span><br><span class="line">        Singleton instance = Singleton.getInstance();</span><br><span class="line">        Singleton instance1 = Singleton.getInstance();</span><br><span class="line">        System.out.println(instance == instance1);</span><br><span class="line">        System.out.println(<span class="string">"instance:"</span>+instance.hashCode()+<span class="string">"\n"</span>+<span class="string">"instance1:"</span>+instance1.hashCode());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//懒汉式（线程安全，同步方法）</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//提供一个静态的公有方法,加入同步处理的代码，解决线程安全问题</span></span><br><span class="line">    <span class="comment">//synchronized</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>运行结果<br><img src="https://img-blog.csdnimg.cn/20200409145819688.png" alt="在这里插入图片描述"></li>
+<li>总结：</li>
+</ul>
+<ol>
+<li>解决了线程不安全问题</li>
+<li>效率太低了，每个线程都在想获得类的实例时候，执行getInstance()方法都要进行执行同步。而其实这个方法只执行一次实例化代码就够了，后面的想获得该实例，直接return 就行了，方法进行同步的效率太低了。</li>
+</ol>
+<ul>
+<li>总结<br><strong>在实际开发中，不推荐使用这种方式</strong></li>
+</ul>
+<hr>
+<h2 id="5）懒汉式（线程安全，同步代码块）"><a href="#5）懒汉式（线程安全，同步代码块）" class="headerlink" title="5）懒汉式（线程安全，同步代码块）"></a>5）懒汉式（线程安全，同步代码块）</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest05</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"懒汉式 同步代码块"</span>);</span><br><span class="line">        Singleton instance = Singleton.getInstance();</span><br><span class="line">        Singleton instance1 = Singleton.getInstance();</span><br><span class="line">        System.out.println(instance == instance1);</span><br><span class="line">        System.out.println(<span class="string">"instance:"</span>+instance.hashCode()+<span class="string">"\n"</span>+<span class="string">"instance1:"</span>+instance1.hashCode());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//懒汉式（线程安全，同步方法）</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span>  Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//提供一个静态的公有方法,加入同步处理的代码，解决线程安全问题</span></span><br><span class="line">    <span class="comment">//synchronized</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">                instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>运行结果<br><img src="https://img-blog.csdnimg.cn/20200409151422498.png" alt="在这里插入图片描述"></li>
+<li>总结：</li>
+</ul>
+<ol>
+<li>这种方式，本意是想对第四种方式的改进，因为前面同步方法效率太低了，改为同步 产生实例化的代码块。</li>
+<li><strong>但是这种同步并不能起到线程同步的作用。</strong>，假如一个线程进入到if(Singleton == null)判断语句块，还未来得及往下执行，另一个线程也通过了这个判断语句，这时便会产生多个实例。</li>
+</ol>
+<ul>
+<li>结论：<br><strong>在实际开发中，不能使用这种方式。</strong></li>
+</ul>
+<hr>
+<h2 id="6）双重检查（推荐使用）"><a href="#6）双重检查（推荐使用）" class="headerlink" title="6）双重检查（推荐使用）"></a>6）双重检查（推荐使用）</h2><ul>
+<li>代码实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest06</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"双重检查"</span>);</span><br><span class="line">        Singleton instance = Singleton.getInstance();</span><br><span class="line">        Singleton instance1 = Singleton.getInstance();</span><br><span class="line">        System.out.println(instance == instance1);</span><br><span class="line">        System.out.println(<span class="string">"instance:"</span>+instance.hashCode()+<span class="string">"\n"</span>+<span class="string">"instance1:"</span>+instance1.hashCode());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//懒汉式（线程安全，同步方法）</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//提供一个静态的公有方法,加入双重检查代码，解决线程安全问题，同时解决懒加载问题</span></span><br><span class="line">    <span class="comment">//同时保证了效率</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">                    instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>运行结果<br><img src="https://img-blog.csdnimg.cn/20200409153524346.png" alt="在这里插入图片描述"></li>
+<li>总结 </li>
+</ul>
+<ol>
+<li>Double-Check概念是多线程开发中学使用到的，我们进行了两次if (instance == null)检查，这样就可以保证线程安全了</li>
+<li>这样，实例化代码只执行一次，后面再次访问时，判断if (instance == null)，直接 return实例化对象，也就避免了反复执行方法同步 。</li>
+<li>线程安全，延迟加载，效率较高</li>
+</ol>
+<ul>
+<li>结论：<br><strong>在开发中，推荐使用这种单例设计模式!</strong></li>
+</ul>
+<hr>
+<h2 id="7）静态内部类（推荐使用）"><a href="#7）静态内部类（推荐使用）" class="headerlink" title="7）静态内部类（推荐使用）"></a>7）静态内部类（推荐使用）</h2><blockquote>
+<p>基本介绍：</p>
+</blockquote>
+<ol>
+<li>静态内部类不会在类装载时，直接执行，保证了懒加载</li>
+<li>在调用类中的方法时，再装载静态内部类，是可行的，JVM中进行类装载时是线程安全的</li>
+</ol>
+<ul>
+<li>代码实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest7</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"静态内部类：单例模式"</span>);</span><br><span class="line">        Singleton instance = Singleton.getInstance();</span><br><span class="line">        Singleton instance1 = Singleton.getInstance();</span><br><span class="line">        System.out.println(instance == instance1);</span><br><span class="line">        System.out.println(<span class="string">"instance:"</span>+instance.hashCode()+<span class="string">"\n"</span>+<span class="string">"instance1:"</span>+instance1.hashCode());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//静态内部类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//静态内部类</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonInstance</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//提供一个静态的公有方法,直接返回SingletonInstance.INSTANCE</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> SingletonInstance.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>运行结果<br><img src="https://img-blog.csdnimg.cn/2020040915524847.png" alt="在这里插入图片描述"></li>
+<li>总结 <blockquote>
+<p>1.这种方式采用了类装载的机制来保证初始化实例时只有一个线程。<br>2.静态内部类方式在Singleton类被装载时并不会立即实例化，而是在需要实例化时，调用getInstance方法，才会被装载SingletonInstance类，从而完成Singleton的实例化。<br>3.类的静态属性只会在第一次加载类的时候初始化，所以在这里，JVM帮助我们保证了线程的安全性，在类进行初始化时，别的线程是无法进入的。<br>4.优点：避免了线程不安全，利用静态内部类特点实现延迟加载，效率高。</p>
+</blockquote>
+</li>
+<li>结论<br><strong>推荐使用！</strong></li>
+</ul>
+<hr>
+<h2 id="8）枚举方式"><a href="#8）枚举方式" class="headerlink" title="8）枚举方式"></a>8）枚举方式</h2><ul>
+<li>代码实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest08</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Singleton instance = Singleton.INSTANCE;</span><br><span class="line">        Singleton instance1 = Singleton.INSTANCE;</span><br><span class="line">        System.out.println(instance == instance1);</span><br><span class="line">        System.out.println(instance.hashCode());</span><br><span class="line">        System.out.println(instance1.hashCode());</span><br><span class="line"></span><br><span class="line">        instance.sayHello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用枚举可以实现单例，推荐作用</span></span><br><span class="line"><span class="keyword">enum</span> Singleton&#123;</span><br><span class="line">    INSTANCE;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello enum"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>运行结果<br><img src="https://img-blog.csdnimg.cn/2020040916162786.png" alt="在这里插入图片描述"></li>
+<li>总结：<blockquote>
+<p>1.借助JDK1.5中添加的枚举来实现单例模式，不仅可以避免多线程同步 问题，而且还能防止反序列化重新创建新的对象</p>
+</blockquote>
+</li>
+<li>结论：<br><strong>强力推荐使用！！！</strong></li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20200409162749367.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>整理不易，如果大家觉得好的话，可以加关注，后续会整理更多的知识点！</strong></p>
+]]></content>
       <categories>
-        <category>git#分类</category>
+        <category>设计模式</category>
       </categories>
       <tags>
-        <tag>-Git</tag>
+        <tag>java设计模式</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>java中的反射机制</title>
+    <url>/2020/04/17/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<h1 id="java中的反射机制"><a href="#java中的反射机制" class="headerlink" title="java中的反射机制"></a>java中的反射机制</h1><a id="more"></a>
+<h2 id="1-类加载器：ClassLoader"><a href="#1-类加载器：ClassLoader" class="headerlink" title="1.类加载器：ClassLoader"></a>1.类加载器：ClassLoader</h2><p><img src="C:%5CUsers%5C%E5%8D%95%E5%B0%91%E5%AE%9D%E5%AE%9D%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1580977084726.png" alt="1580977084726"></p>
+<p>​           Class.forName(“全类名”)                              类名.Class                                                         对象.getClass()</p>
+<ul>
+<li><p>反射：将类的各个组成部分封装为其他对象，这就是反射机制。    </p>
+</li>
+<li><p>好处：</p>
+<ol>
+<li><p>可以在程序运行过程中，操作这些对象</p>
+</li>
+<li><p>可以解耦，提高程序的可扩展性。</p>
+</li>
+</ol>
+</li>
+<li><p>获取Class对象的方式：</p>
+<ol>
+<li>Class.forName(“全类名”)：将字节码文件加载进内存，返回内存对象</li>
+</ol>
+<ul>
+<li>多用于配置文件，将类名定义在配置文件中。读取文件，加载类</li>
+</ul>
+<ol start="2">
+<li>类名.class：通过类名的属性</li>
+</ol>
+<ul>
+<li>多用于参数的传递</li>
+</ul>
+<ol start="3">
+<li><p>对象.getClass()：getClass()方法在Object类中定义着。</p>
+<ul>
+<li>多用于对象的获取字节码的方式</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="2-结论："><a href="#2-结论：" class="headerlink" title="2.结论："></a>2.结论：</h2><p>同一个字节码文件(*.class)在一次程序运行过程中，只会被加载一次，不论通过哪一种方式获取的</p>
+<p>Class对象都是同一个。</p>
+<h2 id="3-Class对象的功能："><a href="#3-Class对象的功能：" class="headerlink" title="3.Class对象的功能："></a>3.Class对象的功能：</h2><ul>
+<li><p>获取功能：</p>
+<ol>
+<li><p>获取成员变量们</p>
+<ul>
+<li><p>Field[]     getFields()：获取所有 public修饰的成员变量</p>
+</li>
+<li><p>Field        getField(String name) ：获取指定public修饰的成员变量</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<pre><code> * Field        getDeclaredFields() ：获取所有成员变量，不考虑修饰符
+
+ * Field        getDeclaredField(String name)
+
+2. 获取构造方法们
+
+ * Constructor&lt;?&gt;[]            getConstructors()   获取数组 
+
+ * Constructor&lt;T&gt;             getConstructor(类&lt;?&gt;... parameterTypes)   获取单个指定的
+
+
+ * Constructor&lt;T&gt;             getDeclaredConstructor(类&lt;?&gt;... parameterTypes)  
+
+ * Constructor&lt;?&gt;[]            getDeclaredConstructors()  
+
+3. 获取成员方法们
+
+ * Method[ ]  getMethods()
+
+ * Method getMethod(String name,类&lt;?&gt; ... parameterTypes)
+
+
+ * Method[ ]  getDeclaredMethods()
+
+ * Method  getDeclaredMethod(String name,类&lt;?&gt; ... parameterTypes)
+
+4. 获取类名
+
+ * String   getName()</code></pre><ul>
+<li><p>Field:成员变量</p>
+<ul>
+<li>操作：<ol>
+<li>设置值 <ul>
+<li>void set(Object obj,Object value)</li>
+</ul>
+</li>
+<li>获取值 <ul>
+<li>get(Object obj)</li>
+</ul>
+</li>
+<li>忽略访问权限修饰符的安全检查<ul>
+<li>setAccessible(true);//暴力反射</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>Constructor：构造方法</p>
+<ul>
+<li>创建对象：<ul>
+<li>T newInstance(Object… initargs)</li>
+<li>如何使用空参构造方法创建对象，操作可以简化 ：Class对象的newInstance方法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Method：方法对象</p>
+<ul>
+<li>执行方法：<ul>
+<li>Object    invoke(Object   obj,object…  args)</li>
+</ul>
+</li>
+<li>获取方法名称：<ul>
+<li>String  getName   获取方法名</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-案例："><a href="#4-案例：" class="headerlink" title="4.案例："></a>4.案例：</h2><ul>
+<li><p>需求：写一个”框架“，不能改变该类的任何代码的前提下，可以帮助我们创建任意类的对象，并且执行其中任意方法</p>
+<ul>
+<li><p>实现：</p>
+<ol>
+<li><p>配置文件</p>
+</li>
+<li><p>反射</p>
+</li>
+</ol>
+</li>
+<li><p>步骤：</p>
+<ol>
+<li>将需要创建的对象的全类名和需要执行的方法定义在配置文件中  </li>
+<li>在程序中加载读取配置文件</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p>​                  3. 使用反射技术来加载类文件进内存</p>
+<ol start="4">
+<li><p>创建对象</p>
+<ol start="5">
+<li><p>执行方法</p>
+<p>实现的方法：（ReflectTest.java）</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1.加载配置文件</span></span><br><span class="line">        <span class="comment">//1.1创建Properties对象</span></span><br><span class="line">        Properties pro = <span class="keyword">new</span> Properties();</span><br><span class="line">        <span class="comment">//1.2加载配置文件，转换为一个集合</span></span><br><span class="line">        <span class="comment">//1.2.1获取class目录下的配置文件</span></span><br><span class="line">        ClassLoader classLoader = ReflectTest<span class="class">.<span class="keyword">class</span>.<span class="title">getClassLoader</span>()</span>;</span><br><span class="line">        InputStream is = classLoader.getResourceAsStream(<span class="string">"pro.properties"</span>);</span><br><span class="line">        pro.load(is);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.获取配置文件中定义的数据</span></span><br><span class="line">        String className = pro.getProperty(<span class="string">"className"</span>);</span><br><span class="line">        String methodName = pro.getProperty(<span class="string">"methodName"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.加载该类进内存</span></span><br><span class="line">        Class cls = Class.forName(className);</span><br><span class="line">        <span class="comment">//4.创建对象</span></span><br><span class="line">        Object obj = cls.newInstance();</span><br><span class="line">        <span class="comment">//5.获取方法的对象</span></span><br><span class="line">        Method method = cls.getMethod(methodName);</span><br><span class="line">        <span class="comment">//6.执行方法</span></span><br><span class="line">        method.invoke(obj);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>配置文件：（pro.properties）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">className=tree.Student</span><br><span class="line">methodName=sleep</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+]]></content>
   </entry>
   <entry>
     <title>一文解决github下载几kb速度太慢的问题</title>
@@ -961,54 +885,48 @@ NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到
       </tags>
   </entry>
   <entry>
-    <title>代理模式：</title>
-    <url>/2020/04/17/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%EF%BC%9A/</url>
-    <content><![CDATA[<h1 id="代理模式："><a href="#代理模式：" class="headerlink" title="代理模式："></a>代理模式：</h1><a id="more"></a>
-
-
-
-<h3 id="1-静态代理"><a href="#1-静态代理" class="headerlink" title="1.静态代理"></a><strong>1.静态代理</strong></h3><h3 id="2-动态代理"><a href="#2-动态代理" class="headerlink" title="2.动态代理"></a><strong>2.动态代理</strong></h3><ul>
-<li><p>动态代理和静态代理角色一样</p>
-</li>
-<li><p>动态代理的代理类是动态生成的，不是我们直接写好的</p>
-</li>
-<li><p>动态代理分为两大类：基于接口的动态代理，基于类的动态代理</p>
-<ul>
-<li><p>基于接口—-JDK动态代理</p>
-</li>
-<li><p>基于类：cglib</p>
-</li>
-<li><p>java字节码实现：javasist</p>
-<p>需要了解两个类：Proxy，InvocationHandler：调用处理程序</p>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>InvocationHandler</strong></p>
-<h3 id="3-实现过程"><a href="#3-实现过程" class="headerlink" title="3.实现过程"></a>3.实现过程</h3><h4 id="3-1-接口Rent"><a href="#3-1-接口Rent" class="headerlink" title="3.1.接口Rent:"></a>3.1.接口Rent:</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Rent</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rent</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-2-Rent的实现类："><a href="#3-2-Rent的实现类：" class="headerlink" title="3.2.Rent的实现类："></a>3.2.Rent的实现类：</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Host</span> <span class="keyword">implements</span> <span class="title">Rent</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"房东要出租房子"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-3-动态生成代理类："><a href="#3-3-动态生成代理类：" class="headerlink" title="3.3.动态生成代理类："></a>3.3.动态生成代理类：</h4>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyInvocationHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//被代理的接口</span></span><br><span class="line">    <span class="keyword">private</span> Rent rent;</span><br><span class="line">    <span class="comment">//setter注入</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRent</span><span class="params">(Rent rent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.rent = rent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//生成代理对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getProxy</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(<span class="keyword">this</span>.getClass().getClassLoader(),</span><br><span class="line">                rent.getClass().getInterfaces(),<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//处理代理实例，并返回结果</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        seeHouse();</span><br><span class="line">        <span class="comment">//动态代理的本质就是使用反射来实现</span></span><br><span class="line">        Object result = method.invoke(rent, args);<span class="comment">//运行rent方法，参数列表为args</span></span><br><span class="line">        fare();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seeHouse</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"中介带看房子"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fare</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"收中介费"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-4-main方法："><a href="#3-4-main方法：" class="headerlink" title="3.4.main方法："></a>3.4.main方法：</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//真实角色</span></span><br><span class="line">        Host host = <span class="keyword">new</span> Host();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//代理角色：现在没有</span></span><br><span class="line">        ProxyInvocationHandler pih = <span class="keyword">new</span> ProxyInvocationHandler();</span><br><span class="line">        <span class="comment">//通过调用程序来处理角色来处理我们要调用的接口对象！</span></span><br><span class="line">        pih.setRent(host);</span><br><span class="line">        Rent proxy = (Rent)pih.getProxy();<span class="comment">//这里的proxy就是动态生成的，我们并没写</span></span><br><span class="line">        proxy.rent();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-  </entry>
-  <entry>
-    <title>使用IDEA开发Web项目并实现热部署</title>
-    <url>/2020/06/02/%E4%BD%BF%E7%94%A8IDEA%E5%BC%80%E5%8F%91Web%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%AE%9E%E7%8E%B0%E7%83%AD%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200622095802735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+    <title>ajax的方式对随机生成的4位验证码进行验证(小可爱都能学会的那种)</title>
+    <url>/2020/06/07/ajax%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AF%B9%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E7%9A%844%E4%BD%8D%E9%AA%8C%E8%AF%81%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AA%8C%E8%AF%81(%E5%B0%8F%E5%8F%AF%E7%88%B1%E9%83%BD%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84%E9%82%A3%E7%A7%8D)/</url>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200606235737643.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <a id="more"></a>
-
-<p>1.新建一个java文件，选择Web Application<br><img src="https://img-blog.csdnimg.cn/20200415091340767.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这就是新建好的项目结构<br><img src="https://img-blog.csdnimg.cn/20200415092029307.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>2.Run—&gt;Edit Configurations<br><img src="https://img-blog.csdnimg.cn/20200415092308181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415092429774.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415092804157.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415092958336.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415093237707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415093315193.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>先测试一下：<br><img src="https://img-blog.csdnimg.cn/20200415093606983.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415093717273.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>就出来了结果！<br><img src="https://img-blog.csdnimg.cn/2020041509375420.png" alt="在这里插入图片描述"><br>然后我们设置为热部署，就是在修改jsp文件，不用重启tomcat服务器</p>
-<p><img src="https://img-blog.csdnimg.cn/20200415094237771.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415094338438.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>修改一下，再测<br><img src="https://img-blog.csdnimg.cn/20200415094401851.png" alt="在这里插入图片描述"><br>将鼠标移动到浏览器刷新<br><img src="https://img-blog.csdnimg.cn/20200415094504434.png" alt="在这里插入图片描述"><br>这样我们就实现了tomcat的热部署</p>
+<blockquote>
+<h3 id="最近我的小可爱说，她不会用jax的方式对随机生成的4位验证码进行验证，我当时就急了，这不得展示一下我的“技术”，美美的撩五我的小可爱！"><a href="#最近我的小可爱说，她不会用jax的方式对随机生成的4位验证码进行验证，我当时就急了，这不得展示一下我的“技术”，美美的撩五我的小可爱！" class="headerlink" title="最近我的小可爱说，她不会用jax的方式对随机生成的4位验证码进行验证，我当时就急了，这不得展示一下我的“技术”，美美的撩五我的小可爱！"></a>最近我的小可爱说，她不会用jax的方式对随机生成的4位验证码进行验证，我当时就急了，这不得展示一下我的“技术”，美美的撩五我的小可爱！</h3></blockquote>
+<blockquote>
+<p>正文区</p>
+</blockquote>
+<h4 id="相信大家在实现登录的时候，都使用过验证码，传统的方式是servlet的方式，在servlet中定义一个处理器，然后再进行验证，整个form中的数据只能一次性的整个提交，提交之后交给servlet来处理，判断哪一个条件不符合然后，给用户提示："><a href="#相信大家在实现登录的时候，都使用过验证码，传统的方式是servlet的方式，在servlet中定义一个处理器，然后再进行验证，整个form中的数据只能一次性的整个提交，提交之后交给servlet来处理，判断哪一个条件不符合然后，给用户提示：" class="headerlink" title="相信大家在实现登录的时候，都使用过验证码，传统的方式是servlet的方式，在servlet中定义一个处理器，然后再进行验证，整个form中的数据只能一次性的整个提交，提交之后交给servlet来处理，判断哪一个条件不符合然后，给用户提示："></a>相信大家在实现登录的时候，都使用过验证码，传统的方式是servlet的方式，在servlet中定义一个处理器，然后再进行验证，整个form中的数据只能一次性的整个提交，提交之后交给servlet来处理，判断哪一个条件不符合然后，给用户提示：</h4><p><img src="https://img-blog.csdnimg.cn/20200606232442688.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h4 id="但是大家有没有发现，这样的效率太低了，如果我直接输入用户名，通过发ajax请求，在控制器中直接-进行判断-，然后将结果通过局部刷新的方式响应给用户，这样就会大大提交效率，下面我们用发ajax的方式对验证码进行局部刷新！"><a href="#但是大家有没有发现，这样的效率太低了，如果我直接输入用户名，通过发ajax请求，在控制器中直接-进行判断-，然后将结果通过局部刷新的方式响应给用户，这样就会大大提交效率，下面我们用发ajax的方式对验证码进行局部刷新！" class="headerlink" title="但是大家有没有发现，这样的效率太低了，如果我直接输入用户名，通过发ajax请求，在控制器中直接 进行判断 ，然后将结果通过局部刷新的方式响应给用户，这样就会大大提交效率，下面我们用发ajax的方式对验证码进行局部刷新！"></a>但是大家有没有发现，这样的效率太低了，如果我直接输入用户名，通过发ajax请求，在控制器中直接 进行判断 ，然后将结果通过局部刷新的方式响应给用户，这样就会大大提交效率，下面我们用发ajax的方式对验证码进行局部刷新！</h4><blockquote>
+<p>代码区</p>
+</blockquote>
+<h4 id="首先你得有一个验证码，当然，这个验证码是一个图片："><a href="#首先你得有一个验证码，当然，这个验证码是一个图片：" class="headerlink" title="首先你得有一个验证码，当然，这个验证码是一个图片："></a>首先你得有一个验证码，当然，这个验证码是一个图片：</h4><ul>
+<li>imgs.jsp</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;%<span class="meta">@page</span> <span class="keyword">import</span>=<span class="string">"javax.imageio.ImageIO"</span>%&gt;</span><br><span class="line">&lt;%<span class="meta">@page</span> <span class="keyword">import</span>=<span class="string">"java.awt.image.BufferedImage"</span>%&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">"java.awt.*"</span> %&gt;</span><br><span class="line">&lt;%@ page language=<span class="string">"java"</span> <span class="keyword">import</span>=<span class="string">"java.util.*"</span> pageEncoding=<span class="string">"UTF-8"</span>%&gt;</span><br><span class="line">&lt;%@ page contentType=<span class="string">"image/jpeg; charset=UTF-8"</span> language=<span class="string">"java"</span>%&gt;</span><br><span class="line"></span><br><span class="line">&lt;%!</span><br><span class="line">	<span class="comment">//随机产生颜色</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Color <span class="title">getColor</span><span class="params">()</span></span>&#123;</span><br><span class="line">		Random ran = <span class="keyword">new</span> Random();</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> r = ran.nextInt(<span class="number">256</span>);</span><br><span class="line">		<span class="keyword">int</span> g = ran.nextInt(<span class="number">256</span>);</span><br><span class="line">		<span class="keyword">int</span> b = ran.nextInt(<span class="number">256</span>);</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Color(r,g,b);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//产生验证码值</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getNum</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//1000-9999</span></span><br><span class="line">		<span class="keyword">int</span> ran = (<span class="keyword">int</span>)(Math.random()*<span class="number">9000</span>)+<span class="number">1000</span>;</span><br><span class="line">		<span class="keyword">return</span> String.valueOf(ran);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">%&gt;</span><br><span class="line">&lt;%</span><br><span class="line"></span><br><span class="line">	<span class="comment">//禁止缓存，防止验证码过期</span></span><br><span class="line">	response.setHeader(<span class="string">"Prama"</span>, <span class="string">"no-cache"</span>);</span><br><span class="line">	response.setHeader(<span class="string">"Cache-control"</span>, <span class="string">"no-cache"</span>);</span><br><span class="line">	response.setHeader(<span class="string">"Expires"</span>, <span class="string">"0"</span>);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//绘制验证码</span></span><br><span class="line">	BufferedImage image = <span class="keyword">new</span> BufferedImage(<span class="number">80</span>,<span class="number">30</span>,BufferedImage.TYPE_INT_BGR);</span><br><span class="line">	<span class="comment">//画笔</span></span><br><span class="line">	Graphics graphics = image.getGraphics();</span><br><span class="line">	graphics.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">80</span>, <span class="number">30</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//绘制干扰线条</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">60</span>;i++)&#123;</span><br><span class="line">		Random ran = <span class="keyword">new</span> Random();</span><br><span class="line">		<span class="keyword">int</span> xBegin = ran.nextInt(<span class="number">80</span>);</span><br><span class="line">		<span class="keyword">int</span> yBegin = ran.nextInt(<span class="number">30</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> xEnd = ran.nextInt(xBegin + <span class="number">10</span>);</span><br><span class="line">		<span class="keyword">int</span> yEnd = ran.nextInt(yBegin + <span class="number">10</span>);</span><br><span class="line">		</span><br><span class="line">		graphics.setColor(getColor());</span><br><span class="line">		<span class="comment">//绘制线条</span></span><br><span class="line">		graphics.drawLine(xBegin, yBegin, xEnd, yEnd);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">		graphics.setFont(<span class="keyword">new</span> Font(<span class="string">"seif"</span>,Font.BOLD,<span class="number">20</span>));</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//绘制验证码</span></span><br><span class="line">		graphics.setColor(Color.BLACK);</span><br><span class="line">		</span><br><span class="line">		String checkCode = getNum();</span><br><span class="line">		StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; checkCode.length();i++)&#123;</span><br><span class="line">			sb.append(checkCode.charAt(i)+<span class="string">" "</span>);<span class="comment">//验证码的每一位数字</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//</span></span><br><span class="line">		graphics.drawString(sb.toString(), <span class="number">15</span>, <span class="number">20</span>);<span class="comment">//绘制验证码</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//将验证码真实值 保存在session中，供使用时比较真实性</span></span><br><span class="line">		session.setAttribute(<span class="string">"CKECKCODE"</span>,checkCode);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//真实的产生图片</span></span><br><span class="line">		ImageIO.write(image, <span class="string">"jpeg"</span>, response.getOutputStream());</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//关闭操作</span></span><br><span class="line">		out.clear();</span><br><span class="line">		out = pageContext.pushBody();</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="这里用的是bootstrap，不会用的大家可以去恶补一下，当然-大家也可以自由发挥，主要是要搞懂原理："><a href="#这里用的是bootstrap，不会用的大家可以去恶补一下，当然-大家也可以自由发挥，主要是要搞懂原理：" class="headerlink" title="这里用的是bootstrap，不会用的大家可以去恶补一下，当然 大家也可以自由发挥，主要是要搞懂原理："></a>这里用的是bootstrap，不会用的大家可以去恶补一下，当然 大家也可以自由发挥，主要是要搞懂原理：</h4><ul>
+<li>index.jsp</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"form-group"</span>&gt;</span><br><span class="line">        &lt;label class="col-sm-2 control-label"&gt;验&amp;nbsp;&amp;nbsp;证&amp;nbsp;&amp;nbsp;码：&lt;/label&gt;</span><br><span class="line">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-sm-10"</span> style=<span class="string">"width: 90px;padding-left: 30px"</span>&gt;</span><br><span class="line">               &lt;input type=<span class="string">"text"</span> style=<span class="string">"width: 90px;display:block"</span> id=<span class="string">"checkcodeId"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"form-control"</span> name=<span class="string">"Yzm"</span> placeholder=<span class="string">"验证码"</span>&gt;</span><br><span class="line">         &lt;/div&gt;</span><br><span class="line">         &lt;!--&lt;input <span class="class"><span class="keyword">class</span></span>=<span class="string">"yzm"</span> type=<span class="string">"text"</span> id=<span class="string">"checkcode"</span> name=<span class="string">"checkcode"</span>size=<span class="string">"4"</span>&gt;--&gt;</span><br><span class="line">         &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"imghh"</span>style=<span class="string">"float: left;padding-left: 40px"</span>&gt;</span><br><span class="line">               &lt;img src=<span class="string">"imgs.jsp"</span> id=<span class="string">"get_Yzm"</span> name=<span class="string">"Img"</span> onclick=<span class="string">"reImg();"</span>/&gt;&lt;br/&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        <span class="comment">//用来显示验证后的验证码的正确性</span></span><br><span class="line">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-sm-2"</span>&gt;</span><br><span class="line">               &lt;span id="tip" style="vertical-align: middle;position: absolute ;left: 50px"&gt;&lt;/span&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;script type=<span class="string">"text/javascript"</span> &gt;</span><br><span class="line">        <span class="function">function <span class="title">reImg</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="keyword">var</span> img = document.getElementById(<span class="string">"Img"</span>);</span><br><span class="line">            <span class="keyword">var</span> i = Math.random();</span><br><span class="line">            img.src=<span class="string">"imgs.jsp?id="</span>+i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//jquery的入口函数</span></span><br><span class="line">		$(function () &#123;</span><br><span class="line">			<span class="comment">//id为checkcodeId，鼠标失去焦点时，发ajax请求</span></span><br><span class="line">            $(<span class="string">"#checkcodeId"</span>).blur(function () &#123;</span><br><span class="line">                <span class="comment">//拿到id为checkcodeId输入框中的值</span></span><br><span class="line">                <span class="keyword">var</span> $Yzm = $(<span class="string">"#checkcodeId"</span>).val();</span><br><span class="line">                $.ajax(&#123;</span><br><span class="line">                    url:<span class="string">"getYzm"</span>,<span class="comment">//请求的url</span></span><br><span class="line">                    type:<span class="string">"POST"</span>,<span class="comment">//发送请求的方式为POST</span></span><br><span class="line">                    data:<span class="string">"Yzm="</span>+$Yzm,<span class="comment">//传入的参数拿到的输入框中的值 </span></span><br><span class="line">                    success:function (result) &#123;</span><br><span class="line">                        <span class="keyword">var</span> resultHtml = $(<span class="string">"&lt;img src='"</span>+result+<span class="string">"' height='30px' width='30px'&gt;"</span>);</span><br><span class="line">                        <span class="comment">//将这个标签通过html的方式写入到id为tip的位置上</span></span><br><span class="line">                        <span class="comment">//注意通过html的方式可以保留标签</span></span><br><span class="line">                        $(<span class="string">"#tip"</span>).html(resultHtml);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">   &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>loginController.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/getYzm"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">getYzm</span><span class="params">(HttpServletRequest request , HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">//定义初值</span></span><br><span class="line">        String resultTyp = <span class="string">"img/x.png"</span>;</span><br><span class="line">		<span class="comment">//拿到用户输入的值</span></span><br><span class="line">        String YzmClient = request.getParameter(<span class="string">"Yzm"</span>);</span><br><span class="line">		<span class="comment">//获取服务器中session中的值 </span></span><br><span class="line">        String YzmService = (String)request.getSession().getAttribute((<span class="string">"CKECKCODE"</span>));</span><br><span class="line"></span><br><span class="line">        System.out.println(YzmService);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (YzmService.equals(YzmClient))&#123;</span><br><span class="line">            resultTyp=<span class="string">"img/v.png"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        response.setContentType(<span class="string">"text/html; charset=UTF-8"</span>);</span><br><span class="line">        PrintWriter writer = response.getWriter();<span class="comment">//输出流</span></span><br><span class="line"></span><br><span class="line">        writer.write(resultTyp);</span><br><span class="line">        writer.flush();</span><br><span class="line">        writer.close();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>效果区</p>
+</blockquote>
+<h4 id="好了，下面我们来看实现的效果："><a href="#好了，下面我们来看实现的效果：" class="headerlink" title="好了，下面我们来看实现的效果："></a>好了，下面我们来看实现的效果：</h4><p><img src="https://img-blog.csdnimg.cn/20200606234846786.gif#pic_center" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>前方高能：</p>
+</blockquote>
+<h2 id="这两个图标我也给大家，要不然大家找也不方便："><a href="#这两个图标我也给大家，要不然大家找也不方便：" class="headerlink" title="这两个图标我也给大家，要不然大家找也不方便："></a>这两个图标我也给大家，要不然大家找也不方便：</h2><blockquote>
+<p>链接：<a href="https://pan.baidu.com/s/1AUDymnlmwKvAB_O5pPRttA" target="_blank" rel="noopener">https://pan.baidu.com/s/1AUDymnlmwKvAB_O5pPRttA</a><br>提取码：gig7</p>
+</blockquote>
+<h3 id="这就是通过ajax的方式异步进行验证码的验证的过程，如果过程中有什么问题，希望大家不吝赐教！"><a href="#这就是通过ajax的方式异步进行验证码的验证的过程，如果过程中有什么问题，希望大家不吝赐教！" class="headerlink" title="这就是通过ajax的方式异步进行验证码的验证的过程，如果过程中有什么问题，希望大家不吝赐教！"></a>这就是通过ajax的方式异步进行验证码的验证的过程，如果过程中有什么问题，希望大家不吝赐教！</h3><h3 id="怎么样，我的小可爱都学会了，大家怎么样了，大家可以在评论区留言哦！"><a href="#怎么样，我的小可爱都学会了，大家怎么样了，大家可以在评论区留言哦！" class="headerlink" title="怎么样，我的小可爱都学会了，大家怎么样了，大家可以在评论区留言哦！"></a>怎么样，我的小可爱都学会了，大家怎么样了，大家可以在评论区留言哦！</h3><p><img src="https://img-blog.csdnimg.cn/20200606235625568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 ]]></content>
       <categories>
-        <category>IDEA</category>
+        <category>ajax</category>
       </categories>
       <tags>
-        <tag>IDEA</tag>
+        <tag>ajax</tag>
       </tags>
   </entry>
   <entry>
@@ -1200,6 +1118,22 @@ NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到
       </tags>
   </entry>
   <entry>
+    <title>使用IDEA开发Web项目并实现热部署</title>
+    <url>/2020/06/02/%E4%BD%BF%E7%94%A8IDEA%E5%BC%80%E5%8F%91Web%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%AE%9E%E7%8E%B0%E7%83%AD%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200622095802735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<a id="more"></a>
+
+<p>1.新建一个java文件，选择Web Application<br><img src="https://img-blog.csdnimg.cn/20200415091340767.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这就是新建好的项目结构<br><img src="https://img-blog.csdnimg.cn/20200415092029307.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>2.Run—&gt;Edit Configurations<br><img src="https://img-blog.csdnimg.cn/20200415092308181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415092429774.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415092804157.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415092958336.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415093237707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415093315193.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>先测试一下：<br><img src="https://img-blog.csdnimg.cn/20200415093606983.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415093717273.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>就出来了结果！<br><img src="https://img-blog.csdnimg.cn/2020041509375420.png" alt="在这里插入图片描述"><br>然后我们设置为热部署，就是在修改jsp文件，不用重启tomcat服务器</p>
+<p><img src="https://img-blog.csdnimg.cn/20200415094237771.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415094338438.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>修改一下，再测<br><img src="https://img-blog.csdnimg.cn/20200415094401851.png" alt="在这里插入图片描述"><br>将鼠标移动到浏览器刷新<br><img src="https://img-blog.csdnimg.cn/20200415094504434.png" alt="在这里插入图片描述"><br>这样我们就实现了tomcat的热部署</p>
+]]></content>
+      <categories>
+        <category>IDEA</category>
+      </categories>
+      <tags>
+        <tag>IDEA</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何“优雅”的将Spring与Mybatis整合（xml方式）</title>
     <url>/2020/04/21/%E5%A6%82%E4%BD%95%E2%80%9C%E4%BC%98%E9%9B%85%E2%80%9D%E7%9A%84%E5%B0%86Spring%E4%B8%8EMybatis%E6%95%B4%E5%90%88%EF%BC%88xml%E6%96%B9%E5%BC%8F%EF%BC%89/</url>
     <content><![CDATA[<ul>
@@ -1323,5 +1257,71 @@ public void addStudent(Student student) {
 </ul>
 <h1 id="抽象工厂模式："><a href="#抽象工厂模式：" class="headerlink" title="抽象工厂模式："></a>抽象工厂模式：</h1><p>定义：抽象工厂模式提供了一个创建一系列相关或者相互依赖对象的接口，无需指定它们具体的类。</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>代理模式：</title>
+    <url>/2020/04/17/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%EF%BC%9A/</url>
+    <content><![CDATA[<h1 id="代理模式："><a href="#代理模式：" class="headerlink" title="代理模式："></a>代理模式：</h1><a id="more"></a>
+
+
+
+<h3 id="1-静态代理"><a href="#1-静态代理" class="headerlink" title="1.静态代理"></a><strong>1.静态代理</strong></h3><h3 id="2-动态代理"><a href="#2-动态代理" class="headerlink" title="2.动态代理"></a><strong>2.动态代理</strong></h3><ul>
+<li><p>动态代理和静态代理角色一样</p>
+</li>
+<li><p>动态代理的代理类是动态生成的，不是我们直接写好的</p>
+</li>
+<li><p>动态代理分为两大类：基于接口的动态代理，基于类的动态代理</p>
+<ul>
+<li><p>基于接口—-JDK动态代理</p>
+</li>
+<li><p>基于类：cglib</p>
+</li>
+<li><p>java字节码实现：javasist</p>
+<p>需要了解两个类：Proxy，InvocationHandler：调用处理程序</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>InvocationHandler</strong></p>
+<h3 id="3-实现过程"><a href="#3-实现过程" class="headerlink" title="3.实现过程"></a>3.实现过程</h3><h4 id="3-1-接口Rent"><a href="#3-1-接口Rent" class="headerlink" title="3.1.接口Rent:"></a>3.1.接口Rent:</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Rent</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rent</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-Rent的实现类："><a href="#3-2-Rent的实现类：" class="headerlink" title="3.2.Rent的实现类："></a>3.2.Rent的实现类：</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Host</span> <span class="keyword">implements</span> <span class="title">Rent</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"房东要出租房子"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-动态生成代理类："><a href="#3-3-动态生成代理类：" class="headerlink" title="3.3.动态生成代理类："></a>3.3.动态生成代理类：</h4>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyInvocationHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//被代理的接口</span></span><br><span class="line">    <span class="keyword">private</span> Rent rent;</span><br><span class="line">    <span class="comment">//setter注入</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRent</span><span class="params">(Rent rent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.rent = rent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//生成代理对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getProxy</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(<span class="keyword">this</span>.getClass().getClassLoader(),</span><br><span class="line">                rent.getClass().getInterfaces(),<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//处理代理实例，并返回结果</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        seeHouse();</span><br><span class="line">        <span class="comment">//动态代理的本质就是使用反射来实现</span></span><br><span class="line">        Object result = method.invoke(rent, args);<span class="comment">//运行rent方法，参数列表为args</span></span><br><span class="line">        fare();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seeHouse</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"中介带看房子"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fare</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"收中介费"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-4-main方法："><a href="#3-4-main方法：" class="headerlink" title="3.4.main方法："></a>3.4.main方法：</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//真实角色</span></span><br><span class="line">        Host host = <span class="keyword">new</span> Host();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//代理角色：现在没有</span></span><br><span class="line">        ProxyInvocationHandler pih = <span class="keyword">new</span> ProxyInvocationHandler();</span><br><span class="line">        <span class="comment">//通过调用程序来处理角色来处理我们要调用的接口对象！</span></span><br><span class="line">        pih.setRent(host);</span><br><span class="line">        Rent proxy = (Rent)pih.getProxy();<span class="comment">//这里的proxy就是动态生成的，我们并没写</span></span><br><span class="line">        proxy.rent();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>npm工具的使用（适合新手）</title>
+    <url>/2020/05/22/npm%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E9%80%82%E5%90%88%E6%96%B0%E6%89%8B%EF%BC%89/</url>
+    <content><![CDATA[<blockquote>
+<h2 id="npm是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种："><a href="#npm是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：" class="headerlink" title="npm是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种："></a>npm是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：</h2><ul>
+<li>允许用户从NPM服务器下载别人编写的第三方包到本地使用。</li>
+<li>允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。</li>
+<li>允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。</li>
+<li>由于新版的nodejs已经集成了npm，所以之前npm也一并安装好了。</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<p>​        以上来自菜鸟教程中的解释</p>
+<h2 id="那么在git中如何安装npm呢-别着急，接下来就讲"><a href="#那么在git中如何安装npm呢-别着急，接下来就讲" class="headerlink" title="那么在git中如何安装npm呢!别着急，接下来就讲"></a>那么在git中如何安装npm呢!别着急，接下来就讲</h2><h2 id="首先安装Node-js，如果没有安装-的话可以上node-js官网下载安装："><a href="#首先安装Node-js，如果没有安装-的话可以上node-js官网下载安装：" class="headerlink" title="首先安装Node.js，如果没有安装 的话可以上node.js官网下载安装："></a>首先安装Node.js，如果没有安装 的话可以上node.js官网下载安装：</h2><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a><br><img src="https://img-blog.csdnimg.cn/20200522112654968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="然后安装-就OK了！下载好node-js之后，它会自带包管理器npm"><a href="#然后安装-就OK了！下载好node-js之后，它会自带包管理器npm" class="headerlink" title="然后安装 就OK了！下载好node.js之后，它会自带包管理器npm"></a>然后安装 就OK了！下载好node.js之后，它会自带包管理器npm</h2><h2 id="接下来我们右键单击进行git命令中去"><a href="#接下来我们右键单击进行git命令中去" class="headerlink" title="接下来我们右键单击进行git命令中去"></a>接下来我们右键单击进行git命令中去</h2><p><img src="https://img-blog.csdnimg.cn/20200522113007596.png" alt=""></p>
+<h2 id="输入-npm-v：察看npm-包管理器的版本"><a href="#输入-npm-v：察看npm-包管理器的版本" class="headerlink" title="输入$npm -v：察看npm(包管理器的版本)"></a>输入$npm -v：察看npm(包管理器的版本)</h2><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">$npm -v</span><br><span class="line"><span class="number">6.14</span><span class="number">.5</span></span><br></pre></td></tr></table></figure>
+<h2 id="如果版本老了，windows用户可以用"><a href="#如果版本老了，windows用户可以用" class="headerlink" title="如果版本老了，windows用户可以用"></a>如果版本老了，windows用户可以用</h2><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">$<span class="built_in">npm</span> install <span class="built_in">npm</span> -g</span><br></pre></td></tr></table></figure>
+<h2 id="Mac命令："><a href="#Mac命令：" class="headerlink" title="Mac命令："></a>Mac命令：</h2><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">$sudo <span class="built_in">npm</span> install <span class="built_in">npm</span> -g</span><br></pre></td></tr></table></figure>
+<h2 id="切换为淘宝镜像："><a href="#切换为淘宝镜像：" class="headerlink" title="切换为淘宝镜像："></a>切换为淘宝镜像：</h2><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="variable">$npm</span> install -g cnpm <span class="attribute">--registry</span>=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<p><strong>注意打断点是ctrl+c</strong></p>
+<h2 id="我们以两个前端框架为例子，使用npm安装-一波："><a href="#我们以两个前端框架为例子，使用npm安装-一波：" class="headerlink" title="我们以两个前端框架为例子，使用npm安装 一波："></a>我们以两个前端框架为例子，使用npm安装 一波：</h2><h3 id="Bootstrap："><a href="#Bootstrap：" class="headerlink" title="Bootstrap："></a>Bootstrap：</h3><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">$ npm install <span class="symbol">bootstrap@</span><span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h3 id="Layui"><a href="#Layui" class="headerlink" title="Layui:"></a>Layui:</h3><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">npm</span> i layui-src</span><br></pre></td></tr></table></figure>
+<h2 id="这样的安装也是特别的方便，而且如果使用普通-的方式进行安装-时，由于是国外的镜像，下载速度也是相当-的感人！所以也是强烈推荐大家使用！"><a href="#这样的安装也是特别的方便，而且如果使用普通-的方式进行安装-时，由于是国外的镜像，下载速度也是相当-的感人！所以也是强烈推荐大家使用！" class="headerlink" title="这样的安装也是特别的方便，而且如果使用普通 的方式进行安装 时，由于是国外的镜像，下载速度也是相当 的感人！所以也是强烈推荐大家使用！"></a>这样的安装也是特别的方便，而且如果使用普通 的方式进行安装 时，由于是国外的镜像，下载速度也是相当 的感人！所以也是强烈推荐大家使用！</h2>]]></content>
+      <categories>
+        <category>git#分类</category>
+      </categories>
+      <tags>
+        <tag>-Git</tag>
+      </tags>
   </entry>
 </search>
