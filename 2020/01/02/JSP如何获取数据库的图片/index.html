@@ -23,20 +23,19 @@
   <meta name="description" content="在我们学习jsp的过程中，有时候有的业务处理会使用到数据库中的图片，我当时也遇到了这种情况，当时也是想走捷径就在csdn上百，发现并没有任何卵用，大家写的都千篇一律，于是就想自己搞懂这个问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JSP如何获取数据库的图片">
-<meta property="og:url" content="http://www.cloverhk.top/2020/06/22/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/index.html">
+<meta property="og:url" content="http://www.cloverhk.top/2020/01/02/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/index.html">
 <meta property="og:site_name" content="clover">
 <meta property="og:description" content="在我们学习jsp的过程中，有时候有的业务处理会使用到数据库中的图片，我当时也遇到了这种情况，当时也是想走捷径就在csdn上百，发现并没有任何卵用，大家写的都千篇一律，于是就想自己搞懂这个问题。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200109204344536.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200109205450268.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70">
-<meta property="article:published_time" content="2020-06-22T15:00:05.000Z">
-<meta property="article:modified_time" content="2020-06-22T02:03:47.517Z">
+<meta property="article:published_time" content="2020-01-02T15:00:05.000Z">
+<meta property="article:modified_time" content="2020-06-22T02:33:43.136Z">
 <meta property="article:author" content="clover">
 <meta property="article:tag" content="javaweb">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200109204344536.png">
 
-<link rel="canonical" href="http://www.cloverhk.top/2020/06/22/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/">
+<link rel="canonical" href="http://www.cloverhk.top/2020/01/02/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/">
 
 
 <script id="page-configurations">
@@ -184,7 +183,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.cloverhk.top/2020/06/22/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/">
+    <link itemprop="mainEntityOfPage" href="http://www.cloverhk.top/2020/01/02/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/hk.jpg">
@@ -206,10 +205,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-06-22 23:00:05 / 修改时间：10:03:47" itemprop="dateCreated datePublished" datetime="2020-06-22T23:00:05+08:00">2020-06-22</time>
+              <time title="创建时间：2020-01-02 23:00:05" itemprop="dateCreated datePublished" datetime="2020-01-02T23:00:05+08:00">2020-01-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-22 10:33:43" itemprop="dateModified" datetime="2020-06-22T10:33:43+08:00">2020-06-22</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -236,8 +241,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/06/22/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/22/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/01/02/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/02/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -258,7 +263,10 @@
 <a id="more"></a>
 
 <ul>
-<li>数据库中存放的无非就：图片的相对路径和图片的名称，当然这两种意思本质上也是相同的。下面的就是一般数据库表的格式就是这样的。我用的数据库客户端是<strong>SQLyog</strong>。<br><img src="https://img-blog.csdnimg.cn/20200109204344536.png" alt="nbateam"><br>项目的结构图如下：<br><img src="https://img-blog.csdnimg.cn/20200109205450268.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到里面就OK了。<br>通过路径的方式，取出你要查询的队名，初始化要查询的字段。搞到集合里占位输出就好了，下面上代码：</li>
+<li>数据库中存放的无非就：图片的相对路径和图片的名称，当然这两种意思本质上也是相同的。下面的就是一般数据库表的格式就是这样的。我用的数据库客户端是<strong>SQLyog</strong>。<br>  <img src="https://img-blog.csdnimg.cn/20200109204344536.png" alt="nbateam"><pre><code>项目的结构图如下：
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200109205450268.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70)
+NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到里面就OK了。
+通过路径的方式，取出你要查询的队名，初始化要查询的字段。搞到集合里占位输出就好了，下面上代码：</code></pre></li>
 </ul>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"lishi"</span>&gt;</span><br><span class="line">          	    	&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"tab"</span>&gt; </span><br><span class="line">          	    	&lt;table  width=<span class="string">"600"</span> align=<span class="string">"center"</span> height=<span class="string">"150"</span> &gt;</span><br><span class="line">          	    	&lt;%</span><br><span class="line">          	    	ArrayList&lt;NTm&gt; list = (ArrayList&lt;NTm&gt;)session.getAttribute(<span class="string">"ssss"</span>);</span><br><span class="line">          	    	<span class="keyword">if</span>(list!=<span class="keyword">null</span>&amp;&amp;list.size() != <span class="number">0</span>)&#123; %&gt;</span><br><span class="line">          	    	&lt;tr align=<span class="string">"center"</span> height=<span class="string">"5"</span>&gt;</span><br><span class="line">          	    			&lt;td class="z1"&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;tr height=<span class="string">"6"</span>&gt; </span><br><span class="line">          	    			&lt;td  align="left"&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    	&lt;% 	</span><br><span class="line">          	    	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; list.size();j++)&#123; %&gt;</span><br><span class="line">          	    		&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"img1"</span> width=<span class="string">"200"</span> height=<span class="string">"200"</span>&gt;</span><br><span class="line">          	    			&lt;img src=<span class="string">"img/NBA/&lt;%=list.get(j).getImgsd()%&gt;"</span> height=<span class="string">"200"</span> width=<span class="string">"200"</span>&gt;</span><br><span class="line">          	    		&lt;/div&gt;</span><br><span class="line">          	    		&lt;tr align=<span class="string">"center"</span> height=<span class="string">"60"</span>&gt;</span><br><span class="line">          	    			&lt;td class="z1"&gt;&lt;%=list.get(j).getNtem() %&gt;&lt;/td&gt;</span><br><span class="line">          	    			</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;tr height=<span class="string">"200"</span>&gt; </span><br><span class="line">          	    			&lt;td  align="left"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;%=list.get(j).getNhostr() %&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;%&#125; </span><br><span class="line">          	    	&#125;</span><br><span class="line">          	    	</span><br><span class="line">          	    	%&gt;</span><br><span class="line">          	    	&lt;/table&gt;</span><br><span class="line">          	    	&lt;/div&gt;</span><br><span class="line">          	    &lt;/div&gt;</span><br><span class="line">          &lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <p>上面的代码是前端显示的界面，使用的是表单提交的方式，将业务需求交给对应的Servlet层进行处理。<br><strong>Servlet层：</strong></p>
@@ -285,11 +293,11 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/06/22/%E4%B8%80%E6%96%87%E8%A7%A3%E5%86%B3github%E4%B8%8B%E8%BD%BD%E5%87%A0kb%E9%80%9F%E5%BA%A6%E5%A4%AA%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/" rel="prev" title="一文解决github下载几kb速度太慢的问题">
-      <i class="fa fa-chevron-left"></i> 一文解决github下载几kb速度太慢的问题
-    </a></div>
       <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/17/mybatis/" rel="next" title="mybatis">
+      mybatis <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -364,7 +372,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
