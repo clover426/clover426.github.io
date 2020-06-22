@@ -1200,61 +1200,6 @@ NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到
       </tags>
   </entry>
   <entry>
-    <title>工厂模式</title>
-    <url>/2020/04/17/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<h1 id="工厂模式："><a href="#工厂模式：" class="headerlink" title="工厂模式："></a>工厂模式：</h1><a id="more"></a>
-
-<ul>
-<li><p>作用：</p>
-<ul>
-<li><p>实现了创建者和调用者的分离</p>
-</li>
-<li><p>详细分类：</p>
-<ul>
-<li><p>简单工厂模式</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">name</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tesla</span> <span class="keyword">implements</span>  <span class="title">Car</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"特斯拉！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WuLing</span> <span class="keyword">implements</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"五菱宏光"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//静态工厂模式</span></span><br><span class="line"><span class="comment">//增加一个新的产品，如果不改变代码，做不到实现！</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="comment">//方法一</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Car <span class="title">getCar</span><span class="params">(String car)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (car.equals(<span class="string">"五菱"</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> WuLing();</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (car.equals(<span class="string">"特斯拉"</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Tesla();</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//方法二</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Car <span class="title">getWuling</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> WuLing();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Car <span class="title">getTesla</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Tesla();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//测试方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">    Car car = CarFactory.getCar(<span class="string">"五菱"</span>);</span><br><span class="line">    Car car2 = CarFactory.getCar(<span class="string">"特斯拉"</span>);</span><br><span class="line"></span><br><span class="line">    car.name();</span><br><span class="line">    car2.name();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code>* 工厂方法模式
-
-  ![1581256720707](C:\Users\单少宝宝\AppData\Roaming\Typora\typora-user-images\1581256720707.png)
-
-  * 代码实现：
-
-    <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">name</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-    <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//工厂方法模式</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="function">Car <span class="title">getCar</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-    <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MoBai</span> <span class="keyword">implements</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"膜拜单车"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-    <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MoBaiFactory</span> <span class="keyword">implements</span> <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Car <span class="title">getCar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MoBai();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-    <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//测试方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Car car2 = <span class="keyword">new</span> MoBaiFactory().getCar();</span><br><span class="line">        car2.name();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><ul>
-<li><p>核心本质：</p>
-<ul>
-<li>实例化对象不使用new ,用工厂方法代替</li>
-<li>将选择实现类，创建对象统一管理和控制。从而将调用者跟我们的实现类解耦。</li>
-</ul>
-</li>
-</ul>
-<h1 id="抽象工厂模式："><a href="#抽象工厂模式：" class="headerlink" title="抽象工厂模式："></a>抽象工厂模式：</h1><p>定义：抽象工厂模式提供了一个创建一系列相关或者相互依赖对象的接口，无需指定它们具体的类。</p>
-]]></content>
-  </entry>
-  <entry>
     <title>如何“优雅”的将Spring与Mybatis整合（xml方式）</title>
     <url>/2020/04/21/%E5%A6%82%E4%BD%95%E2%80%9C%E4%BC%98%E9%9B%85%E2%80%9D%E7%9A%84%E5%B0%86Spring%E4%B8%8EMybatis%E6%95%B4%E5%90%88%EF%BC%88xml%E6%96%B9%E5%BC%8F%EF%BC%89/</url>
     <content><![CDATA[<ul>
@@ -1323,5 +1268,60 @@ public void addStudent(Student student) {
       <tags>
         <tag>-Spring -Mybatis</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>工厂模式</title>
+    <url>/2020/04/17/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<h1 id="工厂模式："><a href="#工厂模式：" class="headerlink" title="工厂模式："></a>工厂模式：</h1><a id="more"></a>
+
+<ul>
+<li><p>作用：</p>
+<ul>
+<li><p>实现了创建者和调用者的分离</p>
+</li>
+<li><p>详细分类：</p>
+<ul>
+<li><p>简单工厂模式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">name</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tesla</span> <span class="keyword">implements</span>  <span class="title">Car</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"特斯拉！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WuLing</span> <span class="keyword">implements</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"五菱宏光"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//静态工厂模式</span></span><br><span class="line"><span class="comment">//增加一个新的产品，如果不改变代码，做不到实现！</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="comment">//方法一</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Car <span class="title">getCar</span><span class="params">(String car)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (car.equals(<span class="string">"五菱"</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> WuLing();</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (car.equals(<span class="string">"特斯拉"</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Tesla();</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//方法二</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Car <span class="title">getWuling</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> WuLing();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Car <span class="title">getTesla</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Tesla();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//测试方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">    Car car = CarFactory.getCar(<span class="string">"五菱"</span>);</span><br><span class="line">    Car car2 = CarFactory.getCar(<span class="string">"特斯拉"</span>);</span><br><span class="line"></span><br><span class="line">    car.name();</span><br><span class="line">    car2.name();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>* 工厂方法模式
+
+  ![1581256720707](C:\Users\单少宝宝\AppData\Roaming\Typora\typora-user-images\1581256720707.png)
+
+  * 代码实现：
+
+    <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">name</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//工厂方法模式</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="function">Car <span class="title">getCar</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MoBai</span> <span class="keyword">implements</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"膜拜单车"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MoBaiFactory</span> <span class="keyword">implements</span> <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Car <span class="title">getCar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MoBai();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//测试方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Car car2 = <span class="keyword">new</span> MoBaiFactory().getCar();</span><br><span class="line">        car2.name();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><ul>
+<li><p>核心本质：</p>
+<ul>
+<li>实例化对象不使用new ,用工厂方法代替</li>
+<li>将选择实现类，创建对象统一管理和控制。从而将调用者跟我们的实现类解耦。</li>
+</ul>
+</li>
+</ul>
+<h1 id="抽象工厂模式："><a href="#抽象工厂模式：" class="headerlink" title="抽象工厂模式："></a>抽象工厂模式：</h1><p>定义：抽象工厂模式提供了一个创建一系列相关或者相互依赖对象的接口，无需指定它们具体的类。</p>
+]]></content>
   </entry>
 </search>
