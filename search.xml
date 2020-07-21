@@ -513,10 +513,10 @@ NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到
 <p>这下就可以打印了，所以在使用时必须重写toString方法，否则默认的就是Object的toString方法！</p>
 ]]></content>
       <categories>
-        <category>Java#分类</category>
+        <category>java#分类</category>
       </categories>
       <tags>
-        <tag>-Java</tag>
+        <tag>-java</tag>
       </tags>
   </entry>
   <entry>
