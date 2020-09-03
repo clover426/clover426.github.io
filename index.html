@@ -205,7 +205,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.cloverhk.top/2020/08/18/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8FJava%E5%AE%9E%E7%8E%B0/">
+    <link itemprop="mainEntityOfPage" href="http://www.cloverhk.top/2020/09/03/Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%EF%BC%9A%E7%AC%AC%E4%B8%80%E7%AF%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/hk.jpg">
@@ -219,7 +219,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/18/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8FJava%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">生产者-消费者模式Java实现</a>
+            <a href="/2020/09/03/Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%EF%BC%9A%E7%AC%AC%E4%B8%80%E7%AF%87/" class="post-title-link" itemprop="url">Nginx服务器实现反向代理：第一篇</a>
         </h2>
 
         <div class="post-meta">
@@ -230,7 +230,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-08-18 23:00:05 / 修改时间：23:02:44" itemprop="dateCreated datePublished" datetime="2020-08-18T23:00:05+08:00">2020-08-18</time>
+              <time title="创建时间：2020-09-03 23:00:05 / 修改时间：15:10:37" itemprop="dateCreated datePublished" datetime="2020-09-03T23:00:05+08:00">2020-09-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,7 +238,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">java设计模式</span></a>
+                  <a href="/categories/web%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">web服务器</span></a>
                 </span>
             </span>
 
@@ -251,8 +251,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/08/18/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8FJava%E5%AE%9E%E7%8E%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/18/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8FJava%E5%AE%9E%E7%8E%B0/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/09/03/Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%EF%BC%9A%E7%AC%AC%E4%B8%80%E7%AF%87/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/03/Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%EF%BC%9A%E7%AC%AC%E4%B8%80%E7%AF%87/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -262,14 +262,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
+              <span>844</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -281,12 +281,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
-<p>生产者-消费者是多线程协作中非常典型的例子！<br>主要是生产者负责生产产品，然后消费者进行消费，但是这样的模式有几个前提<br>①生产者在生产前必须判断消费者线程是否占用(这里用来了加锁机制来避免发生线程安全的问题，在某一时刻内只能有一个对象在占用线程)，如果线程为空闲，则才生产产品，生产完成之后，再”唤醒”消费者进行强制消费，这里有点意思啊！<br>②消费者在消费时，同样也要判断是否线程空闲，如果占用就一起”等待“，否则就消费产品，完成后就”唤醒“生产者进行生产产品！</p>
-</blockquote>
+          <p><img src="F:%5Cblog%5Csource_posts%5Cimg%5C1599116886662.png" alt="1599116886662"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/18/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8FJava%E5%AE%9E%E7%8E%B0/#more" rel="contents">
+              <a class="btn" href="/2020/09/03/Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%EF%BC%9A%E7%AC%AC%E4%B8%80%E7%AF%87/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -390,6 +388,111 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/08/18/Java%E4%B8%AD%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%906%E4%B8%AA%E4%B8%8D%E9%87%8D%E5%A4%8D%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0%E4%B8%80%E6%AC%A1%E6%80%A7%E6%88%90%E5%8A%9F%EF%BC%81/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.cloverhk.top/2020/08/18/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8FJava%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/hk.jpg">
+      <meta itemprop="name" content="clover">
+      <meta itemprop="description" content="志不强者智不达">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="clover">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/18/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8FJava%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">生产者-消费者模式Java实现</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-18 23:00:05 / 修改时间：23:02:44" itemprop="dateCreated datePublished" datetime="2020-08-18T23:00:05+08:00">2020-08-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">java设计模式</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/08/18/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8FJava%E5%AE%9E%E7%8E%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/18/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8FJava%E5%AE%9E%E7%8E%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>生产者-消费者是多线程协作中非常典型的例子！<br>主要是生产者负责生产产品，然后消费者进行消费，但是这样的模式有几个前提<br>①生产者在生产前必须判断消费者线程是否占用(这里用来了加锁机制来避免发生线程安全的问题，在某一时刻内只能有一个对象在占用线程)，如果线程为空闲，则才生产产品，生产完成之后，再”唤醒”消费者进行强制消费，这里有点意思啊！<br>②消费者在消费时，同样也要判断是否线程空闲，如果占用就一起”等待“，否则就消费产品，完成后就”唤醒“生产者进行生产产品！</p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/18/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8FJava%E5%AE%9E%E7%8E%B0/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1148,115 +1251,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.cloverhk.top/2020/06/07/ajax%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AF%B9%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E7%9A%844%E4%BD%8D%E9%AA%8C%E8%AF%81%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AA%8C%E8%AF%81(%E5%B0%8F%E5%8F%AF%E7%88%B1%E9%83%BD%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84%E9%82%A3%E7%A7%8D)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/hk.jpg">
-      <meta itemprop="name" content="clover">
-      <meta itemprop="description" content="志不强者智不达">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="clover">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/07/ajax%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AF%B9%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E7%9A%844%E4%BD%8D%E9%AA%8C%E8%AF%81%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AA%8C%E8%AF%81(%E5%B0%8F%E5%8F%AF%E7%88%B1%E9%83%BD%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84%E9%82%A3%E7%A7%8D)/" class="post-title-link" itemprop="url">ajax的方式对随机生成的4位验证码进行验证(小可爱都能学会的那种)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-07 23:00:05" itemprop="dateCreated datePublished" datetime="2020-06-07T23:00:05+08:00">2020-06-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-21 17:38:18" itemprop="dateModified" datetime="2020-06-21T17:38:18+08:00">2020-06-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ajax/" itemprop="url" rel="index"><span itemprop="name">ajax</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/07/ajax%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AF%B9%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E7%9A%844%E4%BD%8D%E9%AA%8C%E8%AF%81%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AA%8C%E8%AF%81(%E5%B0%8F%E5%8F%AF%E7%88%B1%E9%83%BD%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84%E9%82%A3%E7%A7%8D)/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/07/ajax%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AF%B9%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E7%9A%844%E4%BD%8D%E9%AA%8C%E8%AF%81%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AA%8C%E8%AF%81(%E5%B0%8F%E5%8F%AF%E7%88%B1%E9%83%BD%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84%E9%82%A3%E7%A7%8D)/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://img-blog.csdnimg.cn/20200606235737643.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/06/07/ajax%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AF%B9%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E7%9A%844%E4%BD%8D%E9%AA%8C%E8%AF%81%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AA%8C%E8%AF%81(%E5%B0%8F%E5%8F%AF%E7%88%B1%E9%83%BD%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84%E9%82%A3%E7%A7%8D)/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1328,20 +1322,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1381,12 +1375,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">94k</span>
+    <span title="站点总字数">95k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:26</span>
+    <span title="站点阅读时长">1:27</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
