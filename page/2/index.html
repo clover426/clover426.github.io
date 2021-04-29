@@ -205,7 +205,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.cloverhk.top/2020/07/20/java%E4%B8%AD%E6%89%93%E5%8D%B0%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E5%90%8D%E6%88%96%E8%80%85%E5%AF%B9%E8%B1%A1%E5%90%8D%EF%BC%8C%E5%87%BA%E6%9D%A5%E4%B8%80%E4%B8%AA%E5%9C%B0%E5%9D%80%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F/">
+    <link itemprop="mainEntityOfPage" href="http://www.cloverhk.top/2020/07/20/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/hh.png">
@@ -219,7 +219,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/20/java%E4%B8%AD%E6%89%93%E5%8D%B0%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E5%90%8D%E6%88%96%E8%80%85%E5%AF%B9%E8%B1%A1%E5%90%8D%EF%BC%8C%E5%87%BA%E6%9D%A5%E4%B8%80%E4%B8%AA%E5%9C%B0%E5%9D%80%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F/" class="post-title-link" itemprop="url">java中打印一个数组名或者对象名，出来一个地址是怎么回事？</a>
+            <a href="/2020/07/20/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">java中的反射机制</a>
         </h2>
 
         <div class="post-meta">
@@ -257,8 +257,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/07/20/java%E4%B8%AD%E6%89%93%E5%8D%B0%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E5%90%8D%E6%88%96%E8%80%85%E5%AF%B9%E8%B1%A1%E5%90%8D%EF%BC%8C%E5%87%BA%E6%9D%A5%E4%B8%80%E4%B8%AA%E5%9C%B0%E5%9D%80%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/20/java%E4%B8%AD%E6%89%93%E5%8D%B0%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E5%90%8D%E6%88%96%E8%80%85%E5%AF%B9%E8%B1%A1%E5%90%8D%EF%BC%8C%E5%87%BA%E6%9D%A5%E4%B8%80%E4%B8%AA%E5%9C%B0%E5%9D%80%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/07/20/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/20/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -268,14 +268,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
+              <span>2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -287,10 +287,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://img-blog.csdnimg.cn/20200721091830339.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+          <h1 id="java中的反射机制"><a href="#java中的反射机制" class="headerlink" title="java中的反射机制"></a>java中的反射机制</h1>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/07/20/java%E4%B8%AD%E6%89%93%E5%8D%B0%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E5%90%8D%E6%88%96%E8%80%85%E5%AF%B9%E8%B1%A1%E5%90%8D%EF%BC%8C%E5%87%BA%E6%9D%A5%E4%B8%80%E4%B8%AA%E5%9C%B0%E5%9D%80%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F/#more" rel="contents">
+              <a class="btn" href="/2020/07/20/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
