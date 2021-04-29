@@ -225,6 +225,34 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo next主题修改背景报 TypeError Cannot read property  enable of undefined</title>
+    <url>/2021/04/29/Hexo%20next%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9%E8%83%8C%E6%99%AF%E6%8A%A5%20TypeError%20Cannot%20read%20property%20%20enable%20of%20undefined/</url>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/2021042916100016.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<a id="more"></a>
+
+<p><strong>对于如何修改主题这里引用一位博主的内容：</strong></p>
+<blockquote>
+<p><a href="https://tding.top/archives/2bd6d82.html" target="_blank" rel="noopener">https://tding.top/archives/2bd6d82.html</a></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2021042916130385.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">)<img src="https://img-blog.csdnimg.cn/20210429161259394.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="然后就是错误了："><a href="#然后就是错误了：" class="headerlink" title="然后就是错误了："></a>然后就是错误了：</h4><p><img src="https://img-blog.csdnimg.cn/20210429161400748.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="于是我就找到这个路径【blog-themes-hexo-theme-next-source-data-styles-styl】下的文件，这里要注意有的Next主题是没有-data-styles-styl这个文件的，这个我们得自己创建，文件中的内容在上面的链接中给出了："><a href="#于是我就找到这个路径【blog-themes-hexo-theme-next-source-data-styles-styl】下的文件，这里要注意有的Next主题是没有-data-styles-styl这个文件的，这个我们得自己创建，文件中的内容在上面的链接中给出了：" class="headerlink" title="于是我就找到这个路径【blog\themes\hexo-theme-next\source_data\styles.styl】下的文件，这里要注意有的Next主题是没有_data\styles.styl这个文件的，这个我们得自己创建，文件中的内容在上面的链接中给出了："></a>于是我就找到这个路径【blog\themes\hexo-theme-next\source_data\styles.styl】下的文件，这里要注意有的Next主题是没有_data\styles.styl这个文件的，这个我们得自己创建，文件中的内容在上面的链接中给出了：</h4><p><img src="https://img-blog.csdnimg.cn/20210429161637859.png" alt="在这里插入图片描述"></p>
+<h4 id="这明显是让用户自定义，我参考了其他的写法，就改成了我自己定义的样式"><a href="#这明显是让用户自定义，我参考了其他的写法，就改成了我自己定义的样式" class="headerlink" title="这明显是让用户自定义，我参考了其他的写法，就改成了我自己定义的样式"></a>这明显是让用户自定义，我参考了其他的写法，就改成了我自己定义的样式</h4><p><img src="https://img-blog.csdnimg.cn/20210429161713137.png" alt="在这里插入图片描述"></p>
+<h4 id="接下来就是老三样了："><a href="#接下来就是老三样了：" class="headerlink" title="接下来就是老三样了："></a>接下来就是老三样了：</h4><blockquote>
+<p>hexo clean<br>hexo g 重新部署<br>hexo s 启动服务</p>
+</blockquote>
+<h4 id="这样就可以直接访问http-localhost-4000"><a href="#这样就可以直接访问http-localhost-4000" class="headerlink" title="这样就可以直接访问http://localhost:4000"></a>这样就可以直接访问<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a></h4><h4 id="这里就修改成功了，最后将内容推到github的仓库中就ok了"><a href="#这里就修改成功了，最后将内容推到github的仓库中就ok了" class="headerlink" title="这里就修改成功了，最后将内容推到github的仓库中就ok了"></a>这里就修改成功了，最后将内容推到github的仓库中就ok了</h4><blockquote>
+<p>hexo d</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IDEA整合SSM的小Demo</title>
     <url>/2020/05/20/IDEA%E6%95%B4%E5%90%88SSM%E7%9A%84%E5%B0%8FDemo/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200622102559659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
@@ -343,21 +371,35 @@ NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到
       </tags>
   </entry>
   <entry>
-    <title>Mybatis开启Log4J日志</title>
-    <url>/2020/06/22/Mybatis%E5%BC%80%E5%90%AFLog4j%E6%97%A5%E5%BF%97/</url>
-    <content><![CDATA[<blockquote>
-<p>在日常的开发中，日志有着非常重要的作用，通过日志可以排查错误！只要开启Log4J日志，并在配置文件中配置，就可以在程序运行中定位错误，再也不用system.out.println(…..)之类的打桩测试了！</p>
-</blockquote>
+    <title>Mybatis的源码解析(二)：SqlSession</title>
+    <url>/2020/01/01/Mybatis%E7%9A%84%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90(%E4%BA%8C)%EF%BC%9ASqlSession/</url>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200623001806245.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <a id="more"></a>
 
-<ul>
-<li><h2 id="1-引入maven坐标"><a href="#1-引入maven坐标" class="headerlink" title="1.引入maven坐标"></a>1.引入maven坐标</h2>   <figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;!-- https:<span class="comment">//mvnrepository.com/artifact/log4j/log4j --&gt;</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;log4j&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;log4j&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.17&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="2-在主配置文件中开启日志"><a href="#2-在主配置文件中开启日志" class="headerlink" title="2.在主配置文件中开启日志"></a>2.在主配置文件中开启日志</h2>   <figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;settings&gt;</span><br><span class="line">    &lt;!--开启日志，并指定使用的具体日志--&gt;</span><br><span class="line">    &lt;setting name=<span class="string">"LogImpl"</span> value=<span class="string">"LOG4J"</span>/&gt;</span><br><span class="line"> &lt;/settings&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="3-编写日志文件（log4j-properties）"><a href="#3-编写日志文件（log4j-properties）" class="headerlink" title="3.编写日志文件（log4j.properties）"></a>3.编写日志文件（log4j.properties）</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">log4j.rootLogger=DEBUG,Console</span><br><span class="line">log4j.appender.Console=org.apache.log4j.ConsoleAppender </span><br><span class="line">log4j.appender.Console.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.Console.layout.ConversionPattern= [%t] %-<span class="number">5</span>p [%c] - %m%n</span><br></pre></td></tr></table></figure>
-<h2 id="4-测试"><a href="#4-测试" class="headerlink" title="4.测试"></a>4.测试</h2><p>   <img src="https://img-blog.csdnimg.cn/20200325091334608.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="这样就成功了！"><a href="#这样就成功了！" class="headerlink" title="这样就成功了！"></a>这样就成功了！</h2><p>   ​</p>
+<p><img src="https://img-blog.csdnimg.cn/20200329151126327.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>Mybatis的执行步骤：</p>
+</blockquote>
+<h2 id="2-获取SqlSession对象"><a href="#2-获取SqlSession对象" class="headerlink" title="2.获取SqlSession对象"></a>2.获取SqlSession对象</h2><ul>
+<li>从配置文件中取出Exceutor（执行器），调用openSessionFromDataSource()<br><img src="https://img-blog.csdnimg.cn/20200329170849842.png" alt="在这里插入图片描述"></li>
+<li>新建的执行器的类型默认为：SIMPLE<br><img src="https://img-blog.csdnimg.cn/20200329171109633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>执行器的类型有三种：<br><img src="https://img-blog.csdnimg.cn/20200329171214603.png" alt="在这里插入图片描述"></li>
+<li>注意：<br><img src="https://img-blog.csdnimg.cn/20200329171341732.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">executor = (Executor) interceptorChain.pluginAll(executor);</span><br></pre></td></tr></table></figure>
+对Executor进行拦截增强 ，这里使用的设计模式为<strong>装饰者模式</strong></li>
+<li>然后返回：<strong>DefaultSqlSession(configuratioin,executor,事务问题)</strong><br>Executor执行 configuratioin中的增删改<img src="https://img-blog.csdnimg.cn/20200329172921227.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><blockquote>
+<p>总结：得到SqlSession的过程</p>
+<blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li>首先SqlSessionFactory调用openSession()<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">SqlSession session = sessionFactory.openSession();</span><br></pre></td></tr></table></figure></li>
+<li>然后<strong>openSession()</strong> 调用 <strong>openSessionFromDataSource()</strong><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"> <span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> SqlSession <span class="title">openSession</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> openSessionFromDataSource(configuration.getDefaultExecutorType(), <span class="keyword">null</span>, <span class="keyword">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>返回<strong>DefaultSqlSession对象</strong>，注意DefaultSqlSession包括： <strong>(configuration,executor,事务)</strong><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> SqlSession <span class="title">openSessionFromDataSource</span><span class="params">(ExecutorType execType, TransactionIsolationLevel level, <span class="keyword">boolean</span> autoCommit)</span> </span>&#123;</span><br><span class="line">  Transaction tx = <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> Environment environment = configuration.getEnvironment();</span><br><span class="line">    <span class="keyword">final</span> TransactionFactory transactionFactory = getTransactionFactoryFromEnvironment(environment);</span><br><span class="line">    tx = transactionFactory.newTransaction(environment.getDataSource(), level, autoCommit);</span><br><span class="line">    <span class="comment">//创建一个新的执行器，类型为execType</span></span><br><span class="line">    <span class="keyword">final</span> Executor executor = configuration.newExecutor(tx, execType);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> DefaultSqlSession(configuration, executor, autoCommit);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    closeTransaction(tx); <span class="comment">// may have fetched a connection so lets call close()</span></span><br><span class="line">    <span class="keyword">throw</span> ExceptionFactory.wrapException(<span class="string">"Error opening session.  Cause: "</span> + e, e);</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    ErrorContext.instance().reset();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 </li>
 </ul>
+<p>​    </p>
 ]]></content>
       <categories>
         <category>mybatis</category>
@@ -399,44 +441,6 @@ NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到
 <p>结论：</p>
 </blockquote>
 <h5 id="SqlSessionFactory对象—》DefaultSqlSessionFactory—》Configuration—》所有的配置信息"><a href="#SqlSessionFactory对象—》DefaultSqlSessionFactory—》Configuration—》所有的配置信息" class="headerlink" title="SqlSessionFactory对象—》DefaultSqlSessionFactory—》Configuration—》所有的配置信息"></a>SqlSessionFactory对象—》DefaultSqlSessionFactory—》Configuration—》所有的配置信息</h5>]]></content>
-      <categories>
-        <category>mybatis</category>
-      </categories>
-      <tags>
-        <tag>mybatis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mybatis的源码解析(二)：SqlSession</title>
-    <url>/2020/01/01/Mybatis%E7%9A%84%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90(%E4%BA%8C)%EF%BC%9ASqlSession/</url>
-    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200623001806245.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<a id="more"></a>
-
-<p><img src="https://img-blog.csdnimg.cn/20200329151126327.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<blockquote>
-<p>Mybatis的执行步骤：</p>
-</blockquote>
-<h2 id="2-获取SqlSession对象"><a href="#2-获取SqlSession对象" class="headerlink" title="2.获取SqlSession对象"></a>2.获取SqlSession对象</h2><ul>
-<li>从配置文件中取出Exceutor（执行器），调用openSessionFromDataSource()<br><img src="https://img-blog.csdnimg.cn/20200329170849842.png" alt="在这里插入图片描述"></li>
-<li>新建的执行器的类型默认为：SIMPLE<br><img src="https://img-blog.csdnimg.cn/20200329171109633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-<li>执行器的类型有三种：<br><img src="https://img-blog.csdnimg.cn/20200329171214603.png" alt="在这里插入图片描述"></li>
-<li>注意：<br><img src="https://img-blog.csdnimg.cn/20200329171341732.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">executor = (Executor) interceptorChain.pluginAll(executor);</span><br></pre></td></tr></table></figure>
-对Executor进行拦截增强 ，这里使用的设计模式为<strong>装饰者模式</strong></li>
-<li>然后返回：<strong>DefaultSqlSession(configuratioin,executor,事务问题)</strong><br>Executor执行 configuratioin中的增删改<img src="https://img-blog.csdnimg.cn/20200329172921227.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><blockquote>
-<p>总结：得到SqlSession的过程</p>
-<blockquote>
-</blockquote>
-</blockquote>
-</li>
-<li>首先SqlSessionFactory调用openSession()<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">SqlSession session = sessionFactory.openSession();</span><br></pre></td></tr></table></figure></li>
-<li>然后<strong>openSession()</strong> 调用 <strong>openSessionFromDataSource()</strong><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"> <span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> SqlSession <span class="title">openSession</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> openSessionFromDataSource(configuration.getDefaultExecutorType(), <span class="keyword">null</span>, <span class="keyword">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>返回<strong>DefaultSqlSession对象</strong>，注意DefaultSqlSession包括： <strong>(configuration,executor,事务)</strong><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> SqlSession <span class="title">openSessionFromDataSource</span><span class="params">(ExecutorType execType, TransactionIsolationLevel level, <span class="keyword">boolean</span> autoCommit)</span> </span>&#123;</span><br><span class="line">  Transaction tx = <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> Environment environment = configuration.getEnvironment();</span><br><span class="line">    <span class="keyword">final</span> TransactionFactory transactionFactory = getTransactionFactoryFromEnvironment(environment);</span><br><span class="line">    tx = transactionFactory.newTransaction(environment.getDataSource(), level, autoCommit);</span><br><span class="line">    <span class="comment">//创建一个新的执行器，类型为execType</span></span><br><span class="line">    <span class="keyword">final</span> Executor executor = configuration.newExecutor(tx, execType);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> DefaultSqlSession(configuration, executor, autoCommit);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    closeTransaction(tx); <span class="comment">// may have fetched a connection so lets call close()</span></span><br><span class="line">    <span class="keyword">throw</span> ExceptionFactory.wrapException(<span class="string">"Error opening session.  Cause: "</span> + e, e);</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    ErrorContext.instance().reset();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<p>​    </p>
-]]></content>
       <categories>
         <category>mybatis</category>
       </categories>
@@ -509,6 +513,30 @@ NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到
       </categories>
       <tags>
         <tag>SSM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mybatis开启Log4J日志</title>
+    <url>/2020/06/22/Mybatis%E5%BC%80%E5%90%AFLog4j%E6%97%A5%E5%BF%97/</url>
+    <content><![CDATA[<blockquote>
+<p>在日常的开发中，日志有着非常重要的作用，通过日志可以排查错误！只要开启Log4J日志，并在配置文件中配置，就可以在程序运行中定位错误，再也不用system.out.println(…..)之类的打桩测试了！</p>
+</blockquote>
+<a id="more"></a>
+
+<ul>
+<li><h2 id="1-引入maven坐标"><a href="#1-引入maven坐标" class="headerlink" title="1.引入maven坐标"></a>1.引入maven坐标</h2>   <figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;!-- https:<span class="comment">//mvnrepository.com/artifact/log4j/log4j --&gt;</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;log4j&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;log4j&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.17&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2-在主配置文件中开启日志"><a href="#2-在主配置文件中开启日志" class="headerlink" title="2.在主配置文件中开启日志"></a>2.在主配置文件中开启日志</h2>   <figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;settings&gt;</span><br><span class="line">    &lt;!--开启日志，并指定使用的具体日志--&gt;</span><br><span class="line">    &lt;setting name=<span class="string">"LogImpl"</span> value=<span class="string">"LOG4J"</span>/&gt;</span><br><span class="line"> &lt;/settings&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="3-编写日志文件（log4j-properties）"><a href="#3-编写日志文件（log4j-properties）" class="headerlink" title="3.编写日志文件（log4j.properties）"></a>3.编写日志文件（log4j.properties）</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">log4j.rootLogger=DEBUG,Console</span><br><span class="line">log4j.appender.Console=org.apache.log4j.ConsoleAppender </span><br><span class="line">log4j.appender.Console.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.Console.layout.ConversionPattern= [%t] %-<span class="number">5</span>p [%c] - %m%n</span><br></pre></td></tr></table></figure>
+<h2 id="4-测试"><a href="#4-测试" class="headerlink" title="4.测试"></a>4.测试</h2><p>   <img src="https://img-blog.csdnimg.cn/20200325091334608.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="这样就成功了！"><a href="#这样就成功了！" class="headerlink" title="这样就成功了！"></a>这样就成功了！</h2><p>   ​</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>mybatis</category>
+      </categories>
+      <tags>
+        <tag>mybatis</tag>
       </tags>
   </entry>
   <entry>
@@ -1470,51 +1498,6 @@ NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到
       </tags>
   </entry>
   <entry>
-    <title>多路查找树总结(2-3树、2-3-4树、B树、B+树、B树)</title>
-    <url>/2020/08/08/%E5%A4%9A%E8%B7%AF%E6%9F%A5%E6%89%BE%E6%A0%91%E6%80%BB%E7%BB%93(2-3%E6%A0%91%E3%80%812-3-4%E6%A0%91%E3%80%81B%E6%A0%91%E3%80%81B+%E6%A0%91%E3%80%81B%E6%A0%91)/</url>
-    <content><![CDATA[<h3 id="二叉树的问题分析："><a href="#二叉树的问题分析：" class="headerlink" title="二叉树的问题分析："></a>二叉树的问题分析：</h3><h5 id="二叉树的操作效率较高，但存在着很大的问题到底存在着什么问题呢？"><a href="#二叉树的操作效率较高，但存在着很大的问题到底存在着什么问题呢？" class="headerlink" title="二叉树的操作效率较高，但存在着很大的问题到底存在着什么问题呢？"></a>二叉树的操作效率较高，但存在着很大的问题到底存在着什么问题呢？</h5><a id="more"></a>
-
-
-
-<p><img src="https://img-blog.csdnimg.cn/20200805205753875.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>存在的问题：</strong></p>
-<ol>
-<li>二叉树需要加载到内存时，如果二叉树的节点少，并不会出现什么问题，但是如果二叉树的节点很多，就会出现 很大的问题</li>
-<li>问题一：在构建二叉树时，需要多次进行I/O操作(海量数据存在数据库或文件中)，节点海量，构造二叉树时，速度有影响。</li>
-<li>问题二：节点海量，也会造成二叉树的高度很大，会降低操作速度</li>
-</ol>
-<p>==<strong>解决问题的方案为：多叉树</strong>==<br>1.在二叉树中，每个节点有数据项，最多有两个子节点，如果允许每个节点可以有更多的数据项和更多的子节点，就是多叉树(multiway tree)。</p>
-<hr>
-<h3 id="2-3树："><a href="#2-3树：" class="headerlink" title="==2-3树：=="></a>==<strong>2-3树：</strong>==</h3><h6 id="2-3树，2-3-4树都是属于多叉树，多叉树通过重新组织节点，减少树的高度，能对二叉树进行优化！"><a href="#2-3树，2-3-4树都是属于多叉树，多叉树通过重新组织节点，减少树的高度，能对二叉树进行优化！" class="headerlink" title="2-3树，2-3-4树都是属于多叉树，多叉树通过重新组织节点，减少树的高度，能对二叉树进行优化！"></a>2-3树，2-3-4树都是属于多叉树，多叉树通过重新组织节点，减少树的高度，能对二叉树进行优化！</h6><p><img src="https://img-blog.csdnimg.cn/20200805210303572.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h5 id="2-3树是最简单的B树，特点："><a href="#2-3树是最简单的B树，特点：" class="headerlink" title="2-3树是最简单的B树，特点："></a><strong>2-3树是最简单的B树，特点：</strong></h5><ol>
-<li>2-3树的所有叶子节点都在同一层(只要是B树都满足这个条件)</li>
-<li>有两个子节点的节点叫二节点，二节点要么没有子节点，要么有两个子节点。</li>
-<li>有三个子节点的节点叫三节点，三节点要么没有子节点，要么有三个子节点。</li>
-<li>2-3树是由二节点和三节点构成的树。</li>
-</ol>
-<h5 id="2-3树的插入规则："><a href="#2-3树的插入规则：" class="headerlink" title="2-3树的插入规则："></a><strong>2-3树的插入规则：</strong></h5><ol>
-<li>2-3树的所有叶子节点都在同一层(只要是B树都满足这个条件)</li>
-<li>有两个子节点的节点叫二节点，二节点要么没有子节点，要么有两个子节点。</li>
-<li>有三个子节点的节点叫三节点，三节点要么没有子节点，要么有三个子节点。</li>
-<li>当按照规则插入一个数到某个节点时，不能满足上面三个要求，就需要拆，先向上拆，如果上层满，则拆本层，拆后仍然需要满足上面3个条件。</li>
-</ol>
-<hr>
-<h4 id="2-3-4树：-也是B树的一种"><a href="#2-3-4树：-也是B树的一种" class="headerlink" title="==2-3-4树：(也是B树的一种)=="></a>==<strong>2-3-4树：(也是B树的一种)</strong>==</h4><p><img src="https://img-blog.csdnimg.cn/20200805210617617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>但是它与2-3树不同的是，它多了一个度为4的树！</p>
-<hr>
-<h3 id="重点："><a href="#重点：" class="headerlink" title="重点："></a>重点：</h3><h4 id="B树：-B-B-树-B-tree-–-gt-数据分散在叶子节点和非叶子节点上"><a href="#B树：-B-B-树-B-tree-–-gt-数据分散在叶子节点和非叶子节点上" class="headerlink" title="==B树：(B-,B-树,B-tree)–&gt;数据分散在叶子节点和非叶子节点上=="></a>==B树：(B-,B-树,B-tree)–&gt;数据分散在叶子节点和非叶子节点上==</h4><p>B-tree树即B树，B即Balanced，平衡。<br>Mysql中的索引是基于B+树， Mongodb使用的索引是B树<br><img src="https://img-blog.csdnimg.cn/20200805210745153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>B树的说明 ：</strong><br>1). B树的阶：节点的最多子节点的个数，比如2-3树的阶是3，2-3-4树的阶是4<br>2). B-树的搜索，从根节点开始，对节点内的关键字(有序)序列进行二分查找，如果命中则结束，否则进入到查询关键字所属范围的儿子节点重担，直到所对应的儿子指针为空，或已经是叶子结点！<br>3). 关键字集合分布在整颗树中，即叶子节点和非叶子节点都存放数据。<br>4). 搜索有可能在非叶子节点结束<br>5). 其搜索性能等价于在关键字全集内做一次二分查找！</p>
-<hr>
-<h4 id="B-树：–-gt-所有的数据都存放在叶子节点上，可以很好的降低树的高度"><a href="#B-树：–-gt-所有的数据都存放在叶子节点上，可以很好的降低树的高度" class="headerlink" title="==B+树：–&gt;所有的数据都存放在叶子节点上，可以很好的降低树的高度=="></a>==B+树：–&gt;所有的数据都存放在叶子节点上，可以很好的降低树的高度==</h4><h6 id="B-树是B树的变体，也是一种多路搜索树！"><a href="#B-树是B树的变体，也是一种多路搜索树！" class="headerlink" title="B+树是B树的变体，也是一种多路搜索树！"></a>B+树是B树的变体，也是一种多路搜索树！</h6><h5 id="B-树的说明-："><a href="#B-树的说明-：" class="headerlink" title="B+树的说明 ："></a>B+树的说明 ：</h5><p>1). B+树的搜索与B树基本相同，区别是B+树只有达到叶子节点才命中(B树可以在非叶子结果命中)，其性能也等价于在关键字全集做一次二分查找。<br>2). 所有关键字都出现在叶子节点的链表中(数据只能在叶子节点【也叫稠密索引】,且链表中的关键字(数据)恰好是有序的)。<br>3). 不可能在非叶子节点命中。<br>4). 非叶子节点相当于是叶子节点的索引(稀疏索引)，叶子节点相当于是存储(关键字)数据的数据层。<br>5). 更适合文件索引系统。<br>6). B树和B+树各有自己的应用场景，不能说B+树完全比B树好，反之亦然</p>
-<hr>
-<h4 id="B-树："><a href="#B-树：" class="headerlink" title="==B*树：=="></a>==B*树：==</h4><h6 id="也是B-树的变体，在B-树的非根和非叶子再增加指向兄弟的指针。"><a href="#也是B-树的变体，在B-树的非根和非叶子再增加指向兄弟的指针。" class="headerlink" title="也是B+树的变体，在B+树的非根和非叶子再增加指向兄弟的指针。"></a>也是B+树的变体，在B+树的非根和非叶子再增加指向兄弟的指针。</h6><p><img src="https://img-blog.csdnimg.cn/20200805211245988.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h5 id="B-树的说明："><a href="#B-树的说明：" class="headerlink" title="B*树的说明："></a>B*树的说明：</h5><p>1).B<em>树定义了非叶子节点关键字个数至少为(2/3)</em>M，即块的最低使用率为2/3，而B+树的块的最低使用率为B+树的1/2.(其中M为它的度)<br>2).从第1个特点我们可以看出，B*树分配新节点的概率比B+树要低，空间使用率更高！</p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构与算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何“优雅”的将Spring与Mybatis整合（xml方式）</title>
     <url>/2020/04/21/%E5%A6%82%E4%BD%95%E2%80%9C%E4%BC%98%E9%9B%85%E2%80%9D%E7%9A%84%E5%B0%86Spring%E4%B8%8EMybatis%E6%95%B4%E5%90%88%EF%BC%88xml%E6%96%B9%E5%BC%8F%EF%BC%89/</url>
     <content><![CDATA[<ul>
@@ -1582,6 +1565,51 @@ public void addStudent(Student student) {
       </categories>
       <tags>
         <tag>-Spring -Mybatis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>多路查找树总结(2-3树、2-3-4树、B树、B+树、B树)</title>
+    <url>/2020/08/08/%E5%A4%9A%E8%B7%AF%E6%9F%A5%E6%89%BE%E6%A0%91%E6%80%BB%E7%BB%93(2-3%E6%A0%91%E3%80%812-3-4%E6%A0%91%E3%80%81B%E6%A0%91%E3%80%81B+%E6%A0%91%E3%80%81B%E6%A0%91)/</url>
+    <content><![CDATA[<h3 id="二叉树的问题分析："><a href="#二叉树的问题分析：" class="headerlink" title="二叉树的问题分析："></a>二叉树的问题分析：</h3><h5 id="二叉树的操作效率较高，但存在着很大的问题到底存在着什么问题呢？"><a href="#二叉树的操作效率较高，但存在着很大的问题到底存在着什么问题呢？" class="headerlink" title="二叉树的操作效率较高，但存在着很大的问题到底存在着什么问题呢？"></a>二叉树的操作效率较高，但存在着很大的问题到底存在着什么问题呢？</h5><a id="more"></a>
+
+
+
+<p><img src="https://img-blog.csdnimg.cn/20200805205753875.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>存在的问题：</strong></p>
+<ol>
+<li>二叉树需要加载到内存时，如果二叉树的节点少，并不会出现什么问题，但是如果二叉树的节点很多，就会出现 很大的问题</li>
+<li>问题一：在构建二叉树时，需要多次进行I/O操作(海量数据存在数据库或文件中)，节点海量，构造二叉树时，速度有影响。</li>
+<li>问题二：节点海量，也会造成二叉树的高度很大，会降低操作速度</li>
+</ol>
+<p>==<strong>解决问题的方案为：多叉树</strong>==<br>1.在二叉树中，每个节点有数据项，最多有两个子节点，如果允许每个节点可以有更多的数据项和更多的子节点，就是多叉树(multiway tree)。</p>
+<hr>
+<h3 id="2-3树："><a href="#2-3树：" class="headerlink" title="==2-3树：=="></a>==<strong>2-3树：</strong>==</h3><h6 id="2-3树，2-3-4树都是属于多叉树，多叉树通过重新组织节点，减少树的高度，能对二叉树进行优化！"><a href="#2-3树，2-3-4树都是属于多叉树，多叉树通过重新组织节点，减少树的高度，能对二叉树进行优化！" class="headerlink" title="2-3树，2-3-4树都是属于多叉树，多叉树通过重新组织节点，减少树的高度，能对二叉树进行优化！"></a>2-3树，2-3-4树都是属于多叉树，多叉树通过重新组织节点，减少树的高度，能对二叉树进行优化！</h6><p><img src="https://img-blog.csdnimg.cn/20200805210303572.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h5 id="2-3树是最简单的B树，特点："><a href="#2-3树是最简单的B树，特点：" class="headerlink" title="2-3树是最简单的B树，特点："></a><strong>2-3树是最简单的B树，特点：</strong></h5><ol>
+<li>2-3树的所有叶子节点都在同一层(只要是B树都满足这个条件)</li>
+<li>有两个子节点的节点叫二节点，二节点要么没有子节点，要么有两个子节点。</li>
+<li>有三个子节点的节点叫三节点，三节点要么没有子节点，要么有三个子节点。</li>
+<li>2-3树是由二节点和三节点构成的树。</li>
+</ol>
+<h5 id="2-3树的插入规则："><a href="#2-3树的插入规则：" class="headerlink" title="2-3树的插入规则："></a><strong>2-3树的插入规则：</strong></h5><ol>
+<li>2-3树的所有叶子节点都在同一层(只要是B树都满足这个条件)</li>
+<li>有两个子节点的节点叫二节点，二节点要么没有子节点，要么有两个子节点。</li>
+<li>有三个子节点的节点叫三节点，三节点要么没有子节点，要么有三个子节点。</li>
+<li>当按照规则插入一个数到某个节点时，不能满足上面三个要求，就需要拆，先向上拆，如果上层满，则拆本层，拆后仍然需要满足上面3个条件。</li>
+</ol>
+<hr>
+<h4 id="2-3-4树：-也是B树的一种"><a href="#2-3-4树：-也是B树的一种" class="headerlink" title="==2-3-4树：(也是B树的一种)=="></a>==<strong>2-3-4树：(也是B树的一种)</strong>==</h4><p><img src="https://img-blog.csdnimg.cn/20200805210617617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>但是它与2-3树不同的是，它多了一个度为4的树！</p>
+<hr>
+<h3 id="重点："><a href="#重点：" class="headerlink" title="重点："></a>重点：</h3><h4 id="B树：-B-B-树-B-tree-–-gt-数据分散在叶子节点和非叶子节点上"><a href="#B树：-B-B-树-B-tree-–-gt-数据分散在叶子节点和非叶子节点上" class="headerlink" title="==B树：(B-,B-树,B-tree)–&gt;数据分散在叶子节点和非叶子节点上=="></a>==B树：(B-,B-树,B-tree)–&gt;数据分散在叶子节点和非叶子节点上==</h4><p>B-tree树即B树，B即Balanced，平衡。<br>Mysql中的索引是基于B+树， Mongodb使用的索引是B树<br><img src="https://img-blog.csdnimg.cn/20200805210745153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>B树的说明 ：</strong><br>1). B树的阶：节点的最多子节点的个数，比如2-3树的阶是3，2-3-4树的阶是4<br>2). B-树的搜索，从根节点开始，对节点内的关键字(有序)序列进行二分查找，如果命中则结束，否则进入到查询关键字所属范围的儿子节点重担，直到所对应的儿子指针为空，或已经是叶子结点！<br>3). 关键字集合分布在整颗树中，即叶子节点和非叶子节点都存放数据。<br>4). 搜索有可能在非叶子节点结束<br>5). 其搜索性能等价于在关键字全集内做一次二分查找！</p>
+<hr>
+<h4 id="B-树：–-gt-所有的数据都存放在叶子节点上，可以很好的降低树的高度"><a href="#B-树：–-gt-所有的数据都存放在叶子节点上，可以很好的降低树的高度" class="headerlink" title="==B+树：–&gt;所有的数据都存放在叶子节点上，可以很好的降低树的高度=="></a>==B+树：–&gt;所有的数据都存放在叶子节点上，可以很好的降低树的高度==</h4><h6 id="B-树是B树的变体，也是一种多路搜索树！"><a href="#B-树是B树的变体，也是一种多路搜索树！" class="headerlink" title="B+树是B树的变体，也是一种多路搜索树！"></a>B+树是B树的变体，也是一种多路搜索树！</h6><h5 id="B-树的说明-："><a href="#B-树的说明-：" class="headerlink" title="B+树的说明 ："></a>B+树的说明 ：</h5><p>1). B+树的搜索与B树基本相同，区别是B+树只有达到叶子节点才命中(B树可以在非叶子结果命中)，其性能也等价于在关键字全集做一次二分查找。<br>2). 所有关键字都出现在叶子节点的链表中(数据只能在叶子节点【也叫稠密索引】,且链表中的关键字(数据)恰好是有序的)。<br>3). 不可能在非叶子节点命中。<br>4). 非叶子节点相当于是叶子节点的索引(稀疏索引)，叶子节点相当于是存储(关键字)数据的数据层。<br>5). 更适合文件索引系统。<br>6). B树和B+树各有自己的应用场景，不能说B+树完全比B树好，反之亦然</p>
+<hr>
+<h4 id="B-树："><a href="#B-树：" class="headerlink" title="==B*树：=="></a>==B*树：==</h4><h6 id="也是B-树的变体，在B-树的非根和非叶子再增加指向兄弟的指针。"><a href="#也是B-树的变体，在B-树的非根和非叶子再增加指向兄弟的指针。" class="headerlink" title="也是B+树的变体，在B+树的非根和非叶子再增加指向兄弟的指针。"></a>也是B+树的变体，在B+树的非根和非叶子再增加指向兄弟的指针。</h6><p><img src="https://img-blog.csdnimg.cn/20200805211245988.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h5 id="B-树的说明："><a href="#B-树的说明：" class="headerlink" title="B*树的说明："></a>B*树的说明：</h5><p>1).B<em>树定义了非叶子节点关键字个数至少为(2/3)</em>M，即块的最低使用率为2/3，而B+树的块的最低使用率为B+树的1/2.(其中M为它的度)<br>2).从第1个特点我们可以看出，B*树分配新节点的概率比B+树要低，空间使用率更高！</p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构与算法</tag>
       </tags>
   </entry>
   <entry>
@@ -1726,6 +1754,37 @@ public void addStudent(Student student) {
       </tags>
   </entry>
   <entry>
+    <title>生产者-消费者模式Java实现</title>
+    <url>/2020/08/18/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8FJava%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<blockquote>
+<p>生产者-消费者是多线程协作中非常典型的例子！<br>主要是生产者负责生产产品，然后消费者进行消费，但是这样的模式有几个前提<br>①生产者在生产前必须判断消费者线程是否占用(这里用来了加锁机制来避免发生线程安全的问题，在某一时刻内只能有一个对象在占用线程)，如果线程为空闲，则才生产产品，生产完成之后，再”唤醒”消费者进行强制消费，这里有点意思啊！<br>②消费者在消费时，同样也要判断是否线程空闲，如果占用就一起”等待“，否则就消费产品，完成后就”唤醒“生产者进行生产产品！</p>
+</blockquote>
+<a id="more"></a>
+
+<p><img src="https://img-blog.csdnimg.cn/2020081821300295.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>下面我们将上面的思路转换为代码实现一波：</p>
+<p>首先我们要定义一个桌子类，类中应该包含产品的数量 ，锁对象，还有产品的是否可以食用的状态：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Desk</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义一个标记</span></span><br><span class="line">    <span class="comment">//true 表示桌子上有汉堡，可以吃,否则就不可以</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//汉堡包的总数量</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//锁对象,只能是同一把锁</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Object lock = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后就再定义生产者，这里的类定义为了Cooker，也是为为见名知意，Cooker类是一个线程，应该extends 线程类，然后重写run方法，写上生产的业务代码，也就是线程任务：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cooker</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//继承Thread必须实现run方法</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="comment">//加的是同一把锁</span></span><br><span class="line">            <span class="keyword">synchronized</span> (Desk.lock)&#123;</span><br><span class="line">                <span class="keyword">if</span> (Desk.count == <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (!Desk.flag) &#123;</span><br><span class="line">                        <span class="comment">//生产</span></span><br><span class="line">                        System.out.println(<span class="string">"生产者正在生产产品...."</span>);</span><br><span class="line">                        Desk.flag = <span class="keyword">true</span>;</span><br><span class="line">                        <span class="comment">//叫醒消费者</span></span><br><span class="line">                        Desk.lock.notifyAll();</span><br><span class="line">                    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">//没有就等待</span></span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            Desk.lock.wait();</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后就是消费者要进行消费了，线程任务和上面大致一样</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foodie</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        	<span class="comment">//加锁</span></span><br><span class="line">            <span class="keyword">synchronized</span> (Desk.lock)&#123;</span><br><span class="line">                <span class="keyword">if</span> (Desk.count == <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (Desk.flag) &#123;</span><br><span class="line">                        <span class="comment">//如果有</span></span><br><span class="line">                        System.out.println(<span class="string">"消费者正在消费...."</span>);</span><br><span class="line">                        Desk.flag = <span class="keyword">false</span>;</span><br><span class="line">                        <span class="comment">//唤醒生产者</span></span><br><span class="line">                        Desk.lock.notifyAll();</span><br><span class="line">                        Desk.count--;</span><br><span class="line">                    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">//没有就等待</span></span><br><span class="line">                        <span class="comment">//使用什么对象当做锁，就必须用这个对象调用等待唤醒对象</span></span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            Desk.lock.wait();</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后是主线程：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Foodie f = <span class="keyword">new</span> Foodie();</span><br><span class="line">        Cooker c = <span class="keyword">new</span> Cooker();</span><br><span class="line"></span><br><span class="line">        f.start();</span><br><span class="line">        c.start();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>最后运行代码，看一下结果：<br><img src="https://img-blog.csdnimg.cn/20200818214821475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>总结：</p>
+</blockquote>
+<p>生产者-消费者模式主要是要对于多线程的应用场景下，要保证它的调度满足一定的规律！如有错误，请指正！</p>
+]]></content>
+      <categories>
+        <category>java设计模式</category>
+      </categories>
+      <tags>
+        <tag>java设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>版本控制工具Git的基础命令及在IDEA中的操作</title>
     <url>/2020/07/26/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7Git%E7%9A%84%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E5%8F%8A%E5%9C%A8IDEA%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/</url>
     <content><![CDATA[<blockquote>
@@ -1763,37 +1822,6 @@ public void addStudent(Student student) {
       </categories>
       <tags>
         <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>生产者-消费者模式Java实现</title>
-    <url>/2020/08/18/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8FJava%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<blockquote>
-<p>生产者-消费者是多线程协作中非常典型的例子！<br>主要是生产者负责生产产品，然后消费者进行消费，但是这样的模式有几个前提<br>①生产者在生产前必须判断消费者线程是否占用(这里用来了加锁机制来避免发生线程安全的问题，在某一时刻内只能有一个对象在占用线程)，如果线程为空闲，则才生产产品，生产完成之后，再”唤醒”消费者进行强制消费，这里有点意思啊！<br>②消费者在消费时，同样也要判断是否线程空闲，如果占用就一起”等待“，否则就消费产品，完成后就”唤醒“生产者进行生产产品！</p>
-</blockquote>
-<a id="more"></a>
-
-<p><img src="https://img-blog.csdnimg.cn/2020081821300295.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>下面我们将上面的思路转换为代码实现一波：</p>
-<p>首先我们要定义一个桌子类，类中应该包含产品的数量 ，锁对象，还有产品的是否可以食用的状态：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Desk</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义一个标记</span></span><br><span class="line">    <span class="comment">//true 表示桌子上有汉堡，可以吃,否则就不可以</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//汉堡包的总数量</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//锁对象,只能是同一把锁</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Object lock = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后就再定义生产者，这里的类定义为了Cooker，也是为为见名知意，Cooker类是一个线程，应该extends 线程类，然后重写run方法，写上生产的业务代码，也就是线程任务：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cooker</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//继承Thread必须实现run方法</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="comment">//加的是同一把锁</span></span><br><span class="line">            <span class="keyword">synchronized</span> (Desk.lock)&#123;</span><br><span class="line">                <span class="keyword">if</span> (Desk.count == <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (!Desk.flag) &#123;</span><br><span class="line">                        <span class="comment">//生产</span></span><br><span class="line">                        System.out.println(<span class="string">"生产者正在生产产品...."</span>);</span><br><span class="line">                        Desk.flag = <span class="keyword">true</span>;</span><br><span class="line">                        <span class="comment">//叫醒消费者</span></span><br><span class="line">                        Desk.lock.notifyAll();</span><br><span class="line">                    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">//没有就等待</span></span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            Desk.lock.wait();</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后就是消费者要进行消费了，线程任务和上面大致一样</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foodie</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        	<span class="comment">//加锁</span></span><br><span class="line">            <span class="keyword">synchronized</span> (Desk.lock)&#123;</span><br><span class="line">                <span class="keyword">if</span> (Desk.count == <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (Desk.flag) &#123;</span><br><span class="line">                        <span class="comment">//如果有</span></span><br><span class="line">                        System.out.println(<span class="string">"消费者正在消费...."</span>);</span><br><span class="line">                        Desk.flag = <span class="keyword">false</span>;</span><br><span class="line">                        <span class="comment">//唤醒生产者</span></span><br><span class="line">                        Desk.lock.notifyAll();</span><br><span class="line">                        Desk.count--;</span><br><span class="line">                    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">//没有就等待</span></span><br><span class="line">                        <span class="comment">//使用什么对象当做锁，就必须用这个对象调用等待唤醒对象</span></span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            Desk.lock.wait();</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>最后是主线程：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Foodie f = <span class="keyword">new</span> Foodie();</span><br><span class="line">        Cooker c = <span class="keyword">new</span> Cooker();</span><br><span class="line"></span><br><span class="line">        f.start();</span><br><span class="line">        c.start();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>最后运行代码，看一下结果：<br><img src="https://img-blog.csdnimg.cn/20200818214821475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<blockquote>
-<p>总结：</p>
-</blockquote>
-<p>生产者-消费者模式主要是要对于多线程的应用场景下，要保证它的调度满足一定的规律！如有错误，请指正！</p>
-]]></content>
-      <categories>
-        <category>java设计模式</category>
-      </categories>
-      <tags>
-        <tag>java设计模式</tag>
       </tags>
   </entry>
 </search>

@@ -1,1 +1,1 @@
-http://www.cloverhk.top/2020/10/25/Spring-mybatis%E5%9F%BA%E4%BA%8Emaven%E5%BC%80%E5%8F%91web%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%8A%A5org.apache.catalina.LifecycleException%20Failed%20to%20start%20component/
+http://www.cloverhk.top/2021/04/29/Hexo%20next%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9%E8%83%8C%E6%99%AF%E6%8A%A5%20TypeError%20Cannot%20read%20property%20%20enable%20of%20undefined/
