@@ -95,34 +95,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo next主题修改背景报 TypeError Cannot read property  enable of undefined</title>
-    <url>/2021/04/29/Hexo%20next%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9%E8%83%8C%E6%99%AF%E6%8A%A5%20TypeError%20Cannot%20read%20property%20%20enable%20of%20undefined/</url>
-    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/2021042916100016.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<a id="more"></a>
-
-<p><strong>对于如何修改主题这里引用一位博主的内容：</strong></p>
-<blockquote>
-<p><a href="https://tding.top/archives/2bd6d82.html" target="_blank" rel="noopener">https://tding.top/archives/2bd6d82.html</a></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/2021042916130385.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">)<img src="https://img-blog.csdnimg.cn/20210429161259394.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="然后就是错误了："><a href="#然后就是错误了：" class="headerlink" title="然后就是错误了："></a>然后就是错误了：</h4><p><img src="https://img-blog.csdnimg.cn/20210429161400748.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="于是我就找到这个路径【blog-themes-hexo-theme-next-source-data-styles-styl】下的文件，这里要注意有的Next主题是没有-data-styles-styl这个文件的，这个我们得自己创建，文件中的内容在上面的链接中给出了："><a href="#于是我就找到这个路径【blog-themes-hexo-theme-next-source-data-styles-styl】下的文件，这里要注意有的Next主题是没有-data-styles-styl这个文件的，这个我们得自己创建，文件中的内容在上面的链接中给出了：" class="headerlink" title="于是我就找到这个路径【blog\themes\hexo-theme-next\source_data\styles.styl】下的文件，这里要注意有的Next主题是没有_data\styles.styl这个文件的，这个我们得自己创建，文件中的内容在上面的链接中给出了："></a>于是我就找到这个路径【blog\themes\hexo-theme-next\source_data\styles.styl】下的文件，这里要注意有的Next主题是没有_data\styles.styl这个文件的，这个我们得自己创建，文件中的内容在上面的链接中给出了：</h4><p><img src="https://img-blog.csdnimg.cn/20210429161637859.png" alt="在这里插入图片描述"></p>
-<h4 id="这明显是让用户自定义，我参考了其他的写法，就改成了我自己定义的样式"><a href="#这明显是让用户自定义，我参考了其他的写法，就改成了我自己定义的样式" class="headerlink" title="这明显是让用户自定义，我参考了其他的写法，就改成了我自己定义的样式"></a>这明显是让用户自定义，我参考了其他的写法，就改成了我自己定义的样式</h4><p><img src="https://img-blog.csdnimg.cn/20210429161713137.png" alt="在这里插入图片描述"></p>
-<h4 id="接下来就是老三样了："><a href="#接下来就是老三样了：" class="headerlink" title="接下来就是老三样了："></a>接下来就是老三样了：</h4><blockquote>
-<p>hexo clean<br>hexo g 重新部署<br>hexo s 启动服务</p>
-</blockquote>
-<h4 id="这样就可以直接访问http-localhost-4000"><a href="#这样就可以直接访问http-localhost-4000" class="headerlink" title="这样就可以直接访问http://localhost:4000"></a>这样就可以直接访问<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a></h4><h4 id="这里就修改成功了，最后将内容推到github的仓库中就ok了"><a href="#这里就修改成功了，最后将内容推到github的仓库中就ok了" class="headerlink" title="这里就修改成功了，最后将内容推到github的仓库中就ok了"></a>这里就修改成功了，最后将内容推到github的仓库中就ok了</h4><blockquote>
-<p>hexo d</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>单例模式</title>
     <url>/2020/06/21/Head%20First%20Design%20Patterns%E2%80%94%E2%80%94%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<p>基本介绍：<br>单例模式：也叫单件模式，可以用来创建独一无二的，只能有一个实例的对象，并且该类只提供一个取得其对象实例的方法(static)！它是所有设计模式中最简单的，它的类图只有一个类：</p>
@@ -253,6 +225,64 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo next主题修改背景报 failed to locate @import file Fblogsource_datastyles.styl</title>
+    <url>/2021/04/29/Hexo%20next%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9%E8%83%8C%E6%99%AF%E6%8A%A5%20failed%20to%20locate%20@import%20file%20Fblogsource_datastyles.styl/</url>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/2021042916100016.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<a id="more"></a>
+
+<p><strong>对于如何修改主题这里引用一位博主的内容：</strong></p>
+<blockquote>
+<p><a href="https://tding.top/archives/2bd6d82.html" target="_blank" rel="noopener">https://tding.top/archives/2bd6d82.html</a></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2021042916130385.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">)<img src="https://img-blog.csdnimg.cn/20210429161259394.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="然后就是错误了："><a href="#然后就是错误了：" class="headerlink" title="然后就是错误了："></a>然后就是错误了：</h4><p><img src="https://img-blog.csdnimg.cn/20210429161400748.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="于是我就找到这个路径【blog-themes-hexo-theme-next-source-data-styles-styl】下的文件，这里要注意有的Next主题是没有-data-styles-styl这个文件的，这个我们得自己创建，文件中的内容在上面的链接中给出了："><a href="#于是我就找到这个路径【blog-themes-hexo-theme-next-source-data-styles-styl】下的文件，这里要注意有的Next主题是没有-data-styles-styl这个文件的，这个我们得自己创建，文件中的内容在上面的链接中给出了：" class="headerlink" title="于是我就找到这个路径【blog\themes\hexo-theme-next\source_data\styles.styl】下的文件，这里要注意有的Next主题是没有_data\styles.styl这个文件的，这个我们得自己创建，文件中的内容在上面的链接中给出了："></a>于是我就找到这个路径【blog\themes\hexo-theme-next\source_data\styles.styl】下的文件，这里要注意有的Next主题是没有_data\styles.styl这个文件的，这个我们得自己创建，文件中的内容在上面的链接中给出了：</h4><p><img src="https://img-blog.csdnimg.cn/20210429161637859.png" alt="在这里插入图片描述"></p>
+<h4 id="这明显是让用户自定义，我参考了其他的写法，就改成了我自己定义的样式"><a href="#这明显是让用户自定义，我参考了其他的写法，就改成了我自己定义的样式" class="headerlink" title="这明显是让用户自定义，我参考了其他的写法，就改成了我自己定义的样式"></a>这明显是让用户自定义，我参考了其他的写法，就改成了我自己定义的样式</h4><p><img src="https://img-blog.csdnimg.cn/20210429161713137.png" alt="在这里插入图片描述"></p>
+<h4 id="接下来就是老三样了："><a href="#接下来就是老三样了：" class="headerlink" title="接下来就是老三样了："></a>接下来就是老三样了：</h4><blockquote>
+<p>hexo clean<br>hexo g 重新部署<br>hexo s 启动服务</p>
+</blockquote>
+<h4 id="这样就可以直接访问http-localhost-4000"><a href="#这样就可以直接访问http-localhost-4000" class="headerlink" title="这样就可以直接访问http://localhost:4000"></a>这样就可以直接访问<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a></h4><h4 id="这里就修改成功了，最后将内容推到github的仓库中就ok了"><a href="#这里就修改成功了，最后将内容推到github的仓库中就ok了" class="headerlink" title="这里就修改成功了，最后将内容推到github的仓库中就ok了"></a>这里就修改成功了，最后将内容推到github的仓库中就ok了</h4><blockquote>
+<p>hexo d</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JSP如何获取数据库的图片</title>
+    <url>/2020/01/02/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/</url>
+    <content><![CDATA[<blockquote>
+<p>在我们学习jsp的过程中，有时候有的业务处理会使用到数据库中的图片，我当时也遇到了这种情况，当时也是想走捷径就在csdn上百，发现并没有任何卵用，大家写的都千篇一律，于是就想自己搞懂这个问题。</p>
+</blockquote>
+<a id="more"></a>
+
+<ul>
+<li>数据库中存放的无非就：图片的相对路径和图片的名称，当然这两种意思本质上也是相同的。下面的就是一般数据库表的格式就是这样的。我用的数据库客户端是<strong>SQLyog</strong>。<br>  <img src="https://img-blog.csdnimg.cn/20200109204344536.png" alt="nbateam"><pre><code>项目的结构图如下：
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200109205450268.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70)
+NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到里面就OK了。
+通过路径的方式，取出你要查询的队名，初始化要查询的字段。搞到集合里占位输出就好了，下面上代码：</code></pre></li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"lishi"</span>&gt;</span><br><span class="line">          	    	&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"tab"</span>&gt; </span><br><span class="line">          	    	&lt;table  width=<span class="string">"600"</span> align=<span class="string">"center"</span> height=<span class="string">"150"</span> &gt;</span><br><span class="line">          	    	&lt;%</span><br><span class="line">          	    	ArrayList&lt;NTm&gt; list = (ArrayList&lt;NTm&gt;)session.getAttribute(<span class="string">"ssss"</span>);</span><br><span class="line">          	    	<span class="keyword">if</span>(list!=<span class="keyword">null</span>&amp;&amp;list.size() != <span class="number">0</span>)&#123; %&gt;</span><br><span class="line">          	    	&lt;tr align=<span class="string">"center"</span> height=<span class="string">"5"</span>&gt;</span><br><span class="line">          	    			&lt;td class="z1"&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;tr height=<span class="string">"6"</span>&gt; </span><br><span class="line">          	    			&lt;td  align="left"&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    	&lt;% 	</span><br><span class="line">          	    	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; list.size();j++)&#123; %&gt;</span><br><span class="line">          	    		&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"img1"</span> width=<span class="string">"200"</span> height=<span class="string">"200"</span>&gt;</span><br><span class="line">          	    			&lt;img src=<span class="string">"img/NBA/&lt;%=list.get(j).getImgsd()%&gt;"</span> height=<span class="string">"200"</span> width=<span class="string">"200"</span>&gt;</span><br><span class="line">          	    		&lt;/div&gt;</span><br><span class="line">          	    		&lt;tr align=<span class="string">"center"</span> height=<span class="string">"60"</span>&gt;</span><br><span class="line">          	    			&lt;td class="z1"&gt;&lt;%=list.get(j).getNtem() %&gt;&lt;/td&gt;</span><br><span class="line">          	    			</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;tr height=<span class="string">"200"</span>&gt; </span><br><span class="line">          	    			&lt;td  align="left"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;%=list.get(j).getNhostr() %&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;%&#125; </span><br><span class="line">          	    	&#125;</span><br><span class="line">          	    	</span><br><span class="line">          	    	%&gt;</span><br><span class="line">          	    	&lt;/table&gt;</span><br><span class="line">          	    	&lt;/div&gt;</span><br><span class="line">          	    &lt;/div&gt;</span><br><span class="line">          &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>上面的代码是前端显示的界面，使用的是表单提交的方式，将业务需求交给对应的Servlet层进行处理。<br><strong>Servlet层：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;NTm&gt; <span class="title">selectByTeam</span><span class="params">(String Ntem)</span></span>&#123;</span><br><span class="line">		ArrayList&lt;NTm&gt; slist = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			slist = nd.selectByTeam(Ntem);</span><br><span class="line">		&#125; <span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> (ArrayList&lt;NTm&gt;)slist;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Dao层：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;NTm&gt; <span class="title">selectByTeam</span><span class="params">(String Ntem)</span></span>&#123;</span><br><span class="line">		ArrayList&lt;NTm&gt; list = <span class="keyword">new</span> ArrayList&lt;NTm&gt;();</span><br><span class="line">		String sql = <span class="string">"select * from nbateam where Ntem like '%"</span>+Ntem+<span class="string">"%'"</span>;</span><br><span class="line">		NTm ntm = <span class="keyword">new</span> NTm();</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			DBUtil.getConnection();</span><br><span class="line">			rs = DBUtil.executeQuery(sql);</span><br><span class="line">			<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">				ntm.setNno(rs.getInt(<span class="string">"Nno"</span>));</span><br><span class="line">				ntm.setNtem(rs.getString(<span class="string">"Ntem"</span>));</span><br><span class="line">				ntm.setNhostr(rs.getString(<span class="string">"Nhostr"</span>));</span><br><span class="line">				ntm.setImgsd(rs.getString(<span class="string">"Imgsd"</span>));</span><br><span class="line">				list.add(ntm);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">finally</span>&#123;</span><br><span class="line">			DBUtil.close();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Bean层：</strong><br>Bean层大家自己封装就OK了，这个不再进行说明。</p>
+<p>这个问题的实质就是使用：<strong>img 标签将查找的队名与数据库中的一致时，就输入相对路径的图片。</strong></p>
+<p>如有问题，还望各位大佬多多指教！</p>
+]]></content>
+      <categories>
+        <category>Javaweb</category>
+      </categories>
+      <tags>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IDEA整合SSM的小Demo</title>
     <url>/2020/05/20/IDEA%E6%95%B4%E5%90%88SSM%E7%9A%84%E5%B0%8FDemo/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200622102559659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
@@ -322,33 +352,22 @@ at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)</code
       </tags>
   </entry>
   <entry>
-    <title>JSP如何获取数据库的图片</title>
-    <url>/2020/01/02/JSP%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%BE%E7%89%87/</url>
-    <content><![CDATA[<blockquote>
-<p>在我们学习jsp的过程中，有时候有的业务处理会使用到数据库中的图片，我当时也遇到了这种情况，当时也是想走捷径就在csdn上百，发现并没有任何卵用，大家写的都千篇一律，于是就想自己搞懂这个问题。</p>
-</blockquote>
+    <title>Java中如何生成6个不重复的随机数一次性成功！</title>
+    <url>/2020/08/18/Java%E4%B8%AD%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%906%E4%B8%AA%E4%B8%8D%E9%87%8D%E5%A4%8D%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0%E4%B8%80%E6%AC%A1%E6%80%A7%E6%88%90%E5%8A%9F%EF%BC%81/</url>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200818231534665.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <a id="more"></a>
 
-<ul>
-<li>数据库中存放的无非就：图片的相对路径和图片的名称，当然这两种意思本质上也是相同的。下面的就是一般数据库表的格式就是这样的。我用的数据库客户端是<strong>SQLyog</strong>。<br>  <img src="https://img-blog.csdnimg.cn/20200109204344536.png" alt="nbateam"><pre><code>项目的结构图如下：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200109205450268.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70)
-NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到里面就OK了。
-通过路径的方式，取出你要查询的队名，初始化要查询的字段。搞到集合里占位输出就好了，下面上代码：</code></pre></li>
-</ul>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"lishi"</span>&gt;</span><br><span class="line">          	    	&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"tab"</span>&gt; </span><br><span class="line">          	    	&lt;table  width=<span class="string">"600"</span> align=<span class="string">"center"</span> height=<span class="string">"150"</span> &gt;</span><br><span class="line">          	    	&lt;%</span><br><span class="line">          	    	ArrayList&lt;NTm&gt; list = (ArrayList&lt;NTm&gt;)session.getAttribute(<span class="string">"ssss"</span>);</span><br><span class="line">          	    	<span class="keyword">if</span>(list!=<span class="keyword">null</span>&amp;&amp;list.size() != <span class="number">0</span>)&#123; %&gt;</span><br><span class="line">          	    	&lt;tr align=<span class="string">"center"</span> height=<span class="string">"5"</span>&gt;</span><br><span class="line">          	    			&lt;td class="z1"&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;tr height=<span class="string">"6"</span>&gt; </span><br><span class="line">          	    			&lt;td  align="left"&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    	&lt;% 	</span><br><span class="line">          	    	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; list.size();j++)&#123; %&gt;</span><br><span class="line">          	    		&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"img1"</span> width=<span class="string">"200"</span> height=<span class="string">"200"</span>&gt;</span><br><span class="line">          	    			&lt;img src=<span class="string">"img/NBA/&lt;%=list.get(j).getImgsd()%&gt;"</span> height=<span class="string">"200"</span> width=<span class="string">"200"</span>&gt;</span><br><span class="line">          	    		&lt;/div&gt;</span><br><span class="line">          	    		&lt;tr align=<span class="string">"center"</span> height=<span class="string">"60"</span>&gt;</span><br><span class="line">          	    			&lt;td class="z1"&gt;&lt;%=list.get(j).getNtem() %&gt;&lt;/td&gt;</span><br><span class="line">          	    			</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;tr height=<span class="string">"200"</span>&gt; </span><br><span class="line">          	    			&lt;td  align="left"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;%=list.get(j).getNhostr() %&gt;&lt;/td&gt;</span><br><span class="line">          	    		&lt;/tr&gt;</span><br><span class="line">          	    		&lt;%&#125; </span><br><span class="line">          	    	&#125;</span><br><span class="line">          	    	</span><br><span class="line">          	    	%&gt;</span><br><span class="line">          	    	&lt;/table&gt;</span><br><span class="line">          	    	&lt;/div&gt;</span><br><span class="line">          	    &lt;/div&gt;</span><br><span class="line">          &lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<p>上面的代码是前端显示的界面，使用的是表单提交的方式，将业务需求交给对应的Servlet层进行处理。<br><strong>Servlet层：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;NTm&gt; <span class="title">selectByTeam</span><span class="params">(String Ntem)</span></span>&#123;</span><br><span class="line">		ArrayList&lt;NTm&gt; slist = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			slist = nd.selectByTeam(Ntem);</span><br><span class="line">		&#125; <span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> (ArrayList&lt;NTm&gt;)slist;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>Dao层：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;NTm&gt; <span class="title">selectByTeam</span><span class="params">(String Ntem)</span></span>&#123;</span><br><span class="line">		ArrayList&lt;NTm&gt; list = <span class="keyword">new</span> ArrayList&lt;NTm&gt;();</span><br><span class="line">		String sql = <span class="string">"select * from nbateam where Ntem like '%"</span>+Ntem+<span class="string">"%'"</span>;</span><br><span class="line">		NTm ntm = <span class="keyword">new</span> NTm();</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			DBUtil.getConnection();</span><br><span class="line">			rs = DBUtil.executeQuery(sql);</span><br><span class="line">			<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">				ntm.setNno(rs.getInt(<span class="string">"Nno"</span>));</span><br><span class="line">				ntm.setNtem(rs.getString(<span class="string">"Ntem"</span>));</span><br><span class="line">				ntm.setNhostr(rs.getString(<span class="string">"Nhostr"</span>));</span><br><span class="line">				ntm.setImgsd(rs.getString(<span class="string">"Imgsd"</span>));</span><br><span class="line">				list.add(ntm);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">finally</span>&#123;</span><br><span class="line">			DBUtil.close();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>Bean层：</strong><br>Bean层大家自己封装就OK了，这个不再进行说明。</p>
-<p>这个问题的实质就是使用：<strong>img 标签将查找的队名与数据库中的一致时，就输入相对路径的图片。</strong></p>
-<p>如有问题，还望各位大佬多多指教！</p>
+<p>在使用Java生成随机数时，这里有两种方式：<br>==①是使用Set的不可重复性，来生成的，下面我们来看代码：==</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RandomTest</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Set&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        Random rand = <span class="keyword">new</span> Random();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> s = rand.nextInt(<span class="number">33</span>)+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (set.contains(s)) &#123;</span><br><span class="line">                s = rand.nextInt(<span class="number">33</span>)+<span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                set.add(s);</span><br><span class="line">                index++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (index == <span class="number">6</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Integer integer : set) &#123;</span><br><span class="line">            System.out.print(integer +<span class="string">","</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>==② 是通过boolean来判断当前的元素是否插入到集合中了==</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RandomTest</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; red = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Random rand = <span class="keyword">new</span> Random();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> s = rand.nextInt(<span class="number">33</span>) + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (CunZai(red, s)) &#123;</span><br><span class="line">                red.add(s);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            	<span class="comment">//这里注意，必须得i--，要不然，集合中如果有重复的元素就会空位置，必须让它回退到前一个重新生成</span></span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">CunZai</span><span class="params">(ArrayList&lt;Integer&gt; arr ,<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr.size(); j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr.get(j) == i) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>==运行结果：==<br><img src="https://img-blog.csdnimg.cn/20200808092336416.png" alt="在这里插入图片描述"></p>
 ]]></content>
       <categories>
-        <category>Javaweb</category>
+        <category>java</category>
       </categories>
       <tags>
-        <tag>javaweb</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -373,25 +392,6 @@ NBA文件夹下放的是数据库中存放的图片，将源图片Ctrl + V搞到
       </categories>
       <tags>
         <tag>SSM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java中如何生成6个不重复的随机数一次性成功！</title>
-    <url>/2020/08/18/Java%E4%B8%AD%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%906%E4%B8%AA%E4%B8%8D%E9%87%8D%E5%A4%8D%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0%E4%B8%80%E6%AC%A1%E6%80%A7%E6%88%90%E5%8A%9F%EF%BC%81/</url>
-    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200818231534665.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjg5MzA4NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<a id="more"></a>
-
-<p>在使用Java生成随机数时，这里有两种方式：<br>==①是使用Set的不可重复性，来生成的，下面我们来看代码：==</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RandomTest</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Set&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        Random rand = <span class="keyword">new</span> Random();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> s = rand.nextInt(<span class="number">33</span>)+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (set.contains(s)) &#123;</span><br><span class="line">                s = rand.nextInt(<span class="number">33</span>)+<span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                set.add(s);</span><br><span class="line">                index++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (index == <span class="number">6</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Integer integer : set) &#123;</span><br><span class="line">            System.out.print(integer +<span class="string">","</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>==② 是通过boolean来判断当前的元素是否插入到集合中了==</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RandomTest</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; red = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Random rand = <span class="keyword">new</span> Random();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> s = rand.nextInt(<span class="number">33</span>) + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (CunZai(red, s)) &#123;</span><br><span class="line">                red.add(s);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            	<span class="comment">//这里注意，必须得i--，要不然，集合中如果有重复的元素就会空位置，必须让它回退到前一个重新生成</span></span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">CunZai</span><span class="params">(ArrayList&lt;Integer&gt; arr ,<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr.size(); j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr.get(j) == i) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>==运行结果：==<br><img src="https://img-blog.csdnimg.cn/20200808092336416.png" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
       </tags>
   </entry>
   <entry>
